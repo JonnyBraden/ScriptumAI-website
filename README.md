@@ -1,0 +1,2 @@
+# ScriptumAI-website
+marketing website
