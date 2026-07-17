@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ===========================================================================
+  HOW TO USE THIS TEMPLATE (about 5 minutes per post)
+
+  1. Duplicate this file. Rename it to your URL slug, ending in .html
+     Example:  my-first-post.html   (this becomes the page /blog/my-first-post)
+     Use only lowercase letters, numbers and hyphens. No spaces.
+
+  2. Fill in every spot marked  [[ LIKE THIS ]]  below. There are 6 of them
+     in the <head>, plus the title, tag, date line and body further down.
+
+  3. Write your article between the two lines that say  WRITE YOUR ARTICLE.
+     You only need a handful of tags (cheat sheet is right there).
+
+  4. Add ONE entry to posts.json so the post appears on the blog listing.
+     Copy an existing entry, change the values, keep the commas correct.
+
+  5. Commit on a new branch, check the Netlify deploy preview, then merge.
+
+  Prefer not to touch HTML at all? Write the article in Word or plain text,
+  send it over, and you will get back a finished file plus the posts.json line.
+  ===========================================================================
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- [[ PAGE TITLE ]] shows in the browser tab and in Google results -->
+<title>[[ POST TITLE ]] | Scriptum AI</title>
+
+<!-- [[ META DESCRIPTION ]] one or two sentences, this is your Google snippet -->
+<meta name="description" content="[[ ONE OR TWO SENTENCE SUMMARY FOR SEARCH RESULTS ]]">
+
+<!-- [[ CANONICAL ]] replace the slug at the end with this file's slug -->
+<link rel="canonical" href="https://tryscriptum.ai/blog/[[ YOUR-SLUG ]]">
+
+<!-- Social sharing preview -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="[[ POST TITLE ]]">
+<meta property="og:description" content="[[ ONE OR TWO SENTENCE SUMMARY ]]">
+<meta property="og:url" content="https://tryscriptum.ai/blog/[[ YOUR-SLUG ]]">
+
+<link rel="stylesheet" href="../assets/style.css">
+
+<!-- Google structured data. Update title, dates, and author. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "[[ POST TITLE ]]",
+  "datePublished": "[[ YYYY-MM-DD ]]",
+  "dateModified": "[[ YYYY-MM-DD ]]",
+  "author": { "@type": "Person", "name": "[[ AUTHOR NAME ]]" },
+  "publisher": { "@type": "Organization", "name": "Scriptum AI" }
+}
+</script>
+</head>
+<body>
+<div class="page-glow"></div>
+
+<nav>
+  <a class="nav-logo" href="../index.html">
+    <span class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6V2zm8 1v5h5"/></svg></span>
+    <span>
+      <span class="nav-logo-text">ScriptumAI</span>
+      <span class="nav-tagline">Draft &middot; Collaborate &middot; Negotiate</span>
+    </span>
+  </a>
+  <div class="nav-links">
+    <div class="nav-drop">
+      <button class="nav-drop-btn" type="button">Product <span class="chev"></span></button>
+      <div class="nav-drop-menu">
+        <a href="../product/draft.html"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span><span><span class="nd-title">Draft</span><br><span class="nd-desc">AI-assisted drafting in Microsoft Word.</span></span></a>
+        <a href="../product/collaborate.html"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span><span><span class="nd-title">Collaborate</span><br><span class="nd-desc">One secure workspace for every party.</span></span></a>
+        <a href="../product/negotiate.html"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg></span><span><span class="nd-title">Negotiate</span><br><span class="nd-desc">Instant redlines and a firm-owned record.</span></span></a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <button class="nav-drop-btn" type="button">Resources <span class="chev"></span></button>
+      <div class="nav-drop-menu">
+        <a href="index.html"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 4h13a2 2 0 012 2v14l-4-3H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></span><span><span class="nd-title">Blog</span><br><span class="nd-desc">Writing for transactional lawyers.</span></span></a>
+        <a href="../guides.html"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5z"/></svg></span><span><span class="nd-title">Guides</span><br><span class="nd-desc">Longer-form reference material.</span></span></a>
+      </div>
+    </div>
+    <a href="../index.html#who">Who it's for</a>
+    <a href="../index.html#contact">Contact</a>
+    <a class="btn-primary" href="../index.html#demo">Book a demo</a>
+  </div>
+</nav>
+
+<main>
+<article class="article-wrap">
+  <a class="back-link" href="index.html">&larr; All posts</a>
+
+  <div class="article-head">
+    <!-- [[ TAG ]] one word, matches the tag in posts.json -->
+    <span class="post-tag">[[ TAG ]]</span>
+    <!-- [[ HEADLINE ]] the visible title of the article -->
+    <h1>[[ POST TITLE ]]</h1>
+    <!-- [[ META LINE ]] update the date, reading time and author -->
+    <div class="article-meta">[[ 15 July 2026 ]] &middot; [[ 6 min read ]] &middot; [[ Author name ]]</div>
+  </div>
+
+  <div class="article">
+  <!-- ======================= WRITE YOUR ARTICLE ======================= -->
+  <!--
+     FORMATTING CHEAT SHEET (these are all you need):
+
+       Paragraph .......  <p>Your text here.</p>
+       Subheading ......  <h2>A major section heading</h2>
+       Smaller heading .  <h3>A sub-section heading</h3>
+       Bold ............  <strong>important words</strong>
+       Link ............  <a href="https://example.com">link text</a>
+       Bullet list .....  <ul><li>first point</li><li>second point</li></ul>
+       Numbered list ...  <ol><li>step one</li><li>step two</li></ol>
+       Pull quote ......  <blockquote>A sentence worth highlighting.</blockquote>
+       Image ...........  <img src="/blog/images/your-image.jpg" alt="describe it">
+
+     Rule: no em dashes. Use commas, "so", or parentheses instead.
+  -->
+
+  <p>Replace this paragraph with your opening. The first sentence should tell the reader exactly what they will get, because it is often what shows up in search results.</p>
+
+  <h2>Your first section</h2>
+  <p>Write in short paragraphs. One idea each.</p>
+
+  <h2>Your second section</h2>
+  <p>Keep going. When you are done, delete this placeholder text entirely.</p>
+
+  <!-- ===================== END OF YOUR ARTICLE ======================= -->
+  </div>
+
+  <div class="article-cta">
+    <a class="btn-primary" href="../index.html#demo">Book a demo</a>
+  </div>
+</article>
+</main>
+
+<footer>
+  <div>
+    <span class="nav-logo-text" style="font-size:16px">ScriptumAI</span><br>
+    &copy; 2026 ScriptumAI. All rights reserved.
+  </div>
+  <div class="footer-links">
+    <a href="../product/draft.html">Draft</a>
+    <a href="../product/collaborate.html">Collaborate</a>
+    <a href="../product/negotiate.html">Negotiate</a>
+    <a href="index.html">Blog</a>
+    <a href="../index.html#demo">Book a demo</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>
