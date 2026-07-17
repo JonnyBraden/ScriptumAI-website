@@ -100,11 +100,20 @@
 </div>
 
 <section class="reveal" style="padding-top:10px;padding-bottom:10px">
+<div class="pp-wrap">
+<div class="pp-copy">
 <div class="section-label">Product preview</div>
-<h2>Finalise your edits, then submit them for review</h2>
-<p class="section-intro">This is the approval gate in practice. Draft amendments stay private to you until you finalise them and send them up your approval chain. Try it: finalise an amendment, ask for a modification, or answer the client question.</p>
+<h3>Finalise your edits, then submit them for review</h3>
+<p>This is the approval gate in practice. Draft amendments stay private to you until you finalise them and send them up your approval chain. Try it: finalise an amendment, ask for a modification, or answer the client question.</p>
+</div>
+<div class="pp-visual">
 <style>
-#sfz{--ink:#EDEFEC;--ink2:#A9B0AB;--ink3:#6E7570;--paper:#171A18;--wash:#141614;--line:#252A27;--line2:#333B36;--mint:#2EE6A8;--mintink:#07130E;--mintdim:rgba(46,230,168,.12);--amber:#EEA95C;--amberdim:rgba(238,169,92,.16);--hi:#E86A6A;font-family:Calibri,'Carlito','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.5;color:var(--ink);max-width:920px;margin:26px auto 0;border:1px solid var(--line2);border-radius:16px;background:var(--paper);overflow:hidden}
+.pp-wrap{display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap;max-width:1180px;margin:0 auto}
+.pp-copy{flex:1 1 300px;min-width:260px;max-width:360px;position:sticky;top:90px}
+.pp-copy h3{margin:10px 0 12px;font-size:26px}
+.pp-copy p{color:var(--text-dim);font-size:15px;line-height:1.6}
+.pp-visual{flex:2 1 520px;min-width:320px}
+#sfz{--ink:#EDEFEC;--ink2:#A9B0AB;--ink3:#6E7570;--paper:#171A18;--wash:#141614;--line:#252A27;--line2:#333B36;--mint:#2EE6A8;--mintink:#07130E;--mintdim:rgba(46,230,168,.12);--amber:#EEA95C;--amberdim:rgba(238,169,92,.16);--hi:#E86A6A;font-family:Calibri,'Carlito','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.5;color:var(--ink);width:100%;margin:0;border:1px solid var(--line2);border-radius:16px;background:var(--paper);overflow:hidden}
 #sfz *{box-sizing:border-box}
 #sfz .z-ico{width:1em;height:1em;vertical-align:-.13em;flex:none}
 #sfz .z-bar{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--wash);border-bottom:1px solid var(--line);flex-wrap:wrap}
@@ -164,10 +173,10 @@
 <div style="margin:0 16px 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
 <span style="font-weight:600">Subscription Agreement</span>
 <span style="font-size:11px;color:var(--ink3)">(BVCA-Subscription-Agreement-2025.docx)</span>
-<span class="z-pill" id="z-count" style="margin-left:auto;background:var(--amberdim);color:var(--amber)">4 amendments</span>
+<span class="z-pill" id="z-count" style="margin-left:auto;background:var(--amberdim);color:var(--amber)">3 amendments</span>
 <span class="z-pill" style="border:1px solid var(--line2);color:var(--ink2)">1 question</span>
 </div>
-<div style="margin:0 16px 10px;font-size:11px;color:var(--ink3);letter-spacing:.06em">JONATHAN BRADEN &mdash; 5 ITEMS</div>
+<div style="margin:0 16px 10px;font-size:11px;color:var(--ink3);letter-spacing:.06em">JONATHAN BRADEN &mdash; 4 ITEMS</div>
 <div style="padding:0 16px 16px;display:flex;flex-direction:column;gap:10px">
 
 <div class="z-card">
@@ -178,17 +187,6 @@
 <span class="z-meta">by jonathan braden &middot; 09/07/2026</span>
 </div>
 <div class="z-tc"><div class="z-tclabel">TRACKED CHANGES</div>(1) The <span class="z-del">persons</span> <span class="z-ins">person</span> whose <span class="z-del">names</span> <span class="z-ins">name</span> and <span class="z-del">addresses are</span> <span class="z-ins">address is</span> set out in Schedule 1 (<span class="z-del">together</span> the <span class="z-del">"Investors" and each an</span> "Investor"), which expression shall also include any other person who has executed a Subscription Adherence Agreement; and</div>
-<div class="z-pend" style="margin-top:8px"><svg class="z-ico" style="font-size:14px"><use href="#z-clock"/></svg>Pending approval from jonny@scriptumai.co</div>
-</div>
-
-<div class="z-card">
-<div class="z-head">
-<span class="z-pill" style="background:var(--mintdim);color:var(--mint)">draft</span>
-<span style="font-size:11px;color:var(--ink3)">22.11</span>
-<span style="font-weight:600">Delivery to the Investors of the Disclosure Letter.</span>
-<span class="z-meta">by jonathan braden &middot; 14/07/2026</span>
-</div>
-<div class="z-tc"><div class="z-tclabel">TRACKED CHANGES</div><span class="z-del">Delivery to the Investors of the Disclosure Letter.</span> <span class="z-ins">Delivery to the Lead Investor of the Disclosure Letter and the agreed-form documents.</span></div>
 <div class="z-pend" style="margin-top:8px"><svg class="z-ico" style="font-size:14px"><use href="#z-clock"/></svg>Pending approval from jonny@scriptumai.co</div>
 </div>
 
@@ -239,19 +237,21 @@
 <div class="z-inline"><input type="text" aria-label="Instruction"><button class="z-btn" onclick="sfzInlineSend(this)">Send</button></div>
 </div>
 
-<div id="z-status" style="font-size:12px;color:var(--ink2);text-align:center">2 of 4 amendments finalised and pending approval &middot; 2 awaiting your action</div>
+<div id="z-status" style="font-size:12px;color:var(--ink2);text-align:center">1 of 3 amendments finalised and pending approval &middot; 2 awaiting your action</div>
 </div>
 </div>
 <p style="text-align:center;font-size:12.5px;color:var(--text-dim);margin-top:12px">Interactive preview with sample deal data. Every action shown carries a full audit trail in the live platform.</p>
+</div>
+</div>
 <script>
-var sfzDone=2;
+var sfzDone=1;
 function sfzFinalise(btn){
 var card=btn.closest('.z-live');
 card.querySelector('.z-actions').innerHTML='<div class="z-pend"><svg class="z-ico" style="font-size:14px"><use href="#z-clock"/></svg>Pending approval from jonny@scriptumai.co</div>';
 var inl=card.querySelector('.z-inline'); if(inl) inl.style.display='none';
 sfzDone++;
-var left=4-sfzDone;
-document.getElementById('z-status').textContent=sfzDone+' of 4 amendments finalised and pending approval'+(left>0?' \u00B7 '+left+' awaiting your action':' \u00B7 all done \u2014 ready for review');
+var left=3-sfzDone;
+document.getElementById('z-status').textContent=sfzDone+' of 3 amendments finalised and pending approval'+(left>0?' \u00B7 '+left+' awaiting your action':' \u00B7 all done \u2014 ready for review');
 }
 function sfzToggle(btn,mode){
 var card=btn.closest('.z-live');
