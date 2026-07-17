@@ -70,3 +70,38 @@ function submitContact(){
   document.getElementById('contact-success').classList.add('visible');
   document.querySelector('.contact-form-card .btn-primary').style.display = 'none';
 }
+/* ==========================================================
+   APPEND THIS TO THE END OF assets/main.js
+   Builds a mobile menu from the existing nav links so that
+   Product, Resources and every other link stay reachable on
+   small screens.
+   ========================================================== */
+(function(){
+  try{
+    var nav = document.querySelector('nav');
+    if(!nav) return;
+    var links = nav.querySelectorAll('.nav-links a');
+    if(!links.length) return;
+
+    var burger = document.createElement('button');
+    burger.className = 'nav-hamburger';
+    burger.setAttribute('aria-label','Open menu');
+    burger.innerHTML = '<span></span>';
+
+    var panel = document.createElement('div');
+    panel.className = 'mobile-menu';
+    links.forEach(function(a){
+      var c = a.cloneNode(true);
+      c.classList.remove('btn-primary');
+      panel.appendChild(c);
+    });
+
+    nav.appendChild(burger);
+    nav.parentNode.insertBefore(panel, nav.nextSibling);
+
+    burger.addEventListener('click', function(){ panel.classList.toggle('open'); });
+    panel.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ panel.classList.remove('open'); });
+    });
+  }catch(e){ /* desktop nav unaffected */ }
+})();
