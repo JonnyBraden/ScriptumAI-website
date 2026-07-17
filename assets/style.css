@@ -428,3 +428,53 @@ footer{
   .kl-outputs{flex-wrap:wrap}
   .kl-out{flex:1 1 44%}
 }
+/* ==========================================================
+   APPEND THIS TO THE END OF assets/style.css
+   Blog + Resources + mobile navigation
+   ========================================================== */
+
+/* ---- Blog index ---- */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:44px}
+.post-card{display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;text-decoration:none;transition:border-color .25s,transform .25s}
+.post-card:hover{border-color:var(--mint);transform:translateY(-3px)}
+.post-tag{align-self:flex-start;border:1px solid var(--line-strong);color:var(--mint);border-radius:6px;padding:2px 10px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.post-card h3{color:var(--text);font-size:20px;line-height:1.3;margin-bottom:10px}
+.post-card p{color:var(--text-mid);font-size:15px;flex:1}
+.post-meta{color:var(--text-dim);font-size:13px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+
+/* ---- Article page ---- */
+.article-wrap{max-width:760px;margin:0 auto;padding:110px 6% 40px}
+.back-link{display:inline-flex;gap:6px;color:var(--text-dim);font-size:14px;margin-bottom:26px}
+.back-link:hover{color:var(--mint)}
+.article-head{margin-bottom:36px;border-bottom:1px solid var(--line);padding-bottom:28px}
+.article-head .post-tag{display:inline-block;margin-bottom:18px}
+.article-head h1{font-size:clamp(30px,4vw,44px);line-height:1.16;margin-bottom:16px;color:var(--text);letter-spacing:-0.5px}
+.article-meta{color:var(--text-dim);font-size:14px}
+.article{color:var(--text-mid);font-size:17.5px;line-height:1.8}
+.article h2{color:var(--text);font-size:26px;margin:40px 0 14px;letter-spacing:-0.3px;line-height:1.25}
+.article h3{color:var(--text);font-size:20px;margin:30px 0 10px}
+.article p{margin-bottom:20px}
+.article ul,.article ol{margin:0 0 22px 22px}
+.article li{margin-bottom:9px}
+.article a{color:var(--mint)}
+.article strong{color:var(--text)}
+.article blockquote{border-left:2px solid var(--mint);padding-left:20px;margin:26px 0;color:var(--text);font-style:italic}
+.article img{border-radius:var(--radius-lg);border:1px solid var(--line-strong);margin:26px 0}
+.article-cta{margin-top:48px;border-top:1px solid var(--line);padding-top:32px}
+
+/* ---- Mobile navigation (hamburger) ---- */
+.nav-hamburger{display:none;background:none;border:1px solid var(--line-strong);border-radius:8px;width:42px;height:42px;cursor:pointer;align-items:center;justify-content:center}
+.nav-hamburger span{display:block;width:18px;height:2px;background:var(--text);position:relative}
+.nav-hamburger span::before,.nav-hamburger span::after{content:'';position:absolute;left:0;width:18px;height:2px;background:var(--text)}
+.nav-hamburger span::before{top:-6px}
+.nav-hamburger span::after{top:6px}
+.mobile-menu{display:none;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--line-strong);padding:10px 6% 18px;z-index:99}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:13px 4px;color:var(--text-mid);font-size:16px;border-bottom:1px solid var(--line)}
+.mobile-menu a:last-child{border-bottom:none;color:var(--mint);font-weight:600}
+.mobile-menu a:hover{color:var(--mint)}
+
+@media (max-width:760px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+}
