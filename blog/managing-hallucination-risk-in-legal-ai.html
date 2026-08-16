@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keeping a record of every position your firm takes | Scriptum AI</title>
-<meta name="description" content="Tracking negotiation positions round over round gives transactional deal teams a clear view of what is moving, why, and what the firm's actual walk-away points have been across similar transactions.">
-<link rel="canonical" href="https://tryscriptum.ai/blog/tracking-negotiation-positions-round-over-round">
+<title>Managing hallucination risk in legal AI | Scriptum AI</title>
+<meta name="description" content="Managing hallucination risk in legal AI is the most important practical question for transactional firms considering AI-assisted drafting. Here is a realistic assessment of the risk and how to control it.">
+<link rel="canonical" href="https://tryscriptum.ai/blog/managing-hallucination-risk-in-legal-ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keeping a record of every position your firm takes">
-<meta property="og:description" content="Most negotiation history lives in email threads and fading memory. Here is what a structured position record looks like and why it matters.">
-<meta property="og:url" content="https://tryscriptum.ai/blog/tracking-negotiation-positions-round-over-round">
+<meta property="og:title" content="Managing hallucination risk in legal AI">
+<meta property="og:description" content="Hallucination is the most cited concern about legal AI. Here is a realistic view of the risk and the architectural choices that reduce it in a transactional drafting context.">
+<meta property="og:url" content="https://tryscriptum.ai/blog/managing-hallucination-risk-in-legal-ai">
 <link rel="stylesheet" href="../assets/style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Keeping a record of every position your firm takes",
+  "headline": "Managing hallucination risk in legal AI",
   "datePublished": "2026-08-15",
   "dateModified": "2026-08-15",
   "publisher": { "@type": "Organization", "name": "Scriptum AI" }
@@ -38,24 +38,23 @@
 <article class="article-wrap">
   <a class="back-link" href="/blog/">← All posts</a>
   <div class="article-head">
-    <span class="post-tag">Negotiate</span>
-    <h1>Keeping a record of every position your firm takes</h1>
+    <span class="post-tag">Compliance</span>
+    <h1>Managing hallucination risk in legal AI</h1>
     <div class="article-meta">15 August 2026 · 3 min read</div>
   </div>
   <div class="article">
-    <p>Tracking negotiation positions round over round is one of those practices that most transactional lawyers agree matters in principle and almost none carry out systematically in practice. The tools available have not made it easy, and the deal pressure has made it easy to skip.</p>
+    <p>Managing hallucination risk in legal AI is the question that most often determines whether a transactional firm takes AI-assisted drafting seriously or dismisses it. The concern is legitimate and the risk is real, but it is also frequently overstated in ways that obscure the more practical question of how architectural choices reduce the risk to an acceptable level.</p>
 
-    <h2>Why the record matters</h2>
-    <p>A round-by-round record of positions is useful in at least three ways. It gives the deal team a clear picture of how the negotiation is moving during the transaction, so they can identify what is driving concessions and what is holding. It gives the partner oversight of how a deal is progressing without needing to attend every call. And after the deal closes, it feeds back into the firm's knowledge base: which of its positions held across similar transactions, which tended to give way and at what point.</p>
-    <p>Without a record, the team is navigating from memory. Memory compresses complexity, forgets the sequence of movement and does not survive a handover when a key lawyer steps away from the deal mid-stream.</p>
+    <h2>What hallucination means in a drafting context</h2>
+    <p>Hallucination in a general-purpose language model means the model generates content that is plausible-sounding but factually incorrect, fabricated or inconsistent with the source material. In a research or legal advice context, this is a serious risk: a model that invents case citations or misrepresents statutory provisions produces outputs that are actively dangerous.</p>
+    <p>In a transactional drafting context, the hallucination risk is different. Drafting tasks are largely about structure, clause selection and language, not about recalling external facts. The question is not whether the AI has accurately stated what a court decided; it is whether the AI has produced a clause that reflects the firm's standard position on, say, limitation of liability in a services agreement. That is a very different kind of task, with a different risk profile.</p>
 
-    <h2>What to track</h2>
-    <p>A useful position record does not need to capture everything. For each significant deal point, it should note the firm's opening position, any movement in each subsequent round, the other side's corresponding positions and a brief note on what drove movement if it occurred. The record does not replace professional judgment; it supports it by making the history legible to everyone on the team.</p>
-    <p>The most valuable entries are often the ones about positions that did not move. If your firm held a particular warranty cap position across a four-round negotiation, that is meaningful data for how to approach the same issue next time.</p>
+    <h2>How architectural choices reduce the risk</h2>
+    <p>The hallucination risk in a drafting tool is primarily managed through the architecture of how the AI draws on source material. A tool that generates clauses from a general model trained on internet text carries a higher hallucination risk than a tool that drafts by retrieving and adapting clauses from the firm's own verified precedents. The second approach grounds the output in material the firm knows is correct, which fundamentally changes the nature of the risk.</p>
+    <p>This is why the question of whether a legal AI tool is general-purpose or precedent-grounded matters so much in a risk assessment. Grounding the output in verified firm documents is the single most important architectural safeguard against hallucination in a drafting context.</p>
 
-    <h2>What the record produces over time</h2>
-    <p>Across dozens of transactions, a position record becomes a calibration tool. It tells you which of your standard positions are genuinely firm and which tend to soften faster than the firm intends. It shows patterns in how particular counterparties negotiate. It gives incoming lawyers on a repeat matter the full history rather than a summary that depends on who they can track down to ask.</p>
-    <p>Scriptum builds this record as a byproduct of ordinary negotiation work, without requiring a separate logging process. To see how it works across a deal, <a href="/#demo">book a demo</a> and we can walk through a live example.</p>
+    <h2>Supervision as the final layer</h2>
+    <p>The other layer of hallucination management is human supervision. AI-generated drafts should be reviewed by a qualified lawyer before they leave the firm. This is not different in principle from the supervision obligation that applies to any associate-produced work. The review is more targeted because the risk profile is different, but it remains the final quality control layer. To see how Scriptum approaches this in practice, <a href="/#demo">book a demo</a> and we can demonstrate the drafting workflow.</p>
   </div>
   <div class="article-cta"><a class="btn-primary" href="/#demo">Book a demo</a></div>
 </article>
