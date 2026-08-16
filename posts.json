@@ -1,12 +1,435 @@
 [
   {
+    "slug": "how-to-evaluate-a-legal-ai-drafting-tool",
+    "title": "How to evaluate a legal AI drafting tool",
+    "excerpt": "Evaluating a legal AI drafting tool requires more than a demo. Here is a structured approach for transactional teams that want to assess tools properly before committing.",
+    "tag": "Guide",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ten-questions-to-ask-before-buying-legal-ai",
+    "title": "Ten questions to ask before buying legal AI",
+    "excerpt": "Most legal AI demos are designed to impress. Here are the questions that cut through to what matters for a transactional practice of twenty to one hundred fee earners.",
+    "tag": "Guide",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "build-or-buy-legal-ai-for-a-small-firm",
+    "title": "Build or buy: legal AI for a smaller firm",
+    "excerpt": "Whether to build a bespoke legal AI solution or buy a proven product is a genuine question for some firms. Here is an honest assessment of when each approach makes sense.",
+    "tag": "Guide",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "the-hidden-cost-of-drafting-from-scratch",
+    "title": "The hidden cost of drafting from scratch",
+    "excerpt": "Drafting from scratch is so embedded in how transactional firms work that its true cost is rarely calculated. Here is what it actually adds up to across a practice.",
+    "tag": "Capacity",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-transparent-pricing-matters-in-legal-ai",
+    "title": "Why transparent pricing matters in legal AI",
+    "excerpt": "Legal AI pricing is opaque in ways that make it hard for firms to compare products or plan a budget. Here is why transparency matters and what to look for.",
+    "tag": "Opinion",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "what-is-negotiation-intelligence-for-law-firms",
+    "title": "What is negotiation intelligence for law firms?",
+    "excerpt": "Negotiation intelligence for law firms is the structured capture and analysis of counterparty behaviour, fallback positions and deal outcomes across matters. Here is what it means in practice.",
+    "tag": "Negotiate",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "fallback-ladders-in-contract-negotiation",
+    "title": "Fallback ladders in contract negotiation",
+    "excerpt": "A fallback ladder is a pre-agreed sequence of positions the firm is prepared to accept in a negotiation, from ideal to acceptable. Here is how to build and use them effectively.",
+    "tag": "Negotiate",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "counterparty-profiling-for-deal-teams",
+    "title": "Counterparty profiling for deal teams",
+    "excerpt": "Counterparty profiling for deal teams means building a structured record of how specific firms and individuals negotiate, so each new deal starts with better intelligence.",
+    "tag": "Negotiate",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "tracking-negotiation-positions-round-over-round",
+    "title": "Tracking negotiation positions round over round",
+    "excerpt": "Tracking negotiation positions round over round prevents concessions from slipping through unnoticed and gives deal teams a clear picture of where each issue stands.",
+    "tag": "Negotiate",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "faster-issues-lists-and-redlines",
+    "title": "Faster issues lists and redlines",
+    "excerpt": "Faster issues lists and redlines give your client a clearer picture sooner and set the frame for negotiation before the other side has a chance to. Here is how to get there.",
+    "tag": "Negotiate",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "precedent-bank-for-small-law-firms",
+    "title": "Building a precedent bank for a smaller firm",
+    "excerpt": "A well-maintained precedent bank is the most reliable driver of drafting consistency and speed. Here is how smaller transactional firms can build one that actually gets used.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "building-a-clause-library-lawyers-will-use",
+    "title": "Building a clause library lawyers will actually use",
+    "excerpt": "Most clause libraries fail at the same point: adoption. Here is how to build one that fee earners reach for rather than work around.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "knowledge-management-without-a-km-team",
+    "title": "Knowledge management without a KM team",
+    "excerpt": "Knowledge management without a dedicated KM function is not a compromise position for smaller firms. Here is how to build effective knowledge practices into the work itself.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "capturing-deal-knowledge-before-a-lawyer-leaves",
+    "title": "Capturing deal knowledge before a lawyer leaves",
+    "excerpt": "Capturing deal knowledge before a lawyer leaves requires a structured approach, not a last-minute handover. Here is how to make it a routine part of how matters close.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "what-your-tracked-changes-tell-your-firm",
+    "title": "What your tracked changes tell your firm",
+    "excerpt": "Your tracked changes contain a detailed record of how every negotiation played out. Here is how to turn that record into structured deal intelligence.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "reducing-associate-burnout-without-hiring",
+    "title": "Reducing associate burnout without hiring more lawyers",
+    "excerpt": "Associate burnout in transactional practice is driven more by the quality of work distribution than by the absolute volume of hours. Here is a structural approach to reducing it.",
+    "tag": "Talent",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "training-junior-lawyers-with-ai-drafting",
+    "title": "Training junior lawyers with AI-assisted drafting",
+    "excerpt": "AI-assisted drafting changes how junior lawyers learn, and not necessarily in the way that sceptics expect. Here is a more nuanced view of what it means for development.",
+    "tag": "Talent",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "succession-planning-for-boutique-firms",
+    "title": "Succession planning for boutique transactional firms",
+    "excerpt": "Succession planning for boutique transactional firms is a challenge that combines the human difficulty of partner transition with the structural risk of client and knowledge concentration.",
+    "tag": "Talent",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "keeping-senior-lawyers-in-a-tight-market",
+    "title": "Keeping senior lawyers in a tight market",
+    "excerpt": "Keeping senior lawyers in a tight market requires understanding what actually drives retention at the senior level, which is not principally about remuneration.",
+    "tag": "Talent",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "cutting-nda-turnaround-from-days-to-minutes",
+    "title": "Cutting NDA turnaround from days to minutes",
+    "excerpt": "Cutting NDA turnaround from days to minutes is achievable for any firm with a well-organised precedent base and the right drafting tools. Here is how it works in practice.",
+    "tag": "Drafting",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "drafting-share-purchase-agreements-faster",
+    "title": "Drafting share purchase agreements faster",
+    "excerpt": "Drafting share purchase agreements faster without compromising quality is possible when the firm's standard positions are structured and accessible. Here is what that looks like.",
+    "tag": "Drafting",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ending-the-defined-terms-headache",
+    "title": "Ending the defined-terms headache in long contracts",
+    "excerpt": "Ending the defined-terms headache in long contracts is one of the least glamorous but most practically valuable things AI-assisted drafting can offer a transactional team.",
+    "tag": "Drafting",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-the-first-draft-decides-everything",
+    "title": "Why the quality of the first draft decides everything",
+    "excerpt": "Why the first draft decides so much in contract negotiation is not a mystery. The party that produces the initial draft sets the structure and the starting positions.",
+    "tag": "Drafting",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "how-drafting-playbooks-keep-quality-consistent",
+    "title": "How drafting playbooks keep quality consistent",
+    "excerpt": "How drafting playbooks keep quality consistent across a transactional team is a question of structure and adoption. Here is what makes a playbook work and why most fail.",
+    "tag": "Drafting",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-responsiveness-wins-legal-work",
+    "title": "Why responsiveness wins more legal work than reputation",
+    "excerpt": "Why responsiveness wins more legal work than reputation alone is something most transactional firms discover when they lose an instruction to a firm they consider their inferior on quality grounds.",
+    "tag": "Growth",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "pricing-fixed-fees-with-confidence",
+    "title": "Pricing fixed fees with confidence",
+    "excerpt": "Pricing fixed fees with confidence requires a clear picture of how long similar matters actually take. Here is how AI-assisted drafting changes the calculation for transactional practices.",
+    "tag": "Growth",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "winning-panel-appointments-as-a-smaller-firm",
+    "title": "Winning panel appointments as a smaller firm",
+    "excerpt": "Winning panel appointments as a smaller firm has become more realistic as corporate legal departments unbundle their work and allocate specific transaction types to specialist advisers.",
+    "tag": "Growth",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "the-client-experience-edge-in-transactional-law",
+    "title": "The client experience edge in transactional law",
+    "excerpt": "The client experience edge in transactional law is not built on technical quality alone. Here is what clients actually notice and what drives retention and referrals.",
+    "tag": "Growth",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "the-sra-professional-duties-and-using-ai",
+    "title": "The SRA professional duties and using AI in legal practice",
+    "excerpt": "The SRA professional duties and using AI in legal practice raises questions about supervision, competence and client confidentiality. Here is what transactional solicitors need to consider.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "keeping-client-data-confidential-with-ai",
+    "title": "Keeping client data confidential when using AI",
+    "excerpt": "Keeping client data confidential when using AI requires understanding where data goes, how it is stored and whether it is used to train external models.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "gdpr-and-legal-ai-what-firms-should-know",
+    "title": "GDPR and legal AI: what firms should know",
+    "excerpt": "GDPR and legal AI raises real questions for transactional firms processing personal data through AI tools. Here is what firms should know before deploying AI on live matters.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "managing-hallucination-risk-in-legal-ai",
+    "title": "Managing hallucination risk in legal AI",
+    "excerpt": "Managing hallucination risk in legal AI is the most important practical question for transactional firms. Here is a realistic assessment of the risk and how architectural choices control it.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "how-to-write-an-ai-use-policy-for-your-firm",
+    "title": "How to write an AI use policy for your law firm",
+    "excerpt": "How to write an AI use policy for your law firm is a question most transactional practices are now confronting. Here is a framework for drafting a policy that works.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "who-owns-the-knowledge-your-ai-creates",
+    "title": "Who owns the knowledge your AI creates?",
+    "excerpt": "Who owns the knowledge your AI creates is a critical question for transactional law firms. Here is how to ensure the insight generated through AI-assisted practice belongs to your firm.",
+    "tag": "Compliance",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ai-assisted-drafting-for-ma-lawyers",
+    "title": "AI-assisted drafting for M&A lawyers",
+    "excerpt": "AI-assisted drafting for M&A lawyers addresses one of the most document-intensive and time-compressed workflows in transactional practice. Here is where it makes the biggest difference.",
+    "tag": "Practice",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ai-assisted-drafting-for-commercial-contracts",
+    "title": "AI-assisted drafting for commercial contracts",
+    "excerpt": "AI-assisted drafting for commercial contracts is particularly well-suited to the economics of a commercial practice, where high volumes of broadly similar agreements need to be produced quickly.",
+    "tag": "Practice",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ai-assisted-drafting-for-real-estate-transactions",
+    "title": "AI-assisted drafting for real estate transactions",
+    "excerpt": "AI-assisted drafting for real estate transactions addresses one of the most document-intensive areas of transactional practice, from principal sale documents to ancillary agreements.",
+    "tag": "Practice",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "ai-assisted-drafting-for-employment-lawyers",
+    "title": "AI-assisted drafting for employment lawyers",
+    "excerpt": "AI-assisted drafting for employment lawyers addresses the document-intensive side of employment practice: service agreements, settlement documents and employment aspects of corporate transactions.",
+    "tag": "Practice",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "what-e-e-a-t-means-for-your-law-firm-blog",
+    "title": "What E-E-A-T means for your law firm blog",
+    "excerpt": "What E-E-A-T means for your law firm blog is a practical question for any firm investing in content marketing. Here is how Google's quality signals apply to legal content.",
+    "tag": "Marketing",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "measuring-the-roi-of-legal-ai-by-capacity",
+    "title": "Measuring the ROI of legal AI by capacity, not cost",
+    "excerpt": "Measuring the ROI of legal AI by capacity rather than direct cost savings gives a more accurate picture of what an AI investment actually delivers to a transactional practice.",
+    "tag": "Opinion",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "getting-a-sceptical-team-to-adopt-legal-ai",
+    "title": "Getting a sceptical team to adopt legal AI",
+    "excerpt": "Getting a sceptical team to adopt legal AI is an adoption challenge as much as a technology one. Here is a practical approach to overcoming resistance in a transactional practice.",
+    "tag": "Opinion",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-hours-saved-is-the-wrong-metric",
+    "title": "Why hours saved is the wrong metric for legal AI",
+    "excerpt": "Why hours saved is the wrong metric for legal AI is counterintuitive but important. Here is what to measure instead to understand whether an AI investment is actually working.",
+    "tag": "Opinion",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "the-two-sided-adoption-trap-in-legal-tech",
+    "title": "The two-sided adoption trap in legal tech",
+    "excerpt": "The two-sided adoption trap in legal tech is why most legal technology investments underdeliver. Here is how firms and vendors both contribute to the problem and how to avoid it.",
+    "tag": "Opinion",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "what-magic-circle-firms-know-that-you-can-too",
+    "title": "What Magic Circle firms know about knowledge management",
+    "excerpt": "What Magic Circle firms know about knowledge management that smaller practices can apply is not primarily about resource. Here is what the structural disciplines are and how to replicate them.",
+    "tag": "Knowledge",
+    "date": "2026-08-15",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "what-makes-scriptum-different-from-other-legal-ai",
+    "title": "What makes Scriptum different from other legal AI tools",
+    "excerpt": "What makes Scriptum different from other legal AI tools comes down to three things: where it works, what it learns from, and what it remembers.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "legal-ai-that-builds-knowledge-your-firm-owns",
+    "title": "Legal AI that builds knowledge your firm owns",
+    "excerpt": "Most AI tools reset at the end of every session. Here is what genuine firm-owned knowledge capture looks like for a transactional practice, and why it matters.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-scriptum-works-inside-microsoft-word",
+    "title": "Why Scriptum works inside Microsoft Word, not a separate portal",
+    "excerpt": "Lawyers live in Word. Here is why building Scriptum as a Word add-in rather than a standalone portal changes how well legal AI actually gets used.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "why-general-purpose-ai-falls-short-for-legal-drafting",
+    "title": "Why general-purpose AI falls short for legal drafting",
+    "excerpt": "General-purpose AI assistants are trained on everything, which is exactly the problem for transactional legal drafting. Here is what that means in practice.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "alternative-to-harvey-and-legora",
+    "title": "An alternative to Harvey and Legora for smaller firms",
+    "excerpt": "Harvey and Legora are built for large firms with large budgets. Here is what a firm of twenty to a hundred lawyers should look for in a legal AI drafting tool instead.",
+    "tag": "Comparison",
+    "date": "2026-08-01",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "how-drafting-tools-help-firms-win-more-work",
+    "title": "How better drafting helps law firms win more work",
+    "excerpt": "Winning work comes down to turnaround, confidence and price. Here is how sharper drafting and negotiation tools help transactional firms win more of the deals they pitch for.",
+    "tag": "Growth",
+    "date": "2026-07-29",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "how-ai-drafting-increases-law-firm-capacity",
+    "title": "How AI drafting tools increase law firm capacity",
+    "excerpt": "When you cannot hire fast enough, capacity has to come from somewhere else. Here is how AI-assisted drafting lets a lean transactional team take on more matters.",
+    "tag": "Capacity",
+    "date": "2026-07-25",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "institutional-knowledge-is-your-firms-moat",
+    "title": "Your firm's institutional knowledge is its real moat",
+    "excerpt": "A firm's institutional knowledge is harder to copy than any brand or rate card. Here is why it matters, and why generic AI tools quietly work against it.",
+    "tag": "Knowledge",
+    "date": "2026-07-22",
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "how-law-firms-can-beat-the-talent-crisis",
+    "title": "How law firms can beat the legal talent crisis",
+    "excerpt": "The legal talent crisis is hitting mid-sized firms hardest. Here is how AI-assisted drafting helps you handle more work with the lawyers you already have, and keep them longer.",
+    "tag": "Talent",
+    "date": "2026-07-18",
+    "readingTime": "3 min read"
+  },
+  {
     "slug": "how-law-firms-lose-institutional-knowledge",
     "title": "How law firms lose institutional knowledge when lawyers leave",
     "excerpt": "When a senior associate walks out the door, so does much of what they knew about your precedents, your counterparties and your positions. Here is why that happens, and what firms can do about it.",
     "tag": "Knowledge",
     "date": "2026-07-15",
-    "readingTime": "6 min read",
-    "author": "Jonny Braden"
+    "readingTime": "6 min read"
   },
   {
     "slug": "what-is-ai-assisted-contract-drafting",
@@ -14,7 +437,6 @@
     "excerpt": "AI-assisted drafting promises faster first drafts without sacrificing quality. Here is what it means for a transactional practice, and how to tell genuinely useful tools from hype.",
     "tag": "Drafting",
     "date": "2026-07-08",
-    "readingTime": "7 min read",
-    "author": "Jonny Braden"
+    "readingTime": "7 min read"
   }
 ]
