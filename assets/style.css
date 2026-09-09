@@ -531,3 +531,8 @@ nav{background:rgba(238,236,231,0.85);border-bottom:1px solid var(--line)}
 }
 .demo-connector{background:linear-gradient(var(--line-strong),var(--mint))}
 .redline-del{color:#A72420}
+
+/* Four product cards on the homepage */
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid-4 .card{padding:26px 22px}
+.grid-4 .card p{font-size:14.5px}
