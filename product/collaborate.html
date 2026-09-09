@@ -6,6 +6,7 @@
 <title>Collaborate | Scriptum AI</title>
 <meta name="description" content="One secure workspace for your team, your client and opposing counsel. Approval flows, granular permissions and full audit trail, with every matter fully isolated.">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/wireframes.css">
 </head>
 <body>
 <div class="page-glow"></div>
@@ -33,6 +34,10 @@
 <a href="negotiate.html">
 <span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg></span>
 <span><span class="nd-title">Negotiate</span><br><span class="nd-desc">Instant redlines, issues lists and a growing record of every position your firm has taken.</span></span>
+</a>
+<a href="clause-library.html">
+<span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5zM9 7h7M9 11h7"/></svg></span>
+<span><span class="nd-title">Clause library</span><br><span class="nd-desc">Every clause your firm has agreed, with its provenance and negotiation history, searchable from Word.</span></span>
 </a>
 </div>
 </div>
@@ -74,13 +79,16 @@
 </ul>
 </div>
 <div class="fr-visual">
-<div class="mock">
-<div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-<span class="m-tag">Matter: Project Ash</span>
-<p style="color:var(--text)">Your firm &middot; 4 members &middot; full access</p>
-<p>Client &middot; 2 members &middot; shared documents only</p>
-<p>Opposing counsel &middot; 3 members &middot; released versions only</p>
-</div>
+<div class="wf" data-wf="collab-workspace"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Deal workspace</span><span class="ctx">Project Ash, sale of Mourne Dairy Limited</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body">
+<div class="wf-lab">PARTICIPANTS</div>
+<div class="wf-row"><span class="grow"><b>Braden LLP</b>, 4 members</span><span class="wf-pill navy">full access</span></div>
+<div class="wf-row"><span class="grow">Mourne Dairy, R. Doherty</span><select data-who="R. Doherty" aria-label="Client role"><option>commenter</option><option>viewer</option><option>editor</option></select></div>
+<div class="wf-row"><span class="grow">Orchard Law, 3 members</span><span class="wf-pill">released versions only</span></div>
+<div id="cw-role-note"></div>
+<div class="wf-lab" style="margin-top:14px">VIEW THIS MATTER AS</div>
+<div class="wf-tabs" id="cw-view"><button class="wf-act sm" data-v="firm">Your firm</button><button class="wf-act sm" data-v="client">Client</button><button class="wf-act sm" data-v="oc">Opposing counsel</button></div>
+<div id="cw-docs"></div>
+<div class="wf-status" id="cw-status"></div></div></div><p class="wf-caption">Switch viewpoint to see exactly what each party can open. Roles are set per person, per matter.</p>
 </div>
 </div>
 
@@ -96,13 +104,10 @@
 </ul>
 </div>
 <div class="fr-visual">
-<div class="mock">
-<div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-<span class="m-tag">Release check</span>
-<p style="color:var(--text)">12 amendments drafted</p>
-<p style="color:var(--text)">12 reviewed by supervising partner</p>
-<p style="color:var(--mint)">Approved for release to opposing counsel</p>
-</div>
+<div class="wf" data-wf="collab-approval"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Approval chain</span><span class="ctx">SPA v2, 12 amendments ready</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body">
+<div class="wf-chain"><div class="wf-step"><span class="who">Trainee</span><span class="st"></span></div><div class="wf-step"><span class="who">Associate</span><span class="st"></span></div><div class="wf-step"><span class="who">Partner</span><span class="st"></span></div><div class="wf-step"><span class="who">Release</span><span class="st"></span></div></div>
+<div class="wf-actions" style="margin-top:0"><button class="wf-btn sm" id="ap-next"></button><button class="wf-btn green sm" id="ap-release" disabled>Release to opposing counsel</button></div>
+<div class="wf-card wash" style="margin-top:12px"><div class="wf-lab">AUDIT TRAIL</div><div id="ap-log" style="font-size:12px"><div><span class="wf-pill green">&#10003;</span> 12 amendments drafted by C. Kelly (trainee)</div></div></div></div></div><p class="wf-caption">Release stays locked until every gate in your hierarchy has signed off. Each step is recorded.</p>
 </div>
 </div>
 
@@ -120,25 +125,25 @@
 .pp-copy h3{margin:10px 0 12px;font-size:26px}
 .pp-copy p{color:var(--text-dim);font-size:15px;line-height:1.6}
 .pp-visual{flex:2 1 520px;min-width:320px}
-#sfz{--ink:#EDEFEC;--ink2:#A9B0AB;--ink3:#6E7570;--paper:#171A18;--wash:#141614;--line:#252A27;--line2:#333B36;--mint:#2EE6A8;--mintink:#07130E;--mintdim:rgba(46,230,168,.12);--amber:#EEA95C;--amberdim:rgba(238,169,92,.16);--hi:#E86A6A;font-family:Calibri,'Carlito','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.5;color:var(--ink);width:100%;margin:0;border:1px solid var(--line2);border-radius:16px;background:var(--paper);overflow:hidden}
+#sfz{--ink:#1D2434;--ink2:#6A6E7C;--ink3:#8B8F9C;--paper:#FCFBF8;--wash:#EEECE7;--line:#DFDBD3;--line2:#D0CBC0;--mint:#464F6D;--mintink:#FFFFFF;--mintdim:rgba(70,79,109,.12);--green:#0E7754;--amber:#986410;--amberdim:rgba(184,134,11,.16);--hi:#A72420;font-family:Calibri,'Carlito','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.5;color:var(--ink);width:100%;margin:0;border:1px solid var(--line2);border-radius:16px;background:var(--paper);overflow:hidden}
 #sfz *{box-sizing:border-box}
 #sfz .z-ico{width:1em;height:1em;vertical-align:-.13em;flex:none}
 #sfz .z-bar{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--wash);border-bottom:1px solid var(--line);flex-wrap:wrap}
-#sfz .z-logo{width:26px;height:26px;border-radius:7px;border:1px solid var(--mint);background:var(--mintdim);display:flex;align-items:center;justify-content:center;color:var(--mint);font-size:15px;flex:none}
+#sfz .z-logo{width:26px;height:26px;border-radius:7px;border:1px solid #C86D4C;background:rgba(200,109,76,.14);display:flex;align-items:center;justify-content:center;color:#C86D4C;font-size:15px;flex:none}
 #sfz .z-tabs{display:flex;gap:2px;padding:0 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 #sfz .z-tab{font-size:12px;color:var(--ink3);padding:9px 10px;display:inline-flex;align-items:center;gap:5px}
 #sfz .z-tab.on{color:var(--ink);border-bottom:2px solid var(--mint);margin-bottom:-1px}
 #sfz .z-banner{display:flex;gap:10px;align-items:center;margin:14px 16px;border:1px solid var(--line);border-top:3px solid var(--mint);border-radius:0 0 10px 10px;padding:10px 14px;background:var(--wash)}
 #sfz .z-pill{font-size:11px;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
-#sfz .z-card{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--paper)}
+#sfz .z-card{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}
 #sfz .z-tc{border:1px solid var(--line);border-radius:8px;padding:8px 11px;background:var(--wash);margin-top:8px;font-size:12.5px;line-height:1.65}
 #sfz .z-tclabel{font-size:10px;color:var(--ink3);letter-spacing:.07em;margin-bottom:4px}
 #sfz .z-del{color:var(--hi);text-decoration:line-through}
-#sfz .z-ins{color:var(--mint);text-decoration:underline;text-underline-offset:2px}
+#sfz .z-ins{color:var(--green);text-decoration:underline;text-underline-offset:2px}
 #sfz .z-meta{margin-left:auto;font-size:11px;color:var(--ink3);white-space:nowrap}
 #sfz .z-head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
 #sfz .z-btn{font:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--mint);background:var(--mint);color:var(--mintink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-#sfz .z-act{font:inherit;font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid var(--line2);background:transparent;color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+#sfz .z-act{font:inherit;font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid var(--line2);background:#fff;color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 #sfz .z-act:hover,#sfz .z-btn:hover{filter:brightness(1.1)}
 #sfz .z-actions{display:flex;flex-direction:column;gap:6px;min-width:170px;flex:1}
 #sfz .z-split{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
@@ -174,7 +179,7 @@
 <span class="z-tab"><svg class="z-ico"><use href="#z-send"/></svg>Share</span>
 </div>
 <div class="z-banner">
-<svg class="z-ico" style="font-size:18px;color:var(--mint)"><use href="#z-check"/></svg>
+<svg class="z-ico" style="font-size:18px;color:var(--green)"><use href="#z-check"/></svg>
 <span><span style="font-weight:600">Finalise your edits, then submit them for review.</span><br><span style="font-size:12px;color:var(--ink2)">Draft amendments are private to you until you submit them up your approval chain.</span></span>
 </div>
 <div style="margin:0 16px 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
@@ -183,7 +188,7 @@
 <span class="z-pill" id="z-count" style="margin-left:auto;background:var(--amberdim);color:var(--amber)">3 amendments</span>
 <span class="z-pill" style="border:1px solid var(--line2);color:var(--ink2)">1 question</span>
 </div>
-<div style="margin:0 16px 10px;font-size:11px;color:var(--ink3);letter-spacing:.06em">JONATHAN BRADEN &mdash; 4 ITEMS</div>
+<div style="margin:0 16px 10px;font-size:11px;color:var(--ink3);letter-spacing:.06em">JONATHAN BRADEN, 4 ITEMS</div>
 <div style="padding:0 16px 16px;display:flex;flex-direction:column;gap:10px">
 
 <div class="z-card">
@@ -258,7 +263,7 @@ card.querySelector('.z-actions').innerHTML='<div class="z-pend"><svg class="z-ic
 var inl=card.querySelector('.z-inline'); if(inl) inl.style.display='none';
 sfzDone++;
 var left=3-sfzDone;
-document.getElementById('z-status').textContent=sfzDone+' of 3 amendments finalised and pending approval'+(left>0?' \u00B7 '+left+' awaiting your action':' \u00B7 all done \u2014 ready for review');
+document.getElementById('z-status').textContent=sfzDone+' of 3 amendments finalised and pending approval'+(left>0?' \u00B7 '+left+' awaiting your action':' \u00B7 all done, ready for review');
 }
 function sfzToggle(btn,mode){
 var card=btn.closest('.z-live');
@@ -272,7 +277,7 @@ if(inl.style.display==='flex')input.focus();
 function sfzInlineSend(btn){
 var inl=btn.closest('.z-inline');
 inl.innerHTML=inl.dataset.mode==='modify'
-?'<div class="z-pend" style="color:var(--mint)"><svg class="z-ico"><use href="#z-spark"/></svg>Redrafting \u2014 an updated amendment will replace this card</div>'
+?'<div class="z-pend" style="color:var(--green)"><svg class="z-ico"><use href="#z-spark"/></svg>Redrafting. An updated amendment will replace this card</div>'
 :'<div class="z-pend"><svg class="z-ico"><use href="#z-clock"/></svg>Question sent \u00B7 awaiting response</div>';
 inl.style.display='flex';
 }
@@ -285,10 +290,10 @@ function sfzAnswerSend(){
 document.getElementById('z-q-input').style.display='none';
 var a=document.getElementById('z-q-actions');
 a.style.display='block';
-a.innerHTML='<div class="z-pend" style="color:var(--mint)"><svg class="z-ico"><use href="#z-check"/></svg>Answered \u2014 the drafter has been notified</div>';
+a.innerHTML='<div class="z-pend" style="color:var(--green)"><svg class="z-ico"><use href="#z-check"/></svg>Answered. The drafter has been notified</div>';
 document.getElementById('z-q-state').innerHTML='<svg class="z-ico" style="font-size:11px"><use href="#z-check"/></svg>answered';
-document.getElementById('z-q-state').style.color='var(--mint)';
-document.getElementById('z-q-state').style.borderColor='var(--mint)';
+document.getElementById('z-q-state').style.color='var(--green)';
+document.getElementById('z-q-state').style.borderColor='var(--green)';
 }
 </script>
 </section>
@@ -305,14 +310,8 @@ document.getElementById('z-q-state').style.borderColor='var(--mint)';
 </ul>
 </div>
 <div class="fr-visual">
-<div class="mock">
-<div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-<span class="m-tag">Client view</span>
-<div class="m-line" style="width:85%"></div>
-<div class="m-line mint" style="width:70%"></div>
-<div class="m-line" style="width:78%"></div>
-<p style="margin-top:12px;font-size:12.5px;color:var(--text-dim)">Client comment received on Clause 4.1. Suggested amendment prepared.</p>
-</div>
+<div class="wf" data-wf="collab-client"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Client view</span><span class="ctx">Supply agreement, shared draft v2</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-split"><div class="wf-doc"><div class="h">4. Payment</div><div class="sel">4.1 The Customer shall pay each invoice within 30 days of the date of the invoice.</div><p>4.2 Interest accrues on late payment at 4% above the Bank of England base rate.</p></div>
+<div class="wf-pane"><div class="wf-lab">COMMENT ON 4.1 AS THE CLIENT</div><div class="wf-inline show" style="margin-top:4px"><input type="text" id="cc-input" value="We need 60 days to match our own supplier terms." aria-label="Client comment"><button class="wf-btn sm" id="cc-send">Send</button></div><div id="cc-out" style="margin-top:10px"></div></div></div><div class="wf-body" style="border-top:1px solid var(--wf-line)"><button class="wf-act sm" id="cc-export">Client prefers email? Export the changes table</button></div></div><p class="wf-caption">The client comments on the clause itself. Their feedback becomes proposed drafting that waits for your approval.</p>
 </div>
 </div>
 
@@ -328,13 +327,11 @@ document.getElementById('z-q-state').style.borderColor='var(--mint)';
 </ul>
 </div>
 <div class="fr-visual">
-<div class="mock">
-<div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-<span class="m-tag">Isolation</span>
-<p style="color:var(--text)">Firm A workspace &nbsp;|&nbsp; sealed</p>
-<p style="color:var(--text)">Firm B workspace &nbsp;|&nbsp; sealed</p>
-<p style="color:var(--mint)">No cross-firm data flow. Ever.</p>
-</div>
+<div class="wf" data-wf="collab-isolation"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Isolation check</span><span class="ctx">Two firms, opposite sides of the same deal</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body">
+<div class="wf-lab">SIGNED IN AS</div>
+<div class="wf-tabs" id="iso-firm"><button class="wf-act sm" data-f="a" aria-pressed="true">Braden LLP (seller)</button><button class="wf-act sm" data-f="b">Orchard Law (buyer)</button></div>
+<div class="wf-actions" style="margin-top:0"><button class="wf-btn sm" id="iso-list">List my matters</button><button class="wf-act sm" id="iso-cross">Try to open the other firm’s Project Ash</button></div>
+<div id="iso-out" style="margin-top:10px"></div></div></div><p class="wf-caption">Both firms can be on the same deal. Each sees only its own workspace, enforced at the database layer.</p>
 </div>
 </div>
 
@@ -357,6 +354,7 @@ document.getElementById('z-q-state').style.borderColor='var(--mint)';
 <a href="draft.html">Draft</a>
 <a href="collaborate.html">Collaborate</a>
 <a href="negotiate.html">Negotiate</a>
+<a href="clause-library.html">Clause library</a>
 <a href="../index.html#demo">Book a demo</a>
 <a href="../index.html#contact">Contact</a>
 <a href="#">Privacy Policy</a>
@@ -364,5 +362,6 @@ document.getElementById('z-q-state').style.borderColor='var(--mint)';
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/wireframes.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
 <title>Draft | Scriptum AI</title>
 <meta name="description" content="AI-assisted drafting in Microsoft Word. Populate templates, generate clause suggestions and full drafts, grounded in your firm's own precedents and preferences.">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/wireframes.css">
 </head>
 <body>
 <div class="page-glow"></div>
@@ -33,6 +34,10 @@
         <a href="negotiate.html">
           <span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg></span>
           <span><span class="nd-title">Negotiate</span><br><span class="nd-desc">Instant redlines, issues lists and a growing record of every position your firm has taken.</span></span>
+        </a>
+        <a href="clause-library.html">
+        <span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5zM9 7h7M9 11h7"/></svg></span>
+        <span><span class="nd-title">Clause library</span><br><span class="nd-desc">Every clause your firm has agreed, with its provenance and negotiation history, searchable from Word.</span></span>
         </a>
       </div>
     </div>
@@ -74,17 +79,10 @@
     </ul>
   </div>
   <div class="fr-visual">
-    <div class="mock">
-      <div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-      <span class="m-tag">Word add-in</span>
-      <div class="m-line" style="width:90%"></div>
-      <div class="m-line" style="width:75%"></div>
-      <div class="m-line mint" style="width:95%"></div>
-      <div class="m-line mint" style="width:82%"></div>
-      <div class="m-line" style="width:60%"></div>
-      <p style="margin-top:12px;font-size:12.5px;color:var(--text-dim)">Suggested clause inserted from your firm's precedent bank, ready for review.</p>
-    </div>
-  </div>
+<div class="wf" data-wf="draft-levels"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Word add-in</span><span class="ctx">Services agreement, acting for the Supplier</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-split"><div class="wf-doc"></div><div class="wf-pane">
+<div class="wf-tabs"><button class="wf-act sm" data-k="clause" aria-pressed="true">Clause</button><button class="wf-act sm" data-k="template">Template</button><button class="wf-act sm" data-k="full">Full draft</button></div>
+<div id="dl-body"></div></div></div></div><p class="wf-caption">Pick a level, then draft. Every suggestion lands as a tracked change for you to accept or discard.</p>
+</div>
 </div>
 
 <div class="feature-row reveal">
@@ -99,14 +97,9 @@
     </ul>
   </div>
   <div class="fr-visual">
-    <div class="mock">
-      <div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-      <span class="m-tag">Clause question</span>
-      <p><strong style="color:var(--text)">You:</strong> Should the cap sit at 100% or 150% of Charges?</p>
-      <p><strong style="color:var(--text)">Client:</strong> 150%, matching the MSA we signed last year.</p>
-      <p style="color:var(--mint)">Suggested amendment prepared. Awaiting your approval.</p>
-    </div>
-  </div>
+<div class="wf" data-wf="draft-question"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Word add-in</span><span class="ctx">Services agreement, clause 8.2</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-split"><div class="wf-doc"><div class="h">8. Limitation of liability</div><p>8.1 Nothing in this Agreement limits liability for death, personal injury or fraud.</p><div class="sel">8.2 Subject to clause 8.1, the Supplier’s total liability shall not exceed <b id="dq-cap">[100% / 150%]</b> of the Charges paid or payable in the preceding 12 months.</div><p class="ghost">8.3 ...</p></div>
+<div class="wf-pane"><div class="wf-lab">ASK THE CLIENT ABOUT 8.2</div><div class="wf-inline show" style="margin-top:4px"><input type="text" id="dq-input" value="Should the cap sit at 100% or 150% of Charges?" aria-label="Question"><button class="wf-btn sm" id="dq-send">Send</button></div><div id="dq-out" style="margin-top:10px"></div></div></div></div><p class="wf-caption">Send the question and watch the reply come back as a drafted amendment, held for your approval.</p>
+</div>
 </div>
 
 <div class="feature-row reveal">
@@ -121,16 +114,8 @@
     </ul>
   </div>
   <div class="fr-visual">
-    <div class="mock">
-      <div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-      <span class="m-tag">Before / after</span>
-      <div class="m-line" style="width:88%"></div>
-      <div class="m-line" style="width:70%"></div>
-      <div class="m-line mint" style="width:88%"></div>
-      <div class="m-line mint" style="width:76%"></div>
-      <p style="margin-top:12px;font-size:12.5px;color:var(--text-dim)">Approve &middot; Reject &middot; Counter, with a note on every decision.</p>
-    </div>
-  </div>
+<div class="wf" data-wf="draft-review"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Review and approve</span><span class="ctx">SPA, amendments by A. Murray (trainee)</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body"><div id="dr-list"><div class="wf-card" data-item="6.2 Time limits"><div class="wf-head"><span class="wf-pill">6.2 Time limits</span><span class="wf-meta">A. Murray, 09:14</span></div><div class="wf-tc"><div class="wf-lab">TRACKED CHANGES</div>No Claim may be brought unless notified within <span class="wf-del">18 months</span> <span class="wf-ins">24 months</span> of Completion.</div><div class="wf-actions"><button class="wf-act sm green" data-a="approve">Approve</button><button class="wf-act sm red" data-a="reject">Reject</button><button class="wf-act sm" data-a="counter">Counter</button></div><div class="wf-inline"><input type="text" aria-label="Note"><button class="wf-btn sm">Save</button></div></div><div class="wf-card" data-item="5.1 Warranties"><div class="wf-head"><span class="wf-pill">5.1 Warranties</span><span class="wf-meta">A. Murray, 09:22</span></div><div class="wf-tc"><div class="wf-lab">TRACKED CHANGES</div>The Sellers warrant to the Buyer that each of the Warranties is <span class="wf-ins">true, accurate and not misleading</span></div><div class="wf-actions"><button class="wf-act sm green" data-a="approve">Approve</button><button class="wf-act sm red" data-a="reject">Reject</button><button class="wf-act sm" data-a="counter">Counter</button></div><div class="wf-inline"><input type="text" aria-label="Note"><button class="wf-btn sm">Save</button></div></div><div class="wf-card" data-item="9.1 Non-compete"><div class="wf-head"><span class="wf-pill">9.1 Non-compete</span><span class="wf-meta">A. Murray, 09:31</span></div><div class="wf-tc"><div class="wf-lab">TRACKED CHANGES</div>The Seller shall not for a period of <span class="wf-del">12 months</span> <span class="wf-ins">24 months</span> from Completion carry on any competing business.</div><div class="wf-actions"><button class="wf-act sm green" data-a="approve">Approve</button><button class="wf-act sm red" data-a="reject">Reject</button><button class="wf-act sm" data-a="counter">Counter</button></div><div class="wf-inline"><input type="text" aria-label="Note"><button class="wf-btn sm">Save</button></div></div></div><div class="wf-status" id="dr-status"></div></div></div><p class="wf-caption">Approve, reject or counter each line. Every decision and note is written to the audit trail.</p>
+</div>
 </div>
 
 <div class="feature-row reveal">
@@ -145,16 +130,13 @@
     </ul>
   </div>
   <div class="fr-visual">
-    <div class="mock">
-      <div class="m-head"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
-      <span class="m-tag">Knowledge layer</span>
-      <p>Draft &rarr; Correction &rarr; Captured &rarr; Better next draft</p>
-      <div class="m-line mint" style="width:40%"></div>
-      <div class="m-line mint" style="width:62%"></div>
-      <div class="m-line mint" style="width:84%"></div>
-      <p style="margin-top:12px;font-size:12.5px;color:var(--text-dim)">Suggestion quality compounds with every matter your firm runs.</p>
-    </div>
-  </div>
+<div class="wf" data-wf="draft-loop"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Knowledge loop</span><span class="ctx">SPA, acting for the Seller</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body">
+<div class="wf-card" id="kl-sugg"><div class="wf-head"><span class="wf-pill navy">suggested clause</span><span class="wf-meta">9.1 Non-compete</span></div><div class="wf-tc">The Seller shall not for a period of <b id="kl-val">12 months</b> from Completion carry on any business which competes with the Business.</div>
+<div class="wf-actions"><button class="wf-btn green sm" id="kl-accept">Accept as drafted</button><button class="wf-act sm" id="kl-edit">Edit to the firm’s position</button></div>
+<div class="wf-inline" id="kl-choices" style="gap:6px;flex-wrap:wrap"><span style="font-size:12px;color:var(--wf-ink2);align-self:center">Change to</span><button class="wf-act sm" data-v="6 months">6 months</button><button class="wf-act sm" data-v="18 months">18 months</button><button class="wf-act sm" data-v="24 months">24 months</button></div></div>
+<div class="wf-row" style="margin-top:10px" id="kl-pulse"><span class="wf-pill brand">firm knowledge</span><span class="grow">Non-compete, seller-side, SPA</span><span><b id="kl-n"></b> matters captured</span></div>
+<div id="kl-out"></div></div></div><p class="wf-caption">Accept or edit the suggestion. The knowledge layer records the decision and the next matter starts from it.</p>
+</div>
 </div>
 
 <section>
@@ -176,6 +158,7 @@
     <a href="draft.html">Draft</a>
     <a href="collaborate.html">Collaborate</a>
     <a href="negotiate.html">Negotiate</a>
+<a href="clause-library.html">Clause library</a>
     <a href="../index.html#demo">Book a demo</a>
     <a href="../index.html#contact">Contact</a>
     <a href="#">Privacy Policy</a>
@@ -183,5 +166,6 @@
 </footer>
 
 <script src="../assets/main.js"></script>
+<script src="../assets/wireframes.js"></script>
 </body>
 </html>
