@@ -478,3 +478,56 @@ footer{
   .nav-links{display:none}
   .nav-hamburger{display:flex}
 }
+
+/* ============================================================
+   APP-MATCHED THEME  |  pulled from the Scriptum portal:
+   warm off-white bg, navy primary, terracotta brand accent,
+   green for positive. Overrides the dark palette above.
+   To revert, delete from this line to the end of the file.
+   ============================================================ */
+:root{
+  --bg:#EEECE7;
+  --bg-raise:#FCFBF8;
+  --bg-card:#FCFBF8;
+  --line:#DFDBD3;
+  --line-strong:#D0CBC0;
+  --mint:#C86D4C;                        /* terracotta brand accent (decorative) */
+  --mint-dim:rgba(200,109,76,0.12);
+  --mint-glow:rgba(200,109,76,0.22);
+  --text:#1D2434;                        /* dark navy ink */
+  --text-mid:#6A6E7C;
+  --text-dim:#8B8F9C;
+  --navy:#464F6D;                        /* primary buttons + structure */
+  --navy-hover:#3A4258;
+  --brand-ink:#A84E2A;                   /* readable terracotta for small text */
+  --success:#0E7754;                     /* positive / confirmation */
+}
+::selection{background:var(--mint);color:#fff}
+.page-glow{
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(200,109,76,0.06), transparent 60%),
+    radial-gradient(700px 500px at -10% 40%, rgba(200,109,76,0.045), transparent 60%);
+}
+nav{background:rgba(238,236,231,0.85);border-bottom:1px solid var(--line)}
+.nav-tagline{color:var(--brand-ink)}
+.btn-primary{background:var(--navy);color:#fff;border:1px solid var(--navy)}
+.btn-primary:hover{background:var(--navy-hover);border-color:var(--navy-hover)}
+.btn-secondary{background:#fff;color:var(--navy);border:1px solid var(--line-strong)}
+.btn-secondary:hover{background:var(--mint-dim);color:var(--brand-ink);border-color:var(--mint)}
+/* readable terracotta for small-text accents */
+.section-label,.step-num,.mock .m-tag,.post-tag,.crumb .here,.mobile-menu a:last-child{color:var(--brand-ink)}
+/* navy for body links, terracotta on hover */
+.card-link,.article a{color:var(--navy)}
+.card-link:hover,.article a:hover{color:var(--brand-ink)}
+/* green success ticks, mirroring the app */
+.hero-points .tick{border-color:var(--success)}
+.hero-points .tick::after{border-color:var(--success)}
+/* navy focus ring like the app */
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy)}
+.cta-band{
+  background:
+    radial-gradient(500px 260px at 50% -40%, rgba(200,109,76,0.10), transparent 70%),
+    var(--bg-card);
+}
+.demo-connector{background:linear-gradient(var(--line-strong),var(--mint))}
+.redline-del{color:#A72420}
