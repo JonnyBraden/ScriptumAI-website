@@ -280,5 +280,11 @@
     if(state.level===1) renderHome(); else if(state.level===2) renderInstances(); else renderHistory();
   }
   root.querySelector('#clx-home').addEventListener('click', function(){ state.level=1; state.slug=null; state.inst=null; render(); });
+  /* Small public API so the product page can drive the explorer from scroll position. */
+  window.CLX = {
+    home: function(){ state.level=1; state.slug=null; state.inst=null; render(); },
+    type: function(slug){ if(!DATA[slug]) return; state.level=2; state.slug=slug; state.inst=null; render(); },
+    history: function(id){ var r=find(id); if(!r) return; state.level=3; state.slug=id.split('-')[0]; state.inst=id; render(); }
+  };
   render();
 })();
