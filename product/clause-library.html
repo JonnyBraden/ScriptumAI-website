@@ -67,60 +67,92 @@
   </div>
 </div>
 
-<div class="feature-row reveal">
-  <div class="fr-copy">
-    <div class="section-label">Automatic capture</div>
-    <h3>Built from the work, not from a KM project</h3>
-    <p>Nobody has to file anything. As drafts, turns and signed versions move through a matter, Scriptum parses each document, maps the clauses to your firm's taxonomy and records the context: matter type, client, document type, counterparty and the side you acted for. Lawyers confirm the handful of uncertain matches and move on.</p>
-    <ul>
-      <li>Clause mapping across five practice areas: corporate, commercial, employment, real estate and banking</li>
-      <li>Provenance on every clause so you always know where wording came from</li>
-      <li>Confirmations improve matching for the next document</li>
-    </ul>
-  </div>
-  <div class="fr-visual">
-<div class="wf" data-wf="lib-capture"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Capture</span><span class="ctx">Signed Subscription Agreement, Causeway Series A</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-body">
-<div class="wf-row"><span class="wf-pill">docx</span><span class="grow">Causeway_SA_signed.docx</span><span class="wf-meta">final, signed 18 Jun 2026</span></div>
-<div class="wf-actions" style="margin-top:8px"><button class="wf-btn sm" id="lc-go">Parse and map to the library</button></div>
-<div id="lc-out" style="margin-top:10px"></div></div></div>
-<p class="wf-caption">Clauses are parsed and matched to your taxonomy as documents move through a matter. You confirm the edge cases; the rest is automatic.</p>
-  </div>
-</div>
-
-<div class="feature-row reveal">
-  <div class="fr-copy">
-    <div class="section-label">Inside Word</div>
-    <h3>The right clause, in the document, with its history attached</h3>
-    <p>Search the library without leaving the draft. Results are ranked by what the firm has actually agreed, with the firm-preferred wording first and the fallbacks behind it. Insert as a tracked change and the provenance travels with it in a comment, so the reviewing partner can see why that wording was chosen.</p>
-    <ul>
-      <li>Firm-preferred wording separated from settled compromises</li>
-      <li>Every insert is a proposal held for the drafting lawyer's decision</li>
-      <li>One click from a result to the full negotiation history</li>
-    </ul>
-  </div>
-  <div class="fr-visual">
-<div class="wf" data-wf="lib-search"><div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Word add-in</span><span class="ctx">New Shareholders’ Agreement, acting for the Company</span><button class="wf-reset" type="button">Replay</button></div><div class="wf-split"><div class="wf-doc"><div class="h">14. Drag-along</div><div class="sel" id="ls-doc"><span class="ghost">[cursor here]</span></div><p class="ghost">15. Tag-along ...</p></div>
-<div class="wf-pane"><div class="wf-lab">SEARCH THE FIRM’S LIBRARY</div><div class="wf-inline show" style="margin-top:4px"><input type="text" id="ls-q" value="drag along" aria-label="Search"><button class="wf-btn sm" id="ls-go">Search</button></div><div id="ls-out" style="margin-top:10px"></div></div></div></div>
-<p class="wf-caption">Search from inside Word. Results are ranked by what the firm has actually agreed, not by what a generic model thinks is typical.</p>
-  </div>
-</div>
-
-<section class="reveal" style="padding-top:10px;padding-bottom:10px">
-<div class="pp-wrap">
-<div class="pp-copy">
-<div class="section-label">Product preview</div>
-<h3>Explore a sample library</h3>
-<p>This is the library as a partner sees it in the portal. Pick a clause type, filter the captured instances by side, document or counterparty, then open any matter to see the clause move round by round, with changes marked. Copy works at every level and every copied clause carries its provenance.</p>
-<p>Sample data throughout. In the live platform the library is built solely from your firm's own matters and is visible only to your firm.</p>
-</div>
-<div class="pp-visual">
 <style>
-.pp-wrap{display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap;max-width:1180px;margin:0 auto}
-.pp-copy{flex:1 1 300px;min-width:260px;max-width:360px;position:sticky;top:90px}
-.pp-copy h3{margin:10px 0 12px;font-size:26px}
-.pp-copy p{color:var(--text-dim);font-size:15px;line-height:1.6;margin-bottom:12px}
-.pp-visual{flex:2 1 520px;min-width:320px}
+.scroll-story{display:flex;gap:48px;align-items:flex-start;padding:20px 8% 60px;max-width:1400px;margin:0 auto}
+.ss-copy{flex:1 1 38%;min-width:280px}
+.ss-step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding:40px 0;border-top:1px solid var(--line);opacity:.35;transition:opacity .4s}
+.ss-step:first-child{border-top:none}
+.ss-step.active{opacity:1}
+.ss-step h3{font-size:clamp(22px,2.6vw,30px);margin-bottom:14px}
+.ss-step p{color:var(--text-mid);font-size:16.5px;margin-bottom:14px}
+.ss-step ul{margin:18px 0 0}
+.ss-step li{list-style:none;display:flex;gap:10px;margin-bottom:10px;color:var(--text-mid);font-size:15.5px}
+.ss-step li::before{content:'';flex:0 0 6px;height:6px;border-radius:50%;background:var(--mint);margin-top:9px}
+.ss-jump{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:14px;font-weight:600;color:var(--navy);background:none;border:none;cursor:pointer;font-family:var(--font);padding:0}
+.ss-jump:hover{color:var(--brand-ink)}
+.ss-visual{flex:1 1 58%;min-width:320px;position:sticky;top:86px;align-self:flex-start}
+.ss-visual .clx{height:calc(100vh - 150px);min-height:480px;max-height:760px}
+@media (max-width:960px){
+  .scroll-story{flex-direction:column;gap:0;padding:20px 6% 40px}
+  .ss-visual{position:static;width:100%;order:0;padding:8px 0 12px}
+  .ss-visual .clx{height:auto}
+  .ss-copy{order:1;width:100%}
+  .ss-step{min-height:auto;padding:36px 0;opacity:1}
+}
 </style>
+
+<div class="scroll-story reveal" id="story">
+  <div class="ss-copy">
+
+    <div class="ss-step" data-view="home">
+      <div class="section-label">The library</div>
+      <h3>Built from the work, not from a KM project</h3>
+      <p>Nobody has to file anything. As drafts, turns and signed versions move through a matter, Scriptum parses each document, maps every clause to your firm's taxonomy and records the context: matter, client, document type, counterparty and the side you acted for. What you see on the right is the result: a library organised the way a transactional lawyer thinks, by clause type, not by folder.</p>
+      <ul>
+        <li>Clause mapping across corporate, commercial, employment, real estate and banking</li>
+        <li>Lawyers confirm the handful of uncertain matches; the rest is automatic</li>
+        <li>Grouped by concept, so equivalent positions across document types sit together</li>
+      </ul>
+    </div>
+
+    <div class="ss-step" data-view="type">
+      <div class="section-label">Captured instances</div>
+      <h3>What the firm actually agreed, and with whom</h3>
+      <p>Open a clause type and you get every instance the firm has captured: the agreed wording, the matter it came from, the document, the side you acted for and the counterparty. Filter to the situation in front of you, sort by what matters, and copy any clause with its provenance attached.</p>
+      <ul>
+        <li>Firm-preferred wording separated from settled compromises</li>
+        <li>Filter by side, document type and counterparty</li>
+        <li>Lawyer notes travel with the clause, so the reasoning survives the deal</li>
+      </ul>
+      <button type="button" class="ss-jump" data-go="type">Show warranty time limits on the right</button>
+    </div>
+
+    <div class="ss-step" data-view="history">
+      <div class="section-label">Negotiation history</div>
+      <h3>How the clause got there, round by round</h3>
+      <p>Any clause that took more than one round opens into its full history for that matter: your internal drafts and releases, the counterparty's incoming markup and the agreed form, each diffed against the round before. A partner can see exactly where the other side moved the 36 months to 24, and which round it happened in.</p>
+      <ul>
+        <li>Word-level tracked changes between rounds</li>
+        <li>Questions and answers raised against the clause at each point</li>
+        <li>Copy a single round, the agreed text, or the full history as a record</li>
+      </ul>
+      <button type="button" class="ss-jump" data-go="history">Open the Causeway Series A history</button>
+    </div>
+
+    <div class="ss-step" data-view="word">
+      <div class="section-label">Inside Word</div>
+      <h3>The right clause, in the draft, with its history attached</h3>
+      <p>The same library is searchable from the Word add-in without leaving the document. Results are ranked by what the firm has actually agreed, with the firm-preferred wording first and the fallbacks behind it. Insert as a tracked change and the provenance travels with it in a comment, so the reviewing partner can see why that wording was chosen.</p>
+      <ul>
+        <li>Every insert is a proposal held for the drafting lawyer's decision</li>
+        <li>One click from a result to the full negotiation history</li>
+        <li>Suggestions improve as the library grows, matter by matter</li>
+      </ul>
+    </div>
+
+    <div class="ss-step" data-view="owned">
+      <div class="section-label">Owned by the firm</div>
+      <h3>An asset that stays when people move on</h3>
+      <p>The library is your firm's data, built only from your firm's matters, and never used to train models or shared with anyone else. When a senior lawyer leaves, what they knew about a counterparty's habits or where a cap tends to land does not leave with them. It is already in the library, attached to the clauses and the matters where it was learned.</p>
+      <ul>
+        <li>Firm-level isolation enforced at the database layer</li>
+        <li>No-training commitment flowing down to every model provider</li>
+        <li>Export at any time; the data is yours</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="ss-visual">
 <div class="wf" id="clx-frame">
 <div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">Clause library</span><span class="ctx">Braden LLP, venture and growth</span></div>
 <div class="clx" id="clx">
@@ -132,36 +164,6 @@
 </div>
 </div>
 <p class="wf-caption" style="text-align:center">Interactive preview with sample data. Navy marks your firm's drafts and releases, amber marks incoming counterparty markup, green marks the agreed form.</p>
-</div>
-</div>
-</section>
-
-<div class="feature-row reveal">
-  <div class="fr-copy">
-    <div class="section-label">Owned by the firm</div>
-    <h3>An asset that stays when people move on</h3>
-    <p>The library is your firm's data, built only from your firm's matters, and never used to train models or shared with anyone else. When a senior lawyer leaves, what they knew about a counterparty's habits or where a cap tends to land does not leave with them. It is already in the library, attached to the clauses and the matters where it was learned.</p>
-    <ul>
-      <li>Firm-level isolation enforced at the database layer</li>
-      <li>No-training commitment flowing down to every model provider</li>
-      <li>Export at any time; the data is yours</li>
-    </ul>
-  </div>
-  <div class="fr-visual">
-    <div class="wf" style="padding:0">
-      <div class="wf-bar"><span class="wf-logo"><svg class="ico" viewBox="0 0 24 24"><path d="M6 18C6 11 11 5 18 5c0 7-5 13-12 13z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 18l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="t">What the library holds</span><span class="ctx">Braden LLP, 24 months in</span></div>
-      <div class="wf-body">
-        <table>
-          <tr><td>Captured clauses</td><td style="text-align:right"><b>1,284</b></td></tr>
-          <tr><td>Clause types with a firm position</td><td style="text-align:right"><b>212</b></td></tr>
-          <tr><td>Matters contributing</td><td style="text-align:right"><b>87</b></td></tr>
-          <tr><td>Counterparties profiled</td><td style="text-align:right"><b>31</b></td></tr>
-          <tr><td>Lawyers who have since left the firm</td><td style="text-align:right"><b>6</b></td></tr>
-          <tr><td>Knowledge lost with them</td><td style="text-align:right;color:var(--wf-green)"><b>None</b></td></tr>
-        </table>
-      </div>
-    </div>
-    <p class="wf-caption">Illustrative figures for a 40 fee-earner firm after two years on the platform.</p>
   </div>
 </div>
 
@@ -194,5 +196,23 @@
 <script src="../assets/main.js"></script>
 <script src="../assets/wireframes.js"></script>
 <script src="../assets/clause-library.js"></script>
+<script>
+/* Scroll-driven story: the copy scrolls, the library stays put and follows along
+   until the reader takes over by clicking inside it. */
+(function(){
+  var steps=document.querySelectorAll('.ss-step'), api=window.CLX; if(!steps.length||!api) return;
+  var views={home:function(){api.home();}, type:function(){api.type('time_limits');}, history:function(){api.history('time_limits-0');}, word:function(){api.type('drag');}, owned:function(){api.home();}};
+  var userDrove=false;
+  document.getElementById('clx').addEventListener('click',function(){ userDrove=true; });
+  function activate(step){
+    steps.forEach(function(s){ s.classList.toggle('active', s===step); });
+    if(!userDrove && window.innerWidth>960 && views[step.dataset.view]) views[step.dataset.view]();
+  }
+  var io=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting) activate(e.target); }); },{rootMargin:'-40% 0px -45% 0px',threshold:0});
+  steps.forEach(function(s){ io.observe(s); });
+  document.querySelectorAll('.ss-jump').forEach(function(b){ b.addEventListener('click',function(){ userDrove=true; views[b.dataset.go](); }); });
+  activate(steps[0]);
+})();
+</script>
 </body>
 </html>
