@@ -10,6 +10,9 @@
 <meta property="og:title" content="What E-E-A-T means for your law firm blog">
 <meta property="og:description" content="Google's E-E-A-T signals are particularly relevant to legal content. Here is what they mean for how law firms should approach their blog and content strategy.">
 <meta property="og:url" content="https://tryscriptum.ai/blog/what-e-e-a-t-means-for-your-law-firm-blog">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 <script type="application/ld+json">
 {
@@ -23,15 +26,39 @@
 </script>
 </head>
 <body>
-<div class="page-glow"></div>
-<nav>
-  <a class="nav-logo" href="/"><span class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6V2zm8 1v5h5"></path></svg></span><span><span class="nav-logo-text">ScriptumAI</span><span class="nav-tagline">Draft · Collaborate · Negotiate</span></span></a>
-  <div class="nav-links">
-    <div class="nav-drop"><button class="nav-drop-btn" type="button">Product <span class="chev"></span></button><div class="nav-drop-menu"><a href="/product/draft"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span><span><span class="nd-title">Draft</span><br><span class="nd-desc">AI-assisted drafting in Microsoft Word.</span></span></a><a href="/product/collaborate"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg></span><span><span class="nd-title">Collaborate</span><br><span class="nd-desc">One secure workspace for every party.</span></span></a><a href="/product/negotiate"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M3 12h6l3-9 3 18 3-9h3"></path></svg></span><span><span class="nd-title">Negotiate</span><br><span class="nd-desc">Instant redlines and a firm-owned record.</span></span></a><a href="/product/clause-library"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5zM9 7h7M9 11h7"></path></svg></span><span><span class="nd-title">Clause library</span><br><span class="nd-desc">Every agreed clause, with its history.</span></span></a></div></div>
-    <div class="nav-drop"><button class="nav-drop-btn" type="button">Resources <span class="chev"></span></button><div class="nav-drop-menu"><a href="/blog/"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 4h13a2 2 0 012 2v14l-4-3H4a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg></span><span><span class="nd-title">Blog</span><br><span class="nd-desc">Writing for transactional lawyers.</span></span></a><a href="/guides"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5z"></path></svg></span><span><span class="nd-title">Guides</span><br><span class="nd-desc">Longer-form reference material.</span></span></a></div></div>
-    <a href="/#who">Who it's for</a><a href="/#contact">Contact</a><a class="btn-primary" href="/#demo">Book a demo</a>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html" aria-label="Scriptum AI home"><span class="logo-mark" aria-hidden="true"></span>Scriptum</a>
+    <nav class="nav-menu" id="nav-menu" aria-label="Main">
+      <div class="drop">
+        <button class="drop-btn" type="button" aria-expanded="false">Product</button>
+        <div class="drop-menu">
+          <a href="../product/draft.html"><strong>Draft</strong><span>AI-assisted drafting in Microsoft Word, from your firm's own precedents.</span></a>
+          <a href="../product/collaborate.html"><strong>Collaborate</strong><span>One secure workspace for your team, your client and opposing counsel.</span></a>
+          <a href="../product/negotiate.html"><strong>Negotiate</strong><span>Instant redlines, issues lists and a record of every position you take.</span></a>
+          <a href="../product/clause-library.html"><strong>Clause library</strong><span>Every clause your firm has agreed, with its negotiation history.</span></a>
+        </div>
+      </div>
+      <a href="../index.html#agents">Agents</a>
+      <a href="../index.html#knowledge">Knowledge</a>
+      <a href="../index.html#security">Security</a>
+      <a href="../pricing.html">Pricing</a>
+      <div class="drop">
+        <button class="drop-btn" type="button" aria-expanded="false">Resources</button>
+        <div class="drop-menu">
+          <a href="../blog/index.html"><strong>Blog</strong><span>Writing for transactional lawyers on AI, drafting and knowledge.</span></a>
+          <a href="../guides.html"><strong>Guides</strong><span>Longer-form guides and reference material for your team.</span></a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-dark btn-sm" href="../index.html#demo">Book a demo</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
-<button class="nav-hamburger" aria-label="Open menu"><span></span></button></nav>
+</header>
 <div class="mobile-menu"><a href="/product/draft"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span><span><span class="nd-title">Draft</span><br><span class="nd-desc">AI-assisted drafting in Microsoft Word.</span></span></a><a href="/product/collaborate"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg></span><span><span class="nd-title">Collaborate</span><br><span class="nd-desc">One secure workspace for every party.</span></span></a><a href="/product/negotiate"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M3 12h6l3-9 3 18 3-9h3"></path></svg></span><span><span class="nd-title">Negotiate</span><br><span class="nd-desc">Instant redlines and a firm-owned record.</span></span></a><a href="/product/clause-library"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5zM9 7h7M9 11h7"></path></svg></span><span><span class="nd-title">Clause library</span><br><span class="nd-desc">Every agreed clause, with its history.</span></span></a><a href="/blog/"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 4h13a2 2 0 012 2v14l-4-3H4a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg></span><span><span class="nd-title">Blog</span><br><span class="nd-desc">Writing for transactional lawyers.</span></span></a><a href="/guides"><span class="nd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5V4.5z"></path></svg></span><span><span class="nd-title">Guides</span><br><span class="nd-desc">Longer-form reference material.</span></span></a><a href="/#who">Who it's for</a><a href="/#contact">Contact</a><a class="" href="/#demo">Book a demo</a></div>
 
 <main>
@@ -61,10 +88,21 @@
 </article>
 </main>
 
-<footer>
-  <div><span class="nav-logo-text" style="font-size:16px">ScriptumAI</span><br>© 2026 ScriptumAI. All rights reserved.</div>
-  <div class="footer-links"><a href="/product/draft">Draft</a><a href="/product/collaborate">Collaborate</a><a href="/product/negotiate">Negotiate</a><a href="/blog/">Blog</a><a href="/#demo">Book a demo</a><a href="/#contact">Contact</a></div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo"><span class="logo-mark" aria-hidden="true"></span>Scriptum</span>
+      <span>The operating system for transactional legal teams.</span>
+      <span>&copy; 2026 Scriptum AI. All rights reserved.</span>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><strong>Product</strong><a href="../product/draft.html">Draft</a><a href="../product/collaborate.html">Collaborate</a><a href="../product/negotiate.html">Negotiate</a><a href="../product/clause-library.html">Clause library</a><a href="../pricing.html">Pricing</a></div>
+      <div class="footer-col"><strong>Resources</strong><a href="../blog/index.html">Blog</a><a href="../guides.html">Guides</a></div>
+      <div class="footer-col"><strong>Company</strong><a href="../index.html#security">Security</a><a href="../index.html#contact">Contact</a><a href="#">Privacy policy</a></div>
+    </div>
+  </div>
 </footer>
 <script src="../assets/main.js"></script>
+<script src="../assets/home.js"></script>
 </body>
 </html>
