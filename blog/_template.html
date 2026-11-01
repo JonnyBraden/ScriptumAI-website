@@ -51,14 +51,20 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": "[[ POST TITLE ]]",
+  "description": "[[ ONE OR TWO SENTENCE SUMMARY FOR SEARCH RESULTS ]]",
+  "url": "https://tryscriptum.ai/blog/[[ YOUR-SLUG ]]",
+  "mainEntityOfPage": "https://tryscriptum.ai/blog/[[ YOUR-SLUG ]]",
   "datePublished": "[[ YYYY-MM-DD ]]",
   "dateModified": "[[ YYYY-MM-DD ]]",
   "author": { "@type": "Person", "name": "[[ AUTHOR NAME ]]" },
-  "publisher": { "@type": "Organization", "name": "Scriptum AI" }
+  "publisher": { "@type": "Organization", "@id": "https://tryscriptum.ai/#organization", "name": "Scriptum AI", "url": "https://tryscriptum.ai/" },
+  "inLanguage": "en-GB"
 }
 </script>
+<!-- After adding the post and its posts.json line, run: python3 scripts/seo_build.py
+     It upgrades this block, updates sitemap.xml, llms.txt and the static blog list. -->
 </head>
 <body>
 
@@ -153,7 +159,7 @@
     </div>
     <div class="footer-cols">
       <div class="footer-col"><strong>Product</strong><a href="../product/draft.html">Draft</a><a href="../product/collaborate.html">Collaborate</a><a href="../product/negotiate.html">Negotiate</a><a href="../product/clause-library.html">Clause library</a><a href="../pricing.html">Pricing</a></div>
-      <div class="footer-col"><strong>Resources</strong><a href="../blog/index.html">Blog</a><a href="../guides.html">Guides</a></div>
+      <div class="footer-col"><strong>Resources</strong><a href="../blog/index.html">Blog</a><a href="../guides.html">Guides</a><a href="/compare/harvey-legora">Scriptum vs Harvey vs Legora</a></div>
       <div class="footer-col"><strong>Company</strong><a href="../index.html#security">Security</a><a href="../index.html#contact">Contact</a><a href="#">Privacy policy</a></div>
     </div>
   </div>

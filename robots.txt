@@ -1,0 +1,30 @@
+# robots.txt for https://tryscriptum.ai
+# Scriptum AI welcomes search engines and AI assistants.
+# The site had no robots.txt before this file, so everything was already
+# crawlable. Nothing is blocked: the blank post templates are kept out of
+# indexes with a noindex header (see _headers) rather than a Disallow, so
+# crawlers can actually see that instruction.
+
+User-agent: *
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: DuckAssistBot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://tryscriptum.ai/sitemap.xml
