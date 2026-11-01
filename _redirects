@@ -1,0 +1,14 @@
+# Netlify redirects. "301!" is needed because the old root-level copies
+# still exist as files. They duplicate the real pages (and the /draft,
+# /collaborate, /negotiate copies load a broken stylesheet path), so send
+# people and crawlers to the canonical versions.
+/draft                                        /product/draft                                       301!
+/draft.html                                   /product/draft                                       301!
+/collaborate                                  /product/collaborate                                 301!
+/collaborate.html                             /product/collaborate                                 301!
+/negotiate                                    /product/negotiate                                   301!
+/negotiate.html                               /product/negotiate                                   301!
+/what-is-ai-assisted-contract-drafting        /blog/what-is-ai-assisted-contract-drafting          301!
+/what-is-ai-assisted-contract-drafting.html   /blog/what-is-ai-assisted-contract-drafting          301!
+/how-law-firms-lose-institutional-knowledge       /blog/how-law-firms-lose-institutional-knowledge 301!
+/how-law-firms-lose-institutional-knowledge.html  /blog/how-law-firms-lose-institutional-knowledge 301!

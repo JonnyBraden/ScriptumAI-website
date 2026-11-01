@@ -1,0 +1,21 @@
+# Netlify custom headers. Keep the blank post templates and repo notes
+# out of search and AI indexes (they are publicly served today).
+/_template
+  X-Robots-Tag: noindex, nofollow
+/_template.html
+  X-Robots-Tag: noindex, nofollow
+/blog/_template
+  X-Robots-Tag: noindex, nofollow
+/blog/_template.html
+  X-Robots-Tag: noindex, nofollow
+/README.md
+  X-Robots-Tag: noindex
+/blog/README.md
+  X-Robots-Tag: noindex
+/posts.json
+  X-Robots-Tag: noindex
+/blog/posts.json
+  X-Robots-Tag: noindex
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
