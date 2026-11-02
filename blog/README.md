@@ -39,7 +39,7 @@ entry except the last one ends with a comma.
       "tag": "Employment",
       "date": "2026-08-01",
       "readingTime": "5 min read",
-      "author": "Jonny Braden"
+      "author": ""
     }
 
 The `slug` must match your file name without the `.html`.
