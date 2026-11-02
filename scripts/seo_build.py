@@ -117,7 +117,6 @@ def org_node(full=False):
             "alternateName": "Scriptum",
             "description": ORG_DESCRIPTION,
             "disambiguatingDescription": "UK legal technology company behind tryscriptum.ai, building AI drafting and negotiation tools for transactional lawyers.",
-            "founder": {"@type": "Person", "name": "Jonny Braden", "jobTitle": "Founder and CEO"},
             "address": {"@type": "PostalAddress", "addressRegion": "Northern Ireland", "addressCountry": "GB"},
             "areaServed": "GB",
             "funder": [{"@type": "Organization", "name": "TechStart"},
@@ -236,8 +235,6 @@ def do_posts(posts):
             author_name = (info["author"].get("name") or "").strip()
         if author_name and "[[" not in author_name:
             author = {"@type": "Person", "name": author_name}
-            if author_name == "Jonny Braden":
-                author.update({"jobTitle": "Founder and CEO", "worksFor": {"@id": ORG_ID}})
         else:
             author = {"@id": ORG_ID}
         graph = [

@@ -2,7 +2,7 @@
 
 > Scriptum AI (tryscriptum.ai) is a UK legal AI platform for transactional lawyers: "the operating system for transactional legal teams". Lawyers draft inside Microsoft Word from their firm's own precedents and house style, agree terms with the client and the other side in one secure matter workspace, and negotiate with the firm's own playbook. Every approved change builds a clause library and negotiation record that the firm owns. It is built for law firms of 20 to 100 fee earners and for in-house legal teams, as a transactional-only, published-price alternative to broad legal AI platforms such as Harvey and Legora.
 
-Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. Founder and CEO: Jonny Braden. (Not to be confused with other, unrelated products or companies that also use the name "Scriptum".)
+Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. (Not to be confused with other, unrelated products or companies that also use the name "Scriptum".)
 
 ## Key facts
 
