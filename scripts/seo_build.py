@@ -47,6 +47,9 @@ PAGES = [
     ("/product/clause-library", "product/clause-library.html", "monthly", "0.8", "product"),
     ("/blog/", "blog/index.html", "daily", "0.8", "blogindex"),
     ("/guides", "guides.html", "monthly", "0.4", "page"),
+    ("/privacy", "privacy.html", "yearly", "0.3", "page"),
+    ("/terms", "terms.html", "yearly", "0.3", "page"),
+    ("/data-protection", "data-protection.html", "yearly", "0.3", "page"),
 ]
 
 OFFERS = [

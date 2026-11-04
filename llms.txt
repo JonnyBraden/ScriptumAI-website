@@ -24,6 +24,9 @@ Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. 
 - [Negotiate](https://tryscriptum.ai/product/negotiate): instant redlines, issues lists and a record of every position taken
 - [Clause library](https://tryscriptum.ai/product/clause-library): a firm-owned clause library built from the documents lawyers already draft
 - [Blog](https://tryscriptum.ai/blog/): writing for transactional lawyers on legal AI, drafting and knowledge
+- [Privacy policy](https://tryscriptum.ai/privacy): how Scriptum AI Limited handles personal data
+- [Terms of service](https://tryscriptum.ai/terms): the terms on which the platform is supplied
+- [Data protection policy](https://tryscriptum.ai/data-protection): processor terms, sub-processors, transfers and security
 
 ## Comparisons and buying guides
 
