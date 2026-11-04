@@ -336,3 +336,35 @@ h2{font-size:clamp(32px,4.2vw,46px);margin-bottom:16px;max-width:760px}
   .redline-del,.redline-ins{opacity:1}
   html{scroll-behavior:auto}
 }
+
+/* ---------- Legal pages (privacy, terms, data protection) ---------- */
+.legal-wrap{max-width:800px}
+.legal-tabs{display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:28px;font-size:14px}
+.legal-tabs a{color:var(--muted);padding-bottom:4px;border-bottom:1px solid transparent}
+.legal-tabs a:hover{color:var(--ink)}
+.legal-tabs a[aria-current="page"]{color:var(--accent-ink);border-bottom-color:var(--accent-ink);font-weight:500}
+.legal-lede{color:var(--ink-2);font-size:18px;line-height:1.6;margin-bottom:28px}
+.legal-lede a,.legal-toc a{color:var(--accent-ink)}
+.legal-toc{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:12px;font-size:14px}
+.legal-toc strong{display:block;color:var(--ink);font-weight:600;margin-bottom:10px}
+.legal-toc ol{list-style:none;margin:0;padding:0;columns:2;column-gap:28px}
+.legal-toc li{margin-bottom:6px;break-inside:avoid}
+.article.legal{font-size:16px;line-height:1.7}
+.article.legal h2{font-size:21px;margin:36px 0 12px;scroll-margin-top:90px}
+.article.legal p{margin-bottom:14px}
+.article.legal .clause{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:8px}
+.article.legal .clause-n{color:var(--muted);font-variant-numeric:tabular-nums}
+.article.legal ul{margin-bottom:16px}
+.article.legal li{margin-bottom:6px}
+.legal-table{overflow-x:auto;margin:0 0 20px}
+.article.legal table{margin:0}
+.article.legal th{color:var(--ink);font-weight:600}
+.legal-fill{background:#FBEFD5;border-radius:4px;padding:0 4px;color:var(--ink)}
+@media(max-width:640px){
+  .legal-toc ol{columns:1}
+  .article.legal table{font-size:15px}
+  .article.legal thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .article.legal tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}
+  .article.legal td{display:block;border:0;padding:3px 0}
+  .article.legal td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--muted)}
+}
