@@ -359,7 +359,6 @@ h2{font-size:clamp(32px,4.2vw,46px);margin-bottom:16px;max-width:760px}
 .legal-table{overflow-x:auto;margin:0 0 20px}
 .article.legal table{margin:0}
 .article.legal th{color:var(--ink);font-weight:600}
-.legal-fill{background:#FBEFD5;border-radius:4px;padding:0 4px;color:var(--ink)}
 @media(max-width:640px){
   .legal-toc ol{columns:1}
   .article.legal table{font-size:15px}
