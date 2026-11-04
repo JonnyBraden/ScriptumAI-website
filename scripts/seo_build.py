@@ -40,7 +40,6 @@ ORG_DESCRIPTION = ("Scriptum AI is the operating system for transactional legal 
 PAGES = [
     ("/", "index.html", "weekly", "1.0", "home"),
     ("/pricing", "pricing.html", "monthly", "0.9", "pricing"),
-    ("/compare/harvey-legora", "compare/harvey-legora.html", "monthly", "0.9", "compare"),
     ("/product/draft", "product/draft.html", "monthly", "0.8", "product"),
     ("/product/collaborate", "product/collaborate.html", "monthly", "0.8", "product"),
     ("/product/negotiate", "product/negotiate.html", "monthly", "0.8", "product"),
@@ -280,14 +279,6 @@ def do_pages(posts):
                          {"@type": "Question", "name": q,
                           "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ_PRICING]},
                      crumbs([("Home", "/"), ("Pricing", "/pricing")])]
-        elif kind == "compare":
-            graph = [org_node(), app_node(),
-                     dict(page, **{"@type": ["WebPage", "Article"], "headline": title,
-                                   "author": {"@id": ORG_ID}, "about": {"@id": APP_ID},
-                                   "mentions": [{"@type": "Organization", "name": "Harvey", "url": "https://www.harvey.ai/"},
-                                                {"@type": "Organization", "name": "Legora", "url": "https://legora.com/"}],
-                                   "dateModified": git_date(f) or date.today().isoformat()}),
-                     crumbs([("Home", "/"), ("Compare", "/compare/harvey-legora"), (title, path_url)])]
         elif kind == "product":
             graph = [org_node(), dict(page, about={"@id": APP_ID}),
                      crumbs([("Home", "/"), (title, path_url)])]

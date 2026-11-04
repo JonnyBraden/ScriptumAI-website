@@ -18,7 +18,6 @@ Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. 
 
 - [Home](https://tryscriptum.ai/): product overview, agents, knowledge layer, security and who it is for
 - [Pricing](https://tryscriptum.ai/pricing): plans, what each includes and FAQs
-- [Scriptum vs Harvey vs Legora](https://tryscriptum.ai/compare/harvey-legora): side-by-side comparison for transactional law firms and in-house teams
 - [Draft](https://tryscriptum.ai/product/draft): AI-assisted drafting in Microsoft Word from the firm's own precedents
 - [Collaborate](https://tryscriptum.ai/product/collaborate): one secure workspace for the team, the client and opposing counsel
 - [Negotiate](https://tryscriptum.ai/product/negotiate): instant redlines, issues lists and a record of every position taken
