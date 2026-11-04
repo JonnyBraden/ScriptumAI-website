@@ -1,17 +1,14 @@
 /* ============================================================
    Scriptum AI — cookie consent and Google Analytics 4
    ------------------------------------------------------------
-   PASTE THE GA4 MEASUREMENT ID ON THE NEXT CONSTANT.
+   The GA4 measurement ID is the GA_MEASUREMENT_ID constant below
+   (Admin → Data streams → Web → Measurement ID).
 
-   In Google Analytics: Admin → Data streams → your web stream
-   → Measurement ID. It looks like G-1A2BCD3EF4.
-
-   Replace ONLY the placeholder string below. Leave this file's
-   behaviour as it is. While GA_MEASUREMENT_ID is still
-   'G-XXXXXXXXXX', this script does not load gtag.js and does
-   not send any request to Google.
+   If that constant is set back to the placeholder 'G-XXXXXXXXXX',
+   this script does not load gtag.js and does not send any
+   request to Google.
    ============================================================ */
-var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+var GA_MEASUREMENT_ID = 'G-KYCT58VXEP';
 
 (function () {
   'use strict';
