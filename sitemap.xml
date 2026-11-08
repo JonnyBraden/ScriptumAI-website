@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tryscriptum.ai/</loc><lastmod>2026-11-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://tryscriptum.ai/pricing</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://tryscriptum.ai/product/draft</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/product/collaborate</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/product/negotiate</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/product/clause-library</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/blog/</loc><lastmod>2026-11-06</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/guides</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://tryscriptum.ai/privacy</loc><lastmod>2026-11-04</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://tryscriptum.ai/terms</loc><lastmod>2026-11-04</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://tryscriptum.ai/data-protection</loc><lastmod>2026-11-04</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tryscriptum.ai/</loc><lastmod>2026-11-06</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://tryscriptum.ai/pricing</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tryscriptum.ai/product/draft</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/product/collaborate</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/product/negotiate</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/product/clause-library</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/</loc><lastmod>2026-11-08</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/guides</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://tryscriptum.ai/security</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tryscriptum.ai/ai-policy</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://tryscriptum.ai/sub-processors</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://tryscriptum.ai/privacy</loc><lastmod>2026-11-06</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tryscriptum.ai/terms</loc><lastmod>2026-11-06</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tryscriptum.ai/data-protection</loc><lastmod>2026-11-06</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/legal-ai-pricing-uk-2026</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/ai-contract-negotiation-software-uk</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/ai-for-venture-capital-lawyers-uk</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/legal-ai-for-law-firms-in-northern-ireland-and-ireland</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/legal-ai-for-regional-uk-law-firms</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/does-a-mid-sized-firm-need-enterprise-legal-ai</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/robin-ai-alternative-uk</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/luminance-alternative-uk-law-firms</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/definely-alternative-uk</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/spellbook-alternative-uk</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/copilot-for-legal-vs-scriptum</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/legora-alternative-for-uk-law-firms</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/harvey-alternative-for-uk-law-firms</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/best-legal-ai-for-mid-sized-uk-law-firms</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/legal-ai-vs-chatgpt-for-contract-drafting</loc><lastmod>2026-11-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/best-ai-drafting-tool-for-in-house-legal-teams</loc><lastmod>2026-11-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/best-ai-tool-for-reviewing-a-contract-markup</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -29,7 +46,7 @@
   <url><loc>https://tryscriptum.ai/blog/why-general-purpose-ai-falls-short-for-legal-drafting</loc><lastmod>2026-08-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/fallback-ladders-in-contract-negotiation</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/counterparty-profiling-for-deal-teams</loc><lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://tryscriptum.ai/blog/alternative-to-harvey-and-legora</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/alternative-to-harvey-and-legora</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/tracking-negotiation-positions-round-over-round</loc><lastmod>2026-07-31</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/faster-issues-lists-and-redlines</loc><lastmod>2026-07-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/how-drafting-tools-help-firms-win-more-work</loc><lastmod>2026-07-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
