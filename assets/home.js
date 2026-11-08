@@ -80,7 +80,7 @@
       }).catch(function () {
         if (status) {
           status.className = 'form-status full err';
-          status.innerHTML = 'Something went wrong sending that. Please email us at <a href="mailto:hello@scriptum.ai">hello@scriptum.ai</a>.';
+          status.innerHTML = 'Something went wrong sending that. Please email us at <a href="mailto:info@scriptumai.co">info@scriptumai.co</a>.';
         }
         if (button) { button.disabled = false; button.textContent = button.dataset.label || 'Send'; }
       });
