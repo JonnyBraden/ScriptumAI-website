@@ -371,3 +371,6 @@ section{position:relative}
 @media (max-width:720px){.cta-band{padding:48px 24px;border-radius:20px}}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* FAQ links (homepage) */
+.faq a,.faq-section .section-head p a{color:var(--accent-ink);text-decoration:underline;text-decoration-color:var(--accent-light);text-underline-offset:3px}

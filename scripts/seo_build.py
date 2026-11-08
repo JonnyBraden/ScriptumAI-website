@@ -46,6 +46,9 @@ PAGES = [
     ("/product/clause-library", "product/clause-library.html", "monthly", "0.8", "product"),
     ("/blog/", "blog/index.html", "daily", "0.8", "blogindex"),
     ("/guides", "guides.html", "monthly", "0.4", "page"),
+    ("/security", "security.html", "monthly", "0.6", "page"),
+    ("/ai-policy", "ai-policy.html", "monthly", "0.5", "page"),
+    ("/sub-processors", "sub-processors.html", "monthly", "0.4", "page"),
     ("/privacy", "privacy.html", "yearly", "0.3", "page"),
     ("/terms", "terms.html", "yearly", "0.3", "page"),
     ("/data-protection", "data-protection.html", "yearly", "0.3", "page"),
@@ -75,6 +78,49 @@ FAQ_PRICING = [  # visible, answered questions on /pricing only
      "Your firm does, on every plan. It stays with the firm when people leave."),
     ("Where is our data stored?", "In the EU."),
 ]
+
+
+# Named authors. A post whose posts.json "author" matches a key here gets a full
+# Person node (E-E-A-T). Only put facts here that are true and public.
+AUTHORS = {
+    "Jonny Braden": {
+        "@type": "Person",
+        "@id": SITE + "/#jonny-braden",
+        "name": "Jonny Braden",
+        "jobTitle": "Founder and CEO, Scriptum AI",
+        "description": ("Founder and CEO of Scriptum AI and a practising UK lawyer specialising in "
+                        "startup investment and venture capital transactions."),
+        "knowsAbout": ["Venture capital transactions", "Startup investment", "Contract negotiation",
+                       "Legal AI"],
+        "worksFor": {"@id": ORG_ID},
+    },
+}
+
+
+def strip_tags(s):
+    s = re.sub(r"<[^>]+>", " ", s)
+    return re.sub(r"\s+", " ", html.unescape(s)).strip()
+
+
+def faq_from_html(doc):
+    """Read the visible FAQ (<section class="faq">, each question an <h3> or a <summary>) so the
+    FAQPage schema always matches what readers see on the page."""
+    m = re.search(r'<section[^>]*class="[^"]*\bfaq\b[^"]*"[^>]*>(.*?)</section>', doc, re.S)
+    if not m:
+        return []
+    parts = re.split(r"<(?:h3|summary)[^>]*>(.*?)</(?:h3|summary)>", m.group(1), flags=re.S)
+    out = []
+    for i in range(1, len(parts) - 1, 2):
+        q, a = strip_tags(parts[i]), strip_tags(parts[i + 1])
+        if q and a:
+            out.append((q, a))
+    return out
+
+
+def faq_node(url, qa):
+    return {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+        for q, a in qa]}
 
 
 def rd(p):
@@ -231,11 +277,15 @@ def do_posts(posts):
         modified = info.get("dateModified") or published
         if modified < p["date"]:
             modified = p["date"]
+        if p.get("updated") and p["updated"] > modified:
+            modified = p["updated"]
         desc = meta(doc, "description") or p.get("excerpt", "")
         author_name = (p.get("author") or "").strip()
         if not author_name and isinstance(info.get("author"), dict):
             author_name = (info["author"].get("name") or "").strip()
-        if author_name and "[[" not in author_name:
+        if author_name in AUTHORS:
+            author = {"@id": AUTHORS[author_name]["@id"]}
+        elif author_name and "[[" not in author_name:
             author = {"@type": "Person", "name": author_name}
         else:
             author = {"@id": ORG_ID}
@@ -249,6 +299,11 @@ def do_posts(posts):
             crumbs([("Home", "/"), ("Blog", "/blog/"), (p["title"], "/blog/" + p["slug"])]),
             org_node(),
         ]
+        if author_name in AUTHORS:
+            graph.append(AUTHORS[author_name])
+        qa = faq_from_html(doc)
+        if qa:
+            graph.append(faq_node(url, qa))
         graph[0] = {k: v for k, v in graph[0].items() if v not in (None, "")}
         doc = ensure_head_tags(doc, url, p["title"], desc, "article")
         doc = set_ld(doc, graph, drop_plain=True)
@@ -273,6 +328,8 @@ def do_pages(posts):
                      {"@type": "WebSite", "@id": WEBSITE_ID, "url": SITE + "/", "name": "Scriptum AI",
                       "publisher": {"@id": ORG_ID}, "inLanguage": "en-GB"},
                      app_node(), dict(page, about={"@id": APP_ID})]
+            if faq_from_html(doc):
+                graph.append(faq_node(url, faq_from_html(doc)))
         elif kind == "pricing":
             graph = [org_node(), app_node(), dict(page, about={"@id": APP_ID}),
                      {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
@@ -291,7 +348,9 @@ def do_pages(posts):
                                    for p in posts]},
                      crumbs([("Home", "/"), ("Blog", "/blog/")])]
         else:
-            graph = [org_node(), page]
+            graph = [org_node(), page, crumbs([("Home", "/"), (title, path_url)])]
+            if faq_from_html(doc):
+                graph.append(faq_node(url, faq_from_html(doc)))
         graph = [{k: v for k, v in n.items() if v is not None} for n in graph]
         doc = ensure_head_tags(doc, url, title, desc, "website")
         doc = set_ld(doc, graph)

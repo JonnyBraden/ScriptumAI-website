@@ -1,5 +1,131 @@
 [
   {
+    "slug": "legal-ai-pricing-uk-2026",
+    "title": "How much does legal AI cost a UK law firm in 2026?",
+    "excerpt": "Most legal AI vendors do not publish prices. What we know about legal AI pricing in the UK in 2026, and how a mid-sized firm can budget for it.",
+    "tag": "Pricing",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "ai-contract-negotiation-software-uk",
+    "title": "AI contract negotiation software for UK law firms: 2026 comparison",
+    "excerpt": "AI contract negotiation tools differ most in one thing: who decides. A 2026 comparison for UK law firms of Scriptum, Luminance, Copilot for Legal, Harvey, Legora and Spellbook.",
+    "tag": "Negotiation",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "ai-for-venture-capital-lawyers-uk",
+    "title": "AI for venture capital and startup investment lawyers in the UK",
+    "excerpt": "Venture capital deals run on a familiar set of documents and a lot of repeated negotiation. How legal AI helps UK VC lawyers, written by a lawyer who works on them.",
+    "tag": "Venture capital",
+    "date": "2026-11-08",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "legal-ai-for-law-firms-in-northern-ireland-and-ireland",
+    "title": "Legal AI for law firms in Northern Ireland and Ireland",
+    "excerpt": "Firms in Northern Ireland and the Republic of Ireland have their own reasons to be choosy about legal AI. Data location, pricing in euro and sterling, and tools built for firms their size.",
+    "tag": "Guide",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "legal-ai-for-regional-uk-law-firms",
+    "title": "Legal AI for regional UK law firms: competing with the nationals",
+    "excerpt": "Regional firms compete with national firms for the same clients and the same people. How legal AI can close the gap on transactional work, and what to look for in a tool.",
+    "tag": "Guide",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "does-a-mid-sized-firm-need-enterprise-legal-ai",
+    "title": "Does a mid-sized UK law firm need enterprise legal AI?",
+    "excerpt": "Enterprise legal AI vendors now sell to firms of every size. Here is what a UK firm of 20 to 100 fee earners actually needs, and when a specialist mid-market tool is the better buy.",
+    "tag": "Guide",
+    "date": "2026-11-08",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "robin-ai-alternative-uk",
+    "title": "Robin AI alternative: options for UK legal teams in 2026",
+    "excerpt": "Robin AI was put up for distressed sale in late 2025, with its services arm going to Scissero. What happened, what to check if you used it, and the options for UK legal teams now.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "luminance-alternative-uk-law-firms",
+    "title": "Luminance alternative for mid-sized UK law firms",
+    "excerpt": "Luminance is one of the UK's best-known legal AI companies, with a strong in-house following. For a mid-sized law firm doing transactional work, here is how it compares with Scriptum.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "definely-alternative-uk",
+    "title": "Definely alternative for mid-sized UK law firms",
+    "excerpt": "Definely is a well-regarded UK Word add-in used by many of the largest firms. For a mid-sized transactional firm, here is how it compares with Scriptum.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "3 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "spellbook-alternative-uk",
+    "title": "Spellbook alternative for UK law firms",
+    "excerpt": "Spellbook is one of the best-known AI drafting add-ins for Word. For a mid-sized UK firm that wants help through the whole negotiation, here is how it compares with Scriptum.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "copilot-for-legal-vs-scriptum",
+    "title": "Microsoft Copilot for Legal vs Scriptum: what UK transactional firms should know",
+    "excerpt": "Microsoft's Copilot for Legal brings legal skills and a Legal Agent into Word. For a mid-sized UK transactional firm, here is what it does, what it leaves out, and how it compares with Scriptum.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "5 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "legora-alternative-for-uk-law-firms",
+    "title": "Legora alternative for mid-sized UK law firms",
+    "excerpt": "Legora is Harvey's closest rival and now markets to boutique and mid-size firms. Here is how it compares with Scriptum for a UK firm whose work is mostly transactional.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "harvey-alternative-for-uk-law-firms",
+    "title": "Harvey AI alternative for mid-sized UK law firms",
+    "excerpt": "Harvey is the best-known name in legal AI and now sells to mid-sized firms. For a UK firm whose work is mostly drafting and negotiating documents, here is how it compares with Scriptum.",
+    "tag": "Comparison",
+    "date": "2026-11-08",
+    "readingTime": "6 min read",
+    "author": "Jonny Braden"
+  },
+  {
+    "slug": "best-legal-ai-for-mid-sized-uk-law-firms",
+    "title": "The best legal AI for mid-sized UK law firms in 2026",
+    "excerpt": "For a mid-sized UK firm doing transactional work, the best legal AI drafts in Word from your own precedents, negotiates inside limits your partners set, and publishes its price. A buyer's guide for 2026.",
+    "tag": "Guide",
+    "date": "2026-11-08",
+    "readingTime": "6 min read",
+    "author": "Jonny Braden"
+  },
+  {
     "slug": "legal-ai-vs-chatgpt-for-contract-drafting",
     "title": "Is ChatGPT good enough for contract drafting in a law firm?",
     "excerpt": "ChatGPT is useful for many tasks, but for contract drafting in a law firm the better question is whether it starts from your precedents and keeps what the firm learns. Here is how to judge it.",
@@ -108,6 +234,42 @@
     "author": ""
   },
   {
+    "slug": "what-makes-scriptum-different-from-other-legal-ai",
+    "title": "What makes Scriptum different from other legal AI tools",
+    "excerpt": "What makes Scriptum different from other legal AI tools comes down to three things: where it works, what it learns from, and what it remembers.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "legal-ai-that-builds-knowledge-your-firm-owns",
+    "title": "Legal AI that builds knowledge your firm owns",
+    "excerpt": "Most AI tools reset at the end of every session. Here is what genuine firm-owned knowledge capture looks like for a transactional practice, and why it matters.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "why-scriptum-works-inside-microsoft-word",
+    "title": "Why Scriptum works inside Microsoft Word, not a separate portal",
+    "excerpt": "Lawyers live in Word. Here is why building Scriptum as a Word add-in rather than a standalone portal changes how well legal AI actually gets used.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "why-general-purpose-ai-falls-short-for-legal-drafting",
+    "title": "Why general-purpose AI falls short for legal drafting",
+    "excerpt": "General-purpose AI assistants are trained on everything, which is exactly the problem for transactional legal drafting. Here is what that means in practice.",
+    "tag": "Differentiation",
+    "date": "2026-08-04",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
     "slug": "fallback-ladders-in-contract-negotiation",
     "title": "Fallback ladders in contract negotiation",
     "excerpt": "A fallback ladder is a pre-agreed sequence of positions the firm is prepared to accept in a negotiation, from ideal to acceptable. Here is how to build and use them effectively.",
@@ -126,6 +288,16 @@
     "author": ""
   },
   {
+    "slug": "alternative-to-harvey-and-legora",
+    "title": "Harvey vs Legora vs Scriptum: which suits a mid-sized UK firm?",
+    "excerpt": "Harvey and Legora both now sell to mid-sized firms. A side-by-side comparison with Scriptum for UK firms of 20 to 100 fee earners, and which to choose for which kind of practice.",
+    "tag": "Comparison",
+    "date": "2026-08-01",
+    "readingTime": "4 min read",
+    "author": "Jonny Braden",
+    "updated": "2026-11-08"
+  },
+  {
     "slug": "tracking-negotiation-positions-round-over-round",
     "title": "Tracking negotiation positions round over round",
     "excerpt": "Tracking negotiation positions round over round prevents concessions from slipping through unnoticed and gives deal teams a clear picture of where each issue stands.",
@@ -140,6 +312,15 @@
     "excerpt": "Faster issues lists and redlines give your client a clearer picture sooner and set the frame for negotiation before the other side has a chance to. Here is how to get there.",
     "tag": "Negotiate",
     "date": "2026-07-30",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "how-drafting-tools-help-firms-win-more-work",
+    "title": "How better drafting helps law firms win more work",
+    "excerpt": "Winning work comes down to turnaround, confidence and price. Here is how sharper drafting and negotiation tools help transactional firms win more of the deals they pitch for.",
+    "tag": "Growth",
+    "date": "2026-07-29",
     "readingTime": "3 min read",
     "author": ""
   },
@@ -171,6 +352,15 @@
     "author": ""
   },
   {
+    "slug": "how-ai-drafting-increases-law-firm-capacity",
+    "title": "How AI drafting tools increase law firm capacity",
+    "excerpt": "When you cannot hire fast enough, capacity has to come from somewhere else. Here is how AI-assisted drafting lets a lean transactional team take on more matters.",
+    "tag": "Capacity",
+    "date": "2026-07-25",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
     "slug": "capturing-deal-knowledge-before-a-lawyer-leaves",
     "title": "Capturing deal knowledge before a lawyer leaves",
     "excerpt": "Capturing deal knowledge before a lawyer leaves requires a structured approach, not a last-minute handover. Here is how to make it a routine part of how matters close.",
@@ -185,6 +375,15 @@
     "excerpt": "Your tracked changes contain a detailed record of how every negotiation played out. Here is how to turn that record into structured deal intelligence.",
     "tag": "Knowledge",
     "date": "2026-07-23",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "institutional-knowledge-is-your-firms-moat",
+    "title": "Your firm's institutional knowledge is its real moat",
+    "excerpt": "A firm's institutional knowledge is harder to copy than any brand or rate card. Here is why it matters, and why generic AI tools quietly work against it.",
+    "tag": "Knowledge",
+    "date": "2026-07-22",
     "readingTime": "3 min read",
     "author": ""
   },
@@ -207,6 +406,15 @@
     "author": ""
   },
   {
+    "slug": "how-law-firms-can-beat-the-talent-crisis",
+    "title": "How law firms can beat the legal talent crisis",
+    "excerpt": "The legal talent crisis is hitting mid-sized firms hardest. Here is how AI-assisted drafting helps you handle more work with the lawyers you already have, and keep them longer.",
+    "tag": "Talent",
+    "date": "2026-07-18",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
     "slug": "succession-planning-for-boutique-firms",
     "title": "Succession planning for boutique transactional firms",
     "excerpt": "Succession planning for boutique transactional firms is a challenge that combines the human difficulty of partner transition with the structural risk of client and knowledge concentration.",
@@ -221,6 +429,15 @@
     "excerpt": "Keeping senior lawyers in a tight market requires understanding what actually drives retention at the senior level, which is not principally about remuneration.",
     "tag": "Talent",
     "date": "2026-07-16",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "how-law-firms-lose-institutional-knowledge",
+    "title": "How law firms lose institutional knowledge when lawyers leave",
+    "excerpt": "When a senior associate walks out the door, so does much of what they knew about your precedents, your counterparties and your positions. Here is why that happens, and what firms can do about it.",
+    "tag": "Knowledge",
+    "date": "2026-07-15",
     "readingTime": "3 min read",
     "author": ""
   },
@@ -257,6 +474,15 @@
     "excerpt": "Why the first draft decides so much in contract negotiation is not a mystery. The party that produces the initial draft sets the structure and the starting positions.",
     "tag": "Drafting",
     "date": "2026-07-10",
+    "readingTime": "3 min read",
+    "author": ""
+  },
+  {
+    "slug": "what-is-ai-assisted-contract-drafting",
+    "title": "What is AI-assisted contract drafting? A guide for transactional lawyers",
+    "excerpt": "AI-assisted drafting promises faster first drafts without sacrificing quality. Here is what it means for a transactional practice, and how to tell genuinely useful tools from hype.",
+    "tag": "Drafting",
+    "date": "2026-07-08",
     "readingTime": "3 min read",
     "author": ""
   },
@@ -446,105 +672,6 @@
     "excerpt": "What Magic Circle firms know about knowledge management that smaller practices can apply is not primarily about resource. Here is what the structural disciplines are and how to replicate them.",
     "tag": "Knowledge",
     "date": "2026-06-07",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "what-makes-scriptum-different-from-other-legal-ai",
-    "title": "What makes Scriptum different from other legal AI tools",
-    "excerpt": "What makes Scriptum different from other legal AI tools comes down to three things: where it works, what it learns from, and what it remembers.",
-    "tag": "Differentiation",
-    "date": "2026-08-04",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "legal-ai-that-builds-knowledge-your-firm-owns",
-    "title": "Legal AI that builds knowledge your firm owns",
-    "excerpt": "Most AI tools reset at the end of every session. Here is what genuine firm-owned knowledge capture looks like for a transactional practice, and why it matters.",
-    "tag": "Differentiation",
-    "date": "2026-08-04",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "why-scriptum-works-inside-microsoft-word",
-    "title": "Why Scriptum works inside Microsoft Word, not a separate portal",
-    "excerpt": "Lawyers live in Word. Here is why building Scriptum as a Word add-in rather than a standalone portal changes how well legal AI actually gets used.",
-    "tag": "Differentiation",
-    "date": "2026-08-04",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "why-general-purpose-ai-falls-short-for-legal-drafting",
-    "title": "Why general-purpose AI falls short for legal drafting",
-    "excerpt": "General-purpose AI assistants are trained on everything, which is exactly the problem for transactional legal drafting. Here is what that means in practice.",
-    "tag": "Differentiation",
-    "date": "2026-08-04",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "alternative-to-harvey-and-legora",
-    "title": "An alternative to Harvey and Legora for smaller firms",
-    "excerpt": "Harvey and Legora are built for large firms with large budgets. Here is what a firm of twenty to a hundred lawyers should look for in a legal AI drafting tool instead.",
-    "tag": "Comparison",
-    "date": "2026-08-01",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "how-drafting-tools-help-firms-win-more-work",
-    "title": "How better drafting helps law firms win more work",
-    "excerpt": "Winning work comes down to turnaround, confidence and price. Here is how sharper drafting and negotiation tools help transactional firms win more of the deals they pitch for.",
-    "tag": "Growth",
-    "date": "2026-07-29",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "how-ai-drafting-increases-law-firm-capacity",
-    "title": "How AI drafting tools increase law firm capacity",
-    "excerpt": "When you cannot hire fast enough, capacity has to come from somewhere else. Here is how AI-assisted drafting lets a lean transactional team take on more matters.",
-    "tag": "Capacity",
-    "date": "2026-07-25",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "institutional-knowledge-is-your-firms-moat",
-    "title": "Your firm's institutional knowledge is its real moat",
-    "excerpt": "A firm's institutional knowledge is harder to copy than any brand or rate card. Here is why it matters, and why generic AI tools quietly work against it.",
-    "tag": "Knowledge",
-    "date": "2026-07-22",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "how-law-firms-can-beat-the-talent-crisis",
-    "title": "How law firms can beat the legal talent crisis",
-    "excerpt": "The legal talent crisis is hitting mid-sized firms hardest. Here is how AI-assisted drafting helps you handle more work with the lawyers you already have, and keep them longer.",
-    "tag": "Talent",
-    "date": "2026-07-18",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "how-law-firms-lose-institutional-knowledge",
-    "title": "How law firms lose institutional knowledge when lawyers leave",
-    "excerpt": "When a senior associate walks out the door, so does much of what they knew about your precedents, your counterparties and your positions. Here is why that happens, and what firms can do about it.",
-    "tag": "Knowledge",
-    "date": "2026-07-15",
-    "readingTime": "3 min read",
-    "author": ""
-  },
-  {
-    "slug": "what-is-ai-assisted-contract-drafting",
-    "title": "What is AI-assisted contract drafting? A guide for transactional lawyers",
-    "excerpt": "AI-assisted drafting promises faster first drafts without sacrificing quality. Here is what it means for a transactional practice, and how to tell genuinely useful tools from hype.",
-    "tag": "Drafting",
-    "date": "2026-07-08",
     "readingTime": "3 min read",
     "author": ""
   }
