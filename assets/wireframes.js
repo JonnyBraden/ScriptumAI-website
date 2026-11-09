@@ -164,7 +164,7 @@
       {n:'SPA v1 (released to opposing counsel)', vis:['firm','client','oc'], tag:'released'},
       {n:'Disclosure letter (working)', vis:['firm'], tag:'in progress'}
     ];
-    var label = {firm:'Braden LLP', client:'Mourne Dairy (client)', oc:'Orchard Law (opposing counsel)'};
+    var label = {firm:'Hartley & Co', client:'Mourne Dairy (client)', oc:'Orchard Law (opposing counsel)'};
     function render(who){
       $$(w,'#cw-view .wf-act').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.v===who); });
       var vis = docs.filter(function(d){ return d.vis.indexOf(who)>-1; });
@@ -226,7 +226,7 @@
 
   reg['collab-isolation'] = function(w){
     var firm = 'a', out = $(w,'#iso-out');
-    var data = {a:{name:'Braden LLP', matters:['Project Ash (SPA)','Causeway Series A','Belfast HQ lease']}, b:{name:'Orchard Law', matters:['Project Ash (buyer side)','Strand Retail acquisition']}};
+    var data = {a:{name:'Hartley & Co', matters:['Project Ash (SPA)','Causeway Series A','Belfast HQ lease']}, b:{name:'Orchard Law', matters:['Project Ash (buyer side)','Strand Retail acquisition']}};
     $$(w,'#iso-firm .wf-act').forEach(function(b){ b.addEventListener('click', function(){ firm = b.dataset.f; $$(w,'#iso-firm .wf-act').forEach(function(x){ x.setAttribute('aria-pressed', x===b); }); out.innerHTML=''; }); });
     $(w,'#iso-list').addEventListener('click', function(){
       var d = data[firm];
