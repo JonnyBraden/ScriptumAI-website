@@ -80,21 +80,11 @@ FAQ_PRICING = [  # visible, answered questions on /pricing only
 ]
 
 
-# Named authors. A post whose posts.json "author" matches a key here gets a full
-# Person node (E-E-A-T). Only put facts here that are true and public.
-AUTHORS = {
-    "Jonny Braden": {
-        "@type": "Person",
-        "@id": SITE + "/#jonny-braden",
-        "name": "Jonny Braden",
-        "jobTitle": "Founder and CEO, Scriptum AI",
-        "description": ("Founder and CEO of Scriptum AI and a practising UK lawyer specialising in "
-                        "startup investment and venture capital transactions."),
-        "knowsAbout": ["Venture capital transactions", "Startup investment", "Contract negotiation",
-                       "Legal AI"],
-        "worksFor": {"@id": ORG_ID},
-    },
-}
+# Blog posts are attributed to the organisation. A posts.json "author" that names
+# the founder is ignored, so a later build cannot put that name back on a card
+# or into JSON-LD.
+def founder_author(name):
+    return bool(re.search(r"braden|jonny|jonathan", name or "", re.I))
 
 
 def strip_tags(s):
@@ -281,11 +271,14 @@ def do_posts(posts):
             modified = p["updated"]
         desc = meta(doc, "description") or p.get("excerpt", "")
         author_name = (p.get("author") or "").strip()
+        if founder_author(author_name):
+            author_name = ""
         if not author_name and isinstance(info.get("author"), dict):
-            author_name = (info["author"].get("name") or "").strip()
-        if author_name in AUTHORS:
-            author = {"@id": AUTHORS[author_name]["@id"]}
-        elif author_name and "[[" not in author_name:
+            existing = info["author"]
+            author_name = (existing.get("name") or "").strip()
+            if founder_author(author_name) or founder_author(existing.get("@id") or ""):
+                author_name = ""
+        if author_name and "[[" not in author_name:
             author = {"@type": "Person", "name": author_name}
         else:
             author = {"@id": ORG_ID}
@@ -299,8 +292,6 @@ def do_posts(posts):
             crumbs([("Home", "/"), ("Blog", "/blog/"), (p["title"], "/blog/" + p["slug"])]),
             org_node(),
         ]
-        if author_name in AUTHORS:
-            graph.append(AUTHORS[author_name])
         qa = faq_from_html(doc)
         if qa:
             graph.append(faq_node(url, qa))
@@ -368,7 +359,7 @@ def static_blog_list(doc, posts):
     cards = []
     for p in posts:
         meta_bits = [fmt(p["date"]), p.get("readingTime", "")]
-        if p.get("author"):
+        if p.get("author") and not founder_author(p.get("author")):
             meta_bits.append(p["author"])
         cards.append('    <a class="post-card" href="/blog/%s"><span class="post-tag">%s</span><h3>%s</h3><p>%s</p>'
                      '<div class="post-meta">%s</div></a>' % (

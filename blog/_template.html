@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="../assets/style.css">
 <link rel="stylesheet" href="../assets/consent.css">
 
-<!-- Google structured data. Update title, dates, and author. -->
+<!-- Google structured data. Update title and dates. The author is the organisation. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -59,7 +59,7 @@
   "mainEntityOfPage": "https://tryscriptum.ai/blog/[[ YOUR-SLUG ]]",
   "datePublished": "[[ YYYY-MM-DD ]]",
   "dateModified": "[[ YYYY-MM-DD ]]",
-  "author": { "@type": "Person", "name": "[[ AUTHOR NAME ]]" },
+  "author": { "@id": "https://tryscriptum.ai/#organization" },
   "publisher": { "@type": "Organization", "@id": "https://tryscriptum.ai/#organization", "name": "Scriptum AI", "url": "https://tryscriptum.ai/" },
   "inLanguage": "en-GB"
 }
@@ -112,8 +112,8 @@
     <span class="post-tag">[[ TAG ]]</span>
     <!-- [[ HEADLINE ]] the visible title of the article -->
     <h1>[[ POST TITLE ]]</h1>
-    <!-- [[ META LINE ]] update the date, reading time and author -->
-    <div class="article-meta">[[ 15 July 2026 ]] &middot; [[ 6 min read ]] &middot; [[ Author name ]]</div>
+    <!-- [[ META LINE ]] update the date and reading time. Do not add a personal byline. -->
+    <div class="article-meta">[[ 15 July 2026 ]] &middot; [[ 6 min read ]]</div>
   </div>
 
   <div class="article">
