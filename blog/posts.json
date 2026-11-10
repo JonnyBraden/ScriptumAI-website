@@ -1,5 +1,14 @@
 [
   {
+    "slug": "can-you-train-legal-ai-on-your-firms-precedents",
+    "title": "Can you train legal AI on your law firm's own precedents?",
+    "excerpt": "Most legal AI does not retrain a model on your precedents; it grounds drafts in them. What that means for a law firm, what to check, and who should own the result.",
+    "tag": "Knowledge",
+    "date": "2026-11-10",
+    "readingTime": "4 min read",
+    "author": ""
+  },
+  {
     "slug": "how-can-an-in-house-team-clear-a-contract-backlog-with-ai",
     "title": "How can an in-house legal team clear its contract backlog with AI?",
     "excerpt": "An in-house team clears a contract backlog with AI by drafting first versions from its own approved templates and handling markups against agreed positions. What to look for, and what to avoid.",
