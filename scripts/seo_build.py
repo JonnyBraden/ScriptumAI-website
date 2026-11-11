@@ -29,7 +29,7 @@ APP_ID = SITE + "/#software"
 # Add official profile URLs here once they exist (LinkedIn company page,
 # Crunchbase, G2, Capterra, Legaltech Hub, Product Hunt, Microsoft AppSource,
 # Wikidata). Only list profiles that belong to THIS Scriptum AI.
-SAME_AS = ["https://www.g2.com/products/scriptum-ai/reviews"]
+SAME_AS = ["https://www.g2.com/products/scriptum-ai/reviews", "https://www.capterra.com/p/10282044/Scriptum-AI/"]
 
 ORG_DESCRIPTION = ("Scriptum AI is the operating system for transactional legal teams: "
     "AI-assisted drafting inside Microsoft Word from a firm's own precedents, a secure "
