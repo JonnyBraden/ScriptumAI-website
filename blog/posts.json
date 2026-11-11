@@ -1,5 +1,14 @@
 [
   {
+    "slug": "how-to-implement-legal-ai-in-a-mid-sized-law-firm",
+    "title": "How do you implement legal AI in a mid-sized law firm?",
+    "excerpt": "A practical five-step plan for implementing legal AI at a 20 to 100 fee-earner firm: start with one practice group, pilot on live matters, set the rules, then widen.",
+    "tag": "Practice",
+    "date": "2026-11-11",
+    "readingTime": "5 min read",
+    "author": ""
+  },
+  {
     "slug": "can-you-train-legal-ai-on-your-firms-precedents",
     "title": "Can you train legal AI on your law firm's own precedents?",
     "excerpt": "Most legal AI does not retrain a model on your precedents; it grounds drafts in them. What that means for a law firm, what to check, and who should own the result.",
