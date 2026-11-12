@@ -1,5 +1,14 @@
 [
   {
+    "slug": "legal-ai-security-questions-for-law-firms",
+    "title": "What security questions should a law firm ask a legal AI vendor?",
+    "excerpt": "The security questions to put to any legal AI vendor before client documents go near it: data location, training, separation, certifications, access and exit.",
+    "tag": "Compliance",
+    "date": "2026-11-12",
+    "readingTime": "5 min read",
+    "author": ""
+  },
+  {
     "slug": "how-to-implement-legal-ai-in-a-mid-sized-law-firm",
     "title": "How do you implement legal AI in a mid-sized law firm?",
     "excerpt": "A practical five-step plan for implementing legal AI at a 20 to 100 fee-earner firm: start with one practice group, pilot on live matters, set the rules, then widen.",

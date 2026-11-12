@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tryscriptum.ai/</loc><lastmod>2026-11-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://tryscriptum.ai/</loc><lastmod>2026-11-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://tryscriptum.ai/pricing</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tryscriptum.ai/product/draft</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tryscriptum.ai/product/collaborate</loc><lastmod>2026-11-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tryscriptum.ai/product/negotiate</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tryscriptum.ai/product/clause-library</loc><lastmod>2026-11-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tryscriptum.ai/blog/</loc><lastmod>2026-11-11</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/</loc><lastmod>2026-11-12</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://tryscriptum.ai/guides</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://tryscriptum.ai/security</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://tryscriptum.ai/ai-policy</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -14,6 +14,7 @@
   <url><loc>https://tryscriptum.ai/privacy</loc><lastmod>2026-11-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://tryscriptum.ai/terms</loc><lastmod>2026-11-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://tryscriptum.ai/data-protection</loc><lastmod>2026-11-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tryscriptum.ai/blog/legal-ai-security-questions-for-law-firms</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/how-to-implement-legal-ai-in-a-mid-sized-law-firm</loc><lastmod>2026-11-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/can-you-train-legal-ai-on-your-firms-precedents</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://tryscriptum.ai/blog/how-can-an-in-house-team-clear-a-contract-backlog-with-ai</loc><lastmod>2026-11-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
