@@ -185,7 +185,7 @@ def app_node():
         "url": SITE + "/", "description": ORG_DESCRIPTION,
         "publisher": {"@id": ORG_ID}, "provider": {"@id": ORG_ID},
         "audience": {"@type": "BusinessAudience",
-                     "audienceType": "Transactional lawyers in law firms of 20 to 100 fee earners and in-house legal teams"},
+                     "audienceType": "Transactional lawyers in mid-sized law firms with between 5 and 500 fee earners in the UK, Ireland, the USA and Canada, and in-house legal teams"},
         "featureList": FEATURES, "offers": offers,
     }
 
