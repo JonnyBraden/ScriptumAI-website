@@ -19,3 +19,16 @@
 
 /llms.txt
   Content-Type: text/plain; charset=utf-8
+
+/681f6334dcc9af76f40cf15c58ce26d2.txt
+  Content-Type: text/plain; charset=utf-8
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/blog/images/*
+  Cache-Control: public, max-age=2592000
+
+/assets/brand/*
+  Cache-Control: public, max-age=2592000

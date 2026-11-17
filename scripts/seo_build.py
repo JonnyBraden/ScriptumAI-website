@@ -149,18 +149,25 @@ def title_of(doc):
 
 
 def org_node(full=False):
-    n = {"@type": "Organization", "@id": ORG_ID, "name": "Scriptum AI", "url": SITE + "/"}
+    n = {"@type": "Organization", "@id": ORG_ID, "name": "Scriptum AI", "url": SITE + "/",
+         "logo": {"@type": "ImageObject", "url": LOGO_URL, "width": 512, "height": 512}}
     if full:
         n.update({
             "alternateName": "Scriptum",
             "description": ORG_DESCRIPTION,
-            "disambiguatingDescription": "UK legal technology company behind tryscriptum.ai, building AI drafting and negotiation tools for transactional lawyers.",
+            "disambiguatingDescription": "Legal technology company based in Northern Ireland behind tryscriptum.ai, building AI drafting and negotiation tools for transactional lawyers. Not connected with other companies or apps called Scriptum.",
+            "image": LOGO_URL,
+            "email": CONTACT_EMAIL,
+            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": CONTACT_EMAIL,
+                             "areaServed": ["GB", "IE", "US", "CA"], "availableLanguage": "en"},
             "address": {"@type": "PostalAddress", "addressRegion": "Northern Ireland", "addressCountry": "GB"},
-            "areaServed": "GB",
+            "areaServed": [{"@type": "Country", "name": "United Kingdom"}, {"@type": "Country", "name": "Ireland"},
+                           {"@type": "Country", "name": "United States"}, {"@type": "Country", "name": "Canada"}],
             "funder": [{"@type": "Organization", "name": "TechStart"},
                        {"@type": "Organization", "name": "Invest Northern Ireland"}],
             "knowsAbout": ["Legal AI", "AI-assisted contract drafting", "Transactional law",
-                           "Contract negotiation", "Legal knowledge management"],
+                           "Contract negotiation", "Legal knowledge management", "Clause library software",
+                           "Microsoft Word add-ins for lawyers"],
         })
         if SAME_AS:
             n["sameAs"] = SAME_AS
@@ -169,20 +176,22 @@ def org_node(full=False):
 
 def app_node():
     offers = []
-    for name, price, desc in OFFERS:
-        offers.append({
-            "@type": "Offer", "name": name, "description": desc, "price": price,
-            "priceCurrency": "GBP", "url": SITE + "/pricing",
-            "priceSpecification": {"@type": "UnitPriceSpecification", "price": price,
-                                   "priceCurrency": "GBP", "unitText": "per user per month",
-                                   "billingDuration": "P1M", "valueAddedTaxIncluded": False},
-        })
+    for cur, starter, pro, note in PRICES:
+        for name, price, desc in (("Starter", starter, OFFERS[0][2]), ("Pro", pro, OFFERS[1][2])):
+            offers.append({
+                "@type": "Offer", "name": "%s (%s)" % (name, cur), "description": desc + " " + note,
+                "price": price, "priceCurrency": cur, "url": SITE + "/pricing",
+                "eligibleRegion": {"GBP": "GB", "EUR": "IE", "USD": "US", "CAD": "CA"}[cur],
+                "priceSpecification": {"@type": "UnitPriceSpecification", "price": price, "priceCurrency": cur,
+                                       "unitText": "per user per month", "billingDuration": "P1M",
+                                       "valueAddedTaxIncluded": False},
+            })
     return {
         "@type": "SoftwareApplication", "@id": APP_ID, "name": "Scriptum AI",
         "applicationCategory": "BusinessApplication",
         "applicationSubCategory": "Legal AI contract drafting and negotiation",
         "operatingSystem": "Microsoft Word (add-in), Web",
-        "url": SITE + "/", "description": ORG_DESCRIPTION,
+        "url": SITE + "/", "image": LOGO_URL, "description": ORG_DESCRIPTION,
         "publisher": {"@id": ORG_ID}, "provider": {"@id": ORG_ID},
         "audience": {"@type": "BusinessAudience",
                      "audienceType": "Transactional lawyers in mid-sized law firms with between 5 and 500 fee earners in the UK, Ireland, the USA and Canada, and in-house legal teams"},
@@ -234,6 +243,191 @@ def ensure_head_tags(doc, url, title, desc, og_type):
     return doc.replace("</head>", block + "</head>", 1)
 
 
+# ===================== ADDITIONS FOR scripts/seo_build.py =====================
+# Paste below the existing helper functions (after ensure_head_tags) and wire
+# them in as described in spec.md section 3. Stdlib only.
+import hashlib
+
+LOGO_URL = SITE + "/assets/brand/scriptum-logo-512.png"
+OG_DEFAULT = SITE + "/assets/brand/og-default.png"
+CONTACT_EMAIL = "info@scriptumai.co"
+
+# Pages with Search Console impressions. Every post links to two of these
+# (rotated by slug), so each one gets roughly 30 contextual internal links.
+PRIORITY_POSTS = [
+    "best-ai-drafting-tool-for-in-house-legal-teams",
+    "best-legal-ai-for-mid-sized-uk-law-firms",
+    "building-a-clause-library-lawyers-will-use",
+    "does-a-mid-sized-firm-need-enterprise-legal-ai",
+    "how-ai-drafting-increases-law-firm-capacity",
+]
+
+# One money-page link per post, chosen by tag.
+MONEY_BY_TAG = {
+    "Knowledge": ("/product/clause-library", "Clause library software for law firms"),
+    "Drafting": ("/product/draft", "AI drafting in Microsoft Word"),
+    "Capacity": ("/product/draft", "AI drafting in Microsoft Word"),
+    "Negotiate": ("/product/negotiate", "AI contract negotiation and redlining"),
+    "Negotiation": ("/product/negotiate", "AI contract negotiation and redlining"),
+    "Compliance": ("/security", "How Scriptum keeps client data secure"),
+    "Comparison": ("/pricing", "Scriptum pricing: from £79 per user per month"),
+    "Pricing": ("/pricing", "Scriptum pricing: from £79 per user per month"),
+    "Guide": ("/pricing", "Scriptum pricing: from £79 per user per month"),
+}
+MONEY_DEFAULT = ("/product/draft", "AI drafting in Microsoft Word")
+
+# "Further reading" on product pages (file -> slugs). Only slugs that exist are used.
+PRODUCT_READING = {
+    "product/clause-library.html": ["building-a-clause-library-lawyers-will-use",
+                                    "scriptum-clause-library-how-it-differs",
+                                    "precedent-bank-for-small-law-firms",
+                                    "who-owns-the-knowledge-your-ai-creates"],
+    "product/draft.html": ["what-is-ai-assisted-contract-drafting",
+                           "best-ai-drafting-tool-for-in-house-legal-teams",
+                           "best-ai-tool-for-drafting-contracts-in-microsoft-word",
+                           "how-ai-drafting-increases-law-firm-capacity"],
+    "product/negotiate.html": ["ai-contract-negotiation-software-uk",
+                               "fallback-ladders-in-contract-negotiation",
+                               "tracking-negotiation-positions-round-over-round",
+                               "best-ai-tool-for-reviewing-a-contract-markup"],
+    "product/collaborate.html": ["keeping-client-data-confidential-with-ai",
+                                 "legal-ai-security-questions-for-law-firms",
+                                 "the-client-experience-edge-in-transactional-law"],
+    "pricing.html": ["legal-ai-pricing-uk-2026",
+                     "best-legal-ai-for-mid-sized-uk-law-firms",
+                     "does-a-mid-sized-firm-need-enterprise-legal-ai"],
+    "index.html": ["best-legal-ai-for-mid-sized-uk-law-firms",
+                   "best-ai-drafting-tool-for-in-house-legal-teams",
+                   "building-a-clause-library-lawyers-will-use",
+                   "harvey-alternative-for-uk-law-firms",
+                   "legal-ai-pricing-uk-2026"],
+}
+
+# Prices by jurisdiction. Must match assets/pricing.js exactly.
+PRICES = [("GBP", "79", "119", "Prices exclude VAT."), ("EUR", "95", "139", "Prices exclude VAT."),
+          ("USD", "105", "159", "Prices exclude applicable taxes."), ("CAD", "149", "225", "Prices exclude applicable taxes.")]
+
+FAVICON_TAGS = ('<link rel="icon" href="/favicon.ico" sizes="48x48">\n'
+                '<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n'
+                '<link rel="apple-touch-icon" href="/apple-touch-icon.png">')
+
+
+def _rot(slug, seq, n):
+    """Deterministic rotation so links spread evenly and builds stay idempotent."""
+    if not seq:
+        return []
+    k = int(hashlib.md5(slug.encode("utf-8")).hexdigest(), 16) % len(seq)
+    return (seq[k:] + seq[:k])[:n]
+
+
+def _linked_slugs(doc):
+    return set(re.findall(r'href=["\'](?:https://tryscriptum\.ai)?/blog/([a-z0-9-]+)["\']', doc))
+
+
+def related_block(p, posts, doc):
+    by_slug = {q["slug"]: q for q in posts}
+    already = _linked_slugs(re.sub(r"<!-- RELATED:START.*?<!-- RELATED:END -->", "", doc, flags=re.S))
+    pool_pri = [s for s in PRIORITY_POSTS if s in by_slug and s != p["slug"] and s not in already]
+    picks = _rot(p["slug"], pool_pri, 2)
+    # Neighbours in date order (next older, next newer, cyclic): first within the
+    # same tag, then across all posts. Guarantees every post is linked from others.
+    def neighbours(seq):
+        if p["slug"] not in seq:
+            return []
+        i = seq.index(p["slug"])
+        order = []
+        for step in range(1, len(seq)):
+            for j in (i + step, i - step):
+                s2 = seq[j % len(seq)]
+                if s2 not in order:
+                    order.append(s2)
+        return order
+    tag_seq = [q["slug"] for q in posts if q.get("tag") == p.get("tag")]
+    all_seq = [q["slug"] for q in posts]
+    for s2 in neighbours(tag_seq) + neighbours(all_seq):
+        if len(picks) >= 4:
+            break
+        if s2 != p["slug"] and s2 not in already and s2 not in picks:
+            picks.append(s2)
+    href, label = MONEY_BY_TAG.get(p.get("tag", ""), MONEY_DEFAULT)
+    items = "\n".join('    <li><a href="/blog/%s">%s</a></li>' % (s, html.escape(by_slug[s]["title"])) for s in picks)
+    return ('<!-- RELATED:START (generated by scripts/seo_build.py) -->\n'
+            '<aside class="related-reading" aria-labelledby="related-reading-h">\n'
+            '  <h2 id="related-reading-h">Related reading</h2>\n'
+            '  <ul>\n%s\n  </ul>\n'
+            '  <p class="related-product">Product: <a href="%s">%s</a></p>\n'
+            '</aside>\n<!-- RELATED:END -->' % (items, href, html.escape(label)))
+
+
+def set_related(doc, block):
+    doc = re.sub(r"<!-- RELATED:START.*?<!-- RELATED:END -->\n[ \t]*", "", doc, flags=re.S)
+    i = doc.find('<div class="article-cta">')
+    if i == -1:
+        i = doc.find("</article>")
+    if i == -1:
+        return doc
+    return doc[:i] + block + "\n  " + doc[i:]
+
+
+def product_reading_block(f, posts):
+    by_slug = {q["slug"]: q for q in posts}
+    slugs = [s for s in PRODUCT_READING.get(f, []) if s in by_slug]
+    if not slugs:
+        return ""
+    items = "\n".join('      <li><a href="/blog/%s">%s</a></li>' % (s, html.escape(by_slug[s]["title"])) for s in slugs)
+    return ('<!-- READING:START (generated by scripts/seo_build.py) -->\n'
+            '<section class="pad related-reading-section"><div class="wrap related-reading">\n'
+            '    <h2>Further reading</h2>\n    <ul>\n%s\n    </ul>\n'
+            '</div></section>\n<!-- READING:END -->\n' % items)
+
+
+def set_product_reading(doc, block):
+    doc = re.sub(r"<!-- READING:START.*?<!-- READING:END -->\n?", "", doc, flags=re.S)
+    if not block:
+        return doc
+    i = doc.find("<footer")
+    return doc if i == -1 else doc[:i] + block + doc[i:]
+
+
+def first_article_image(doc, page_url):
+    from urllib.parse import urljoin
+    m = re.search(r'<article.*?<img[^>]+src="([^"]+)"', doc, re.S)
+    return urljoin(page_url, m.group(1)) if m else None
+
+
+def ensure_social_and_icons(doc, image):
+    """og:image, twitter tags, crawlable favicons, en-GB lang. Idempotent."""
+    if 'property="og:image"' not in doc:
+        tags = ['<meta property="og:image" content="%s">' % image]
+        if image == OG_DEFAULT:
+            tags += ['<meta property="og:image:width" content="1200">',
+                     '<meta property="og:image:height" content="630">']
+        tags.append('<meta property="og:image:alt" content="Scriptum AI">')
+        doc = doc.replace("</head>", "\n".join(tags) + "\n</head>", 1)
+    if 'name="twitter:card"' not in doc:
+        doc = doc.replace("</head>", '<meta name="twitter:card" content="summary_large_image">\n</head>', 1)
+    if 'name="twitter:image"' not in doc:
+        doc = doc.replace("</head>", '<meta name="twitter:image" content="%s">\n</head>' % image, 1)
+    doc = re.sub(r'<link rel="icon" href="data:image/svg\+xml[^"]*">', FAVICON_TAGS, doc, count=1)
+    if 'href="/favicon.ico"' not in doc:
+        doc = doc.replace("</head>", FAVICON_TAGS + "\n</head>", 1)
+    doc = re.sub(r'<html lang="en">', '<html lang="en-GB">', doc, count=1)
+    return doc
+
+
+def lint(path, doc):
+    t = re.search(r"<title>(.*?)</title>", doc, re.S)
+    d = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', doc)
+    t = html.unescape(t.group(1).strip()) if t else ""
+    d = html.unescape(d.group(1)) if d else ""
+    warn = []
+    if not t or len(t) > 60: warn.append("title %d chars" % len(t))
+    if not d or len(d) > 160 or len(d) < 70: warn.append("description %d chars" % len(d))
+    if len(re.findall(r"<h1[\s>]", doc)) != 1: warn.append("needs exactly one <h1>")
+    if re.search(r"braden|jonny|jonathan", doc, re.I): warn.append("FOUNDER NAME PRESENT")
+    if warn:
+        print("LINT %s: %s" % (path, "; ".join(warn)))
+
 def load_posts():
     posts = json.loads(rd("blog/posts.json"))
     posts.sort(key=lambda p: p["date"], reverse=True)
@@ -262,6 +456,8 @@ def do_posts(posts):
             continue
         doc = rd(path)
         url = "%s/blog/%s" % (SITE, p["slug"])
+        doc = set_related(doc, related_block(p, posts, doc))
+        image = first_article_image(doc, url) or OG_DEFAULT
         info = post_ld_info(doc)
         published = info.get("datePublished") or p["date"]
         modified = info.get("dateModified") or published
@@ -284,7 +480,7 @@ def do_posts(posts):
             author = {"@id": ORG_ID}
         graph = [
             {"@type": "BlogPosting", "@id": url + "#article", "headline": p["title"],
-             "description": desc, "url": url, "mainEntityOfPage": url,
+             "description": desc, "url": url, "mainEntityOfPage": url, "image": [image],
              "datePublished": published, "dateModified": modified,
              "author": author, "publisher": {"@id": ORG_ID}, "inLanguage": "en-GB",
              "articleSection": p.get("tag", ""), "isPartOf": {"@id": SITE + "/blog/#blog"},
@@ -297,7 +493,9 @@ def do_posts(posts):
             graph.append(faq_node(url, qa))
         graph[0] = {k: v for k, v in graph[0].items() if v not in (None, "")}
         doc = ensure_head_tags(doc, url, p["title"], desc, "article")
+        doc = ensure_social_and_icons(doc, image)
         doc = set_ld(doc, graph, drop_plain=True)
+        lint(path, doc)
         wr(path, doc)
         out.append((p, modified))
     return out
@@ -308,6 +506,7 @@ def do_pages(posts):
         if not os.path.exists(os.path.join(ROOT, f)):
             continue
         doc = rd(f)
+        doc = set_product_reading(doc, product_reading_block(f, posts))
         url = SITE + path_url
         title = title_of(doc)
         desc = meta(doc, "description")
@@ -330,9 +529,11 @@ def do_pages(posts):
         elif kind == "product":
             graph = [org_node(), dict(page, about={"@id": APP_ID}),
                      crumbs([("Home", "/"), (title, path_url)])]
+            if faq_from_html(doc):
+                graph.append(faq_node(url, faq_from_html(doc)))
         elif kind == "blogindex":
             graph = [org_node(),
-                     {"@type": "Blog", "@id": SITE + "/blog/#blog", "url": url, "name": "Scriptum AI blog",
+                     {"@type": "Blog", "@id": SITE + "/blog/#blog", "url": url, "name": "Scriptum AI blog: legal AI for transactional lawyers",
                       "description": desc, "publisher": {"@id": ORG_ID}, "inLanguage": "en-GB",
                       "blogPost": [{"@type": "BlogPosting", "headline": p["title"],
                                     "url": "%s/blog/%s" % (SITE, p["slug"]), "datePublished": p["date"]}
@@ -344,9 +545,11 @@ def do_pages(posts):
                 graph.append(faq_node(url, faq_from_html(doc)))
         graph = [{k: v for k, v in n.items() if v is not None} for n in graph]
         doc = ensure_head_tags(doc, url, title, desc, "website")
+        doc = ensure_social_and_icons(doc, OG_DEFAULT)
         doc = set_ld(doc, graph)
         if kind == "blogindex":
             doc = static_blog_list(doc, posts)
+        lint(f, doc)
         wr(f, doc)
 
 
