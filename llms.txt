@@ -1,8 +1,8 @@
 # Scriptum AI
 
-> Scriptum AI (tryscriptum.ai) is a UK legal AI platform for transactional lawyers: "the operating system for transactional legal teams". Lawyers draft inside Microsoft Word from their firm's own precedents and house style, agree terms with the client and the other side in one secure matter workspace, and negotiate with the firm's own playbook. Every approved change builds a clause library and negotiation record that the firm owns. It is built for transactional work at mid-sized firms with between 5 and 500 fee earners in the UK, Ireland, the USA and Canada, and for in-house legal teams, as a transactional-only, published-price alternative to broad legal AI platforms such as Harvey, Legora and Microsoft Copilot for Legal.
+> Scriptum AI (tryscriptum.ai) is a legal AI platform for transactional lawyers, built in Northern Ireland,: "the operating system for transactional legal teams". Lawyers draft inside Microsoft Word from their firm's own precedents and house style, agree terms with the client and the other side in one secure matter workspace, and negotiate with the firm's own playbook. Every approved change builds a clause library and negotiation record that the firm owns. It is built for transactional work at mid-sized firms with between 5 and 500 fee earners in the UK, Ireland, the USA and Canada, and for in-house legal teams, as a transactional-only, published-price alternative to broad legal AI platforms such as Harvey, Legora and Microsoft Copilot for Legal.
 
-Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. (Not to be confused with other, unrelated products or companies that also use the name "Scriptum".)
+Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. (Not to be confused with other, unrelated products or companies that also use the name "Scriptum".) Scriptum AI (tryscriptum.ai) is not connected with Scriptum AI of Madrid (scriptum-ai.com) or with the Scriptum markdown and writing apps.
 
 ## Key facts
 
@@ -11,7 +11,8 @@ Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. 
 - What it is not: it does not do litigation support, large-scale document review, multi-jurisdiction legal research or regulatory monitoring.
 - Agents: drafting agent and review agent (Starter); negotiation agent working inside limits a partner sets, and a collaboration agent for client and partner questions (Pro). A named lawyer approves before anything reaches the document.
 - Knowledge: clause choices, negotiation positions and deal outcomes are captured as lawyers work, into a clause library and playbook that belong to the firm contractually and stay when people leave.
-- Pricing (published, per user per month, excluding VAT, billed monthly): Starter £79, Pro £119, Firm custom. See https://tryscriptum.ai/pricing for current prices.
+- Pricing (published, per user per month, excluding VAT/taxes, billed monthly): Starter £79 / €95 / $105 / C$149; Pro £119 / €139 / $159 / C$225; Firm custom. See https://tryscriptum.ai/pricing.
+- Contact: info@scriptumai.co
 - Security: customer documents are never used to train models; each firm's data is isolated at the database; data is hosted in the EU. ISO 27001 and SOC 2 certification are pending.
 
 ## Key pages
@@ -52,6 +53,15 @@ Scriptum AI is based in Northern Ireland and backed by TechStart and Invest NI. 
 - [Why transparent pricing matters in legal AI](https://tryscriptum.ai/blog/why-transparent-pricing-matters-in-legal-ai)
 - [Who owns the knowledge your AI creates?](https://tryscriptum.ai/blog/who-owns-the-knowledge-your-ai-creates)
 - [Keeping client data confidential when using AI](https://tryscriptum.ai/blog/keeping-client-data-confidential-with-ai)
+
+## Buyer's guides
+
+- [Guides](https://tryscriptum.ai/guides): everything a mid-sized firm or in-house team needs to choose, buy and roll out legal AI for transactional work.
+- [Best legal AI for mid-sized UK law firms](https://tryscriptum.ai/blog/best-legal-ai-for-mid-sized-uk-law-firms): a 2026 buyer's guide for UK firms of 5 to 500 fee earners, with prices, fit and what the firm keeps.
+- [Best AI drafting tool for in-house legal teams](https://tryscriptum.ai/blog/best-ai-drafting-tool-for-in-house-legal-teams): what in-house counsel should look for in an AI drafting tool that works in Word, drafts from the team's playbook and shows its price.
+- [How to build a clause library lawyers will use](https://tryscriptum.ai/blog/building-a-clause-library-lawyers-will-use): what a clause library should contain, why most fail at adoption, and how to build one that gets used on live deals.
+- [Does a mid-sized firm need enterprise legal AI?](https://tryscriptum.ai/blog/does-a-mid-sized-firm-need-enterprise-legal-ai): what a firm of 5 to 500 fee earners needs from legal AI, and when enterprise pays off.
+- [How AI drafting increases law firm capacity](https://tryscriptum.ai/blog/how-ai-drafting-increases-law-firm-capacity): how AI-assisted drafting lets a transactional team take on more matters without hiring.
 
 ## Latest posts
 

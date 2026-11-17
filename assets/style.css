@@ -407,3 +407,5 @@ h2{font-size:clamp(32px,4.2vw,46px);margin-bottom:16px;max-width:760px}
 .related-reading li{margin:8px 0}
 .related-reading .related-product{margin:16px 0 0;font-weight:500}
 .related-reading-section .related-reading{border-top:0;margin-top:0}
+
+.guide-group{margin:40px 0}.guide-group li{margin:12px 0}.guide-group li span{color:var(--text-dim,#5b6170);font-size:.95em}
