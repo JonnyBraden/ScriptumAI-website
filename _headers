@@ -17,6 +17,12 @@
 /blog/posts.json
   X-Robots-Tag: noindex
 
+
+# Private guided demo, shared by link only. Kept out of search and AI indexes.
+/tour-722a227774/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Referrer-Policy: no-referrer
+
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 

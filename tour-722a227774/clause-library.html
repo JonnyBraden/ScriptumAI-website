@@ -1,0 +1,1150 @@
+<!doctype html><html><head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Scriptum Clause Library</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: app bar, heading tree on the left, one library entry on the right; drawers and a modal over it. Scriptum's own tokens: warm stone ground, navy ink, terracotta accent. */
+:root{
+  --bg:#EEECE7; --surface:#F7F6F2; --card:#FFFFFF; --ink:#1B2A41; --muted:#5E6573; --faint:#8A909B;
+  --line:#D9D5CC; --line-soft:#E6E3DC; --accent:#B9573B; --accent-soft:#F3E3DC; --accent-ink:#FFFFFF;
+  --held:#2E7650; --comp:#B07C25; --conc:#9B3A4E; --del:#6A6F79; --open:#3A68A0; --unk:#A7ABB3;
+  --ins-bg:#DDEFE4; --ins-ink:#1E5A3A; --del-bg:#F6DEDE; --del-ink:#8A2B2B;
+  --focus:#3A68A0; --shadow:0 1px 2px rgba(27,42,65,.06),0 6px 20px rgba(27,42,65,.06);
+  --f-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:8px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12161D; --surface:#181D25; --card:#1F2531; --ink:#E5E8EE; --muted:#A1A9B6; --faint:#7C8494;
+  --line:#313A49; --line-soft:#272F3C; --accent:#E07D60; --accent-soft:#3A2620; --accent-ink:#1B0F0B;
+  --held:#5BB585; --comp:#D6A653; --conc:#D47A8D; --del:#9AA0AA; --open:#7FA7DA; --unk:#6E7480;
+  --ins-bg:#1F3A2B; --ins-ink:#9BDDB5; --del-bg:#432426; --del-ink:#F0A8A8; --focus:#7FA7DA;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#12161D; --surface:#181D25; --card:#1F2531; --ink:#E5E8EE; --muted:#A1A9B6; --faint:#7C8494;
+  --line:#313A49; --line-soft:#272F3C; --accent:#E07D60; --accent-soft:#3A2620; --accent-ink:#1B0F0B;
+  --held:#5BB585; --comp:#D6A653; --conc:#D47A8D; --del:#9AA0AA; --open:#7FA7DA; --unk:#6E7480;
+  --ins-bg:#1F3A2B; --ins-ink:#9BDDB5; --del-bg:#432426; --del-ink:#F0A8A8; --focus:#7FA7DA;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:14px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* App bar */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px}
+.brand{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.brand b{font-weight:600;letter-spacing:.01em}
+.brand span{color:var(--muted)}
+.ask{flex:1 1 320px;display:flex;gap:6px;min-width:0}
+.ask input{flex:1;min-width:0;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.bar-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;padding:6px 10px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:7px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{border-color:var(--faint)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:500}
+.btn.ghost{background:none;border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--ink);border-color:var(--line)}
+.btn.small{padding:4px 9px;font-size:13px}
+.btn[aria-disabled="true"]{opacity:.55}
+.badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:600}
+.demo-note{background:var(--accent-soft);color:var(--ink);font-size:12.5px}
+.demo-note .wrap{padding-block:6px}
+
+/* Shell */
+.shell{display:grid;grid-template-columns:280px minmax(0,1fr);gap:0;align-items:start}
+aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 62px);max-height:calc(100vh - 62px);overflow:auto;border-right:1px solid var(--line);padding:16px 14px 40px max(16px,env(safe-area-inset-left,0px))}
+main{min-width:0;padding-block:20px 60px}
+.doc-tabs{display:grid;gap:2px;margin-bottom:16px}
+.doc-tabs button{text-align:left;border:0;background:none;padding:7px 10px;border-radius:6px;cursor:pointer;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.doc-tabs button[aria-pressed="true"]{background:var(--card);color:var(--ink);font-weight:500;box-shadow:var(--shadow)}
+.doc-tabs small{color:var(--faint);font-size:11.5px}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.tree{display:grid;gap:14px}
+.tree-group{display:grid;gap:1px}
+.tree-group .eyebrow{padding:0 10px 4px}
+.node{display:flex;justify-content:space-between;gap:8px;width:100%;border:0;background:none;text-align:left;padding:5px 10px;border-radius:6px;cursor:pointer;color:var(--ink)}
+.node:hover{background:var(--line-soft)}
+.node[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.node[aria-current="true"] .cnt{color:inherit;opacity:.75}
+.node.child{padding-left:24px;color:var(--muted);font-size:13.5px}
+.node.child[aria-current="true"]{color:var(--bg)}
+.cnt{font-family:var(--f-mono);font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:grid;gap:8px}
+.side-foot p{margin:0;color:var(--muted);font-size:12.5px}
+.inline-form{display:flex;gap:6px}
+.inline-form input{flex:1;min-width:0;padding:6px 9px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.mobile-tree{display:none}
+.side-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 10px 10px;flex-wrap:wrap}
+.tree{gap:4px}
+.tree-group summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:6px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.tree-group summary::-webkit-details-marker{display:none}
+.tree-group summary::before{content:"▸";margin-right:2px;color:var(--faint);transition:transform .15s}
+.tree-group[open] summary::before{transform:rotate(90deg)}
+.tree-group summary span:first-child{flex:1}
+.tree-group summary:hover{background:var(--line-soft)}
+.tree-items{display:grid;gap:1px;padding:2px 0 8px}
+.node.empty-node{color:var(--faint)}
+.node.empty-node[aria-current="true"]{color:var(--bg)}
+.firm{font-size:10.5px;padding:0 5px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-weight:600;letter-spacing:.02em}
+.firm-chip{border-color:var(--accent);color:var(--accent)}
+.part-form{margin:-4px 0 16px;display:grid;gap:8px}
+.part-form label{font-weight:500}
+
+/* Entry */
+.crumbs{color:var(--muted);font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 6px}
+.crumbs button{border:0;background:none;padding:0;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.entry-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin:6px 0 16px}
+.entry-head h1{font-family:var(--f-serif);font-weight:500;font-size:30px;line-height:1.15}
+.kind{display:inline-block;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin-top:8px}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;margin-bottom:14px}
+.summary.single{grid-template-columns:minmax(0,1fr)}
+.stat-title{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px}
+.stack{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line-soft)}
+.stack i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.big{font-family:var(--f-serif);font-size:22px;font-weight:500}
+.note{color:var(--muted);font-size:12.5px;margin:8px 0 0}
+.plot svg{display:block;width:100%;height:auto;overflow:visible}
+.plot text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:4px 0 14px}
+.filters label{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px}
+.filters select{padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.filters .spacer{flex:1}
+.check{display:inline-flex;gap:6px;align-items:center;color:var(--muted);font-size:13px;cursor:pointer}
+.parts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.part{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 12px;cursor:pointer;display:grid;gap:6px;min-width:150px;text-align:left}
+.part:hover{border-color:var(--faint)}
+.part .mini{display:flex;height:5px;border-radius:3px;overflow:hidden;background:var(--line-soft)}
+.part .mini i{display:block;height:100%}
+.part small{color:var(--muted);font-size:12px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;min-width:0}
+.card.prec{border-style:dashed}
+.card-h{padding:12px 14px 10px;border-bottom:1px solid var(--line-soft);display:grid;gap:4px}
+.card-h .row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-h h3{font-size:14.5px;font-weight:600;line-height:1.3}
+.meta{color:var(--muted);font-size:12.5px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap;border:1px solid currentColor}
+.pill.held{color:var(--held)} .pill.compromised{color:var(--comp)} .pill.conceded{color:var(--conc)}
+.pill.deleted{color:var(--del)} .pill.open{color:var(--open)} .pill.unknown{color:var(--faint)} .pill.prec{color:var(--muted);border-style:dashed}
+.tag{font-size:11.5px;padding:1px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);font-weight:500;width:max-content}
+.rounds{display:flex;flex-wrap:wrap;gap:4px;padding:10px 14px 0}
+.rounds button{border:1px solid var(--line);background:none;border-radius:5px;padding:2px 8px;font-size:12px;font-family:var(--f-mono);cursor:pointer;color:var(--muted)}
+.rounds button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.wording{padding:10px 14px 12px;font-family:var(--f-serif);font-size:14.5px;line-height:1.6;flex:1;min-width:0;overflow-wrap:anywhere}
+.wording p{margin:0 0 6px}
+.wording p.limb{padding-left:22px}
+.wording .lead{color:var(--faint);font-style:italic;margin-bottom:8px;font-size:13.5px}
+.wording .gone{color:var(--del);font-family:var(--f-sans);font-size:13px}
+.wording ins{background:var(--ins-bg);color:var(--ins-ink);text-decoration:none;border-radius:2px}
+.wording del{background:var(--del-bg);color:var(--del-ink);border-radius:2px}
+.wording .part-label{display:block;font-family:var(--f-sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:8px 0 2px}
+.wording .part-label:first-child{margin-top:0}
+.xref{border-bottom:1px dotted var(--accent);cursor:pointer}
+.xref .xdef{font-family:var(--f-sans);font-size:12.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;padding:1px 6px;margin:0 2px}
+.xref.closed .xdef{display:none}
+.card-f{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px 10px;border-top:1px solid var(--line-soft)}
+.card-f .val{margin-left:auto;font-family:var(--f-mono);font-size:12.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line-soft);padding:2px 8px;border-radius:5px;font-variant-numeric:tabular-nums}
+.linkish{border:0;background:none;padding:0;color:var(--accent);cursor:pointer;font-size:12.5px;text-align:left;text-decoration:underline;text-underline-offset:3px}
+.move-row{display:flex;gap:6px;padding:0 10px 10px;flex-wrap:wrap}
+.move-row select{flex:1;min-width:0;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.empty{color:var(--muted);padding:24px;text-align:center;border:1px dashed var(--line);border-radius:10px}
+
+/* Answer */
+.answer{margin-bottom:18px;border-left:3px solid var(--accent)}
+.answer .q{color:var(--muted);font-size:13px;margin:0 0 6px}
+.answer .a{font-family:var(--f-serif);font-size:21px;line-height:1.35;margin:0}
+.answer .mkt{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line-soft);display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.answer .src{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.answer .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.suggest{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:var(--faint)}
+
+/* Definitions */
+.defs{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:start}
+.term-list{display:grid;gap:2px;position:sticky;top:90px}
+.term-list input{padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);margin-bottom:6px}
+.term{border:0;background:none;text-align:left;padding:6px 10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;gap:6px}
+.term:hover{background:var(--line-soft)}
+.term[aria-current="true"]{background:var(--card);box-shadow:var(--shadow);font-weight:500}
+.src{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 6px;width:max-content}
+.aka{margin:-6px 0 14px;color:var(--muted)}
+.pointer{font-family:var(--f-sans);font-size:13px;color:var(--muted);display:inline-flex;gap:6px;align-items:center;border:1px dashed var(--line);border-radius:6px;padding:4px 8px}
+
+/* Drawer + modal */
+.scrim{position:fixed;inset:0;background:rgba(15,20,28,.45);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);z-index:41;overflow:auto;border-left:1px solid var(--line);box-shadow:var(--shadow);padding:calc(18px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(30px + env(safe-area-inset-bottom,0px)) 20px}
+.drawer-h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.drawer h2{font-family:var(--f-serif);font-weight:500;font-size:22px}
+.region{border:1px solid var(--line);border-radius:8px;background:var(--card);margin-bottom:10px;overflow:hidden}
+.region-h{display:flex;justify-content:space-between;gap:8px;padding:7px 12px;background:var(--line-soft);font-size:12.5px}
+.region-h b{font-weight:600}
+.region-h code{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.onode{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;padding:5px 12px;font-size:13px;border-top:1px solid var(--line-soft)}
+.onode .ref{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.onode.d2{padding-left:28px}
+.onode.hit{background:var(--accent-soft)}
+.onode.hit .t::after{content:"This entry";margin-left:8px;font-size:11px;color:var(--accent);font-weight:600}
+.modal{position:fixed;inset:0;z-index:41;display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));pointer-events:none}
+.modal-box{pointer-events:auto;width:min(720px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:20px}
+.modal-box h2{font-family:var(--f-serif);font-weight:500;font-size:22px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.form-grid label{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.form-grid input,.form-grid select{padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:14px}
+.file{display:flex;gap:10px;align-items:center;border:1px dashed var(--line);border-radius:8px;padding:12px;background:var(--card)}
+.file .ico{width:34px;height:40px;border-radius:4px;background:var(--open);color:#fff;display:grid;place-items:center;font-family:var(--f-mono);font-size:10px;font-weight:600;flex:none}
+.log{font-family:var(--f-mono);font-size:12.5px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:3px;margin:14px 0}
+.log .ok::before{content:"✓ ";color:var(--held)}
+.log .run::before{content:"… ";color:var(--muted)}
+.check-item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;display:grid;gap:8px}
+.check-item.done{border-color:var(--held)}
+.check-item .where{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.check-item .txt{font-family:var(--f-serif);font-size:14px}
+.check-item .ask-line{font-size:13.5px}
+.check-item .ask-line b{font-weight:600}
+.conf{font-family:var(--f-mono);font-size:12px;color:var(--comp)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.actions select,.actions input{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);min-width:0;flex:1 1 200px}
+.resolved{font-size:13px;color:var(--held);font-weight:500}
+.modal-f{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.queue-item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:8px;margin-bottom:10px}
+.toggle-row{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:10px}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:60;max-width:min(560px,calc(100% - 32px));font-size:13.5px;box-shadow:var(--shadow)}
+
+@media (max-width:820px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  aside{display:none}
+  .mobile-tree{display:block;margin-bottom:14px}
+  .mobile-tree select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+  .mobile-tree .doc-row{display:flex;gap:6px;margin-bottom:8px;overflow-x:auto}
+  .summary{grid-template-columns:minmax(0,1fr)}
+  .defs{grid-template-columns:minmax(0,1fr)}
+  .term-list{position:static}
+  .entry-head h1{font-size:25px}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .bar-in{gap:8px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card,.answer{animation:rise .25s ease-out both}
+  @keyframes rise{from{transform:translateY(4px)}to{transform:none}}
+}
+</style>
+
+<header class="bar">
+  <div class="bar-in wrap">
+    <div class="brand"><b>Scriptum</b><span>Clause Library</span></div>
+    <form class="ask" id="askForm" role="search">
+      <input id="askInput" type="text" autocomplete="off" placeholder="Ask a question, e.g. What drag-along threshold do we usually agree?" aria-label="Ask a question about the library">
+      <button class="btn" type="submit">Ask</button>
+    </form>
+    <div class="bar-tools">
+      <div class="seg" role="group" aria-label="View as">
+        <button type="button" data-act="role" data-v="associate" id="roleAssoc">Associate</button>
+        <button type="button" data-act="role" data-v="admin" id="roleAdmin">Firm admin</button>
+      </div>
+      <button type="button" class="btn" id="queueBtn" data-act="queue" hidden>Parts to approve <span class="badge" id="queueCount">0</span></button>
+      <button type="button" class="btn primary" data-act="upload">Upload a document</button>
+    </div>
+  </div>
+</header>
+<div class="demo-note"><div class="wrap">Demo for Carrick &amp; Shaw LLP (a made-up firm). Every matter, client and fund here is invented sample data.</div></div>
+
+<div class="shell">
+  <aside id="side" aria-label="Library headings"></aside>
+  <main class="wrap" id="main"></main>
+</div>
+
+<div id="overlay" hidden></div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script>
+/* ---------------- Sample data ---------------- */
+const M = {
+  prec:{name:"Firm precedent", client:"Carrick & Shaw precedent bank", precedent:true, date:"2026-01-12", doc:"Precedent v4"},
+  qui:{name:"Quillon Software Series A", client:"Quillon Software Ltd", side:"Company", cp:"Harbourline Capital", date:"2026-09-29", doc:"v2 (in negotiation)"},
+  bra:{name:"Brackwater Labs Series A", client:"Harbourline Capital", side:"Investor", cp:"Brackwater Labs Ltd", date:"2026-06-30", doc:"v3 signed"},
+  kes:{name:"Kestrel Robotics Series A", client:"Kestrel Robotics Ltd", side:"Company", cp:"Northlight Ventures", date:"2026-03-14", doc:"v3 signed"},
+  pin:{name:"Pinecrest Analytics Series B", client:"Pinecrest Analytics Ltd", side:"Company", cp:"Ardent Growth", date:"2025-11-02", doc:"v3 signed"},
+  hal:{name:"Halyard Bio Seed", client:"Seedwell Partners", side:"Investor", cp:"Halyard Bio Ltd", date:"2025-09-18", doc:"v3 signed"},
+  tal:{name:"Tallow Health Seed", client:"Tallow Health Ltd", side:"Company", cp:"Northlight Ventures", date:"2025-07-21", doc:"v3 signed"},
+  old:{name:"Marlow Foods Series A", client:"Marlow Foods Ltd", side:"Company", cp:"Ardent Growth", date:"2021-05-04", doc:"Signed copy (historical upload)"},
+  lan:{name:"Unit 4, Lanyon Quay", client:"Brightwater Retail Ltd", side:"Tenant", cp:"Cathedral Estates", date:"2026-02-20", doc:"v3 signed"},
+  vic:{name:"12 Victoria Street", client:"Ormeau Holdings Ltd", side:"Landlord", cp:"Fieldfare Design Ltd", date:"2025-10-08", doc:"v3 signed"},
+};
+const OUT = {held:"Held",compromised:"Compromised",conceded:"Conceded",deleted:"Deleted",open:"In negotiation",unknown:"Outcome unknown"};
+const OUT_C = {held:"var(--held)",compromised:"var(--comp)",conceded:"var(--conc)",deleted:"var(--del)",open:"var(--open)",unknown:"var(--unk)"};
+const DOCS = {sha:"Shareholders' Agreement", sa:"Subscription Agreement", art:"Articles of Association", spa:"Share Purchase Agreement", asa:"Advance Subscription Agreement", lease:"Commercial lease", cfs:"Contract for sale", dl:"Disclosure Letter"};
+const us="us", them="them", agreed="agreed", signed="signed";
+const R=(label,by,text)=>[label,by,text];
+const tri=(f,a,b,c)=>[R("v1 ours",us,f(a)),R("v2 theirs",them,f(b)),R("v3 agreed",agreed,f(c))];
+const duo=(f,a,b)=>[R("v1 ours",us,f(a)),R("v2 theirs",them,f(b))];
+
+const dragT=p=>`If the holders of not less than ${p} of the Shares in issue (the "Drag Majority") wish to transfer all of their Shares to a bona fide Proposed Buyer, the Drag Majority may require all other Shareholders to transfer all of their Shares to the Proposed Buyer on the terms of this clause.`;
+const trig=x=>`A Drag Notice may only be served where the Proposed Buyer has made a bona fide offer on arm's length terms${x}.`;
+const dprice=x=>`Each Called Shareholder shall receive the same consideration per Share as the Drag Majority${x}, applied in the order of priority set out in Article 4 (Return of capital).`;
+const dnote=d=>`The Drag Majority shall give a Drag Notice to the Called Shareholders not less than ${d} Business Days before the proposed date of completion of the sale.`;
+const tagT=x=>`No transfer of Shares that would result in any person acquiring a Controlling Interest may be made unless the Proposed Buyer has offered to buy all other Shares on the same terms${x}.`;
+const borrow=x=>`(f) incur any borrowing or indebtedness in excess of ${x} in aggregate, other than trade credit in the ordinary course of business;`;
+const shares=x=>`(a) allot or issue any shares${x}, other than Excluded Securities;`;
+const biz=x=>`(c) make any material change to the nature of the Business${x};`;
+const divs=`(d) declare, pay or make any dividend or other distribution;`;
+const LEAD=`The Company shall not, and shall procure that no Group Company shall, without {{Investor Majority}} Consent:`;
+const vest=n=>`Leaver's Shares vest in equal monthly instalments over ${n} months from the Vesting Start Date, with none vesting before the first anniversary of that date.`;
+const lprice=x=>`Leaver's Shares held by a {{Bad Leaver}} shall be transferred at ${x}. Leaver's Shares held by a {{Good Leaver}} shall be transferred at Fair Value.`;
+const trigT=x=>`A Founder becomes a Leaver on ceasing to be an employee, consultant or director of any Group Company${x}.`;
+const ldefs=x=>`A Founder who leaves is a Good Leaver or a Bad Leaver as defined in clause 1.1.${x}`;
+const board=(w,n)=>`The {{Investor Majority}} shall be entitled to appoint ${w} as ${n} of the Company (each an "Investor Director") and to remove any person so appointed.`;
+const info=d=>`The Company shall deliver to each Investor monthly management accounts within ${d} Business Days of the end of each month, together with a summary of cash position and headcount.`;
+const ipown=x=>`The Company is the sole legal and beneficial owner of all ${x}Company IP, free from any Encumbrance.`;
+const ipinf=x=>x?`${x}no Company IP is being infringed, misappropriated or used without permission by any other person.`:`No Company IP is being infringed, misappropriated or used without permission by any other person.`;
+const empT=x=>`Complete and accurate details of the terms of employment of every employee earning more than ${x} a year have been Disclosed.`;
+const empC=x=>`No employee or former employee has any outstanding claim against the Company${x}.`;
+const cap=x=>`The total liability of each Founder for all Warranty Claims shall not exceed ${x} their annual gross salary at Completion.`;
+const demin=x=>`No Warranty Claim may be brought unless the amount of that claim exceeds ${x}.`;
+const tlim=x=>`No Warranty Claim may be brought unless written notice of it is given within ${x} months of Completion.`;
+const proceeds=`The Company shall use the Subscription Monies for the purposes set out in the Business Plan and for no other purpose without {{Investor Majority}} Consent.`;
+const rrev=x=>`The rent shall be reviewed on every fifth anniversary of the Term Commencement Date to the open market rent${x}.`;
+const bcond=x=>`The break is conditional on the Tenant having paid all Main Rent due${x} on the Break Date.`;
+const bnote=m=>`The Tenant may end this lease on the Break Date by giving the Landlord not less than ${m} months' written notice.`;
+
+const E = [
+  /* Shareholders' Agreement */
+  {id:"defs", doc:"sha", group:"Definitions and interpretation", title:"Definitions", kind:"definitions", loc:"1.1"},
+  {id:"interp", doc:"sha", group:"Definitions and interpretation", title:"Interpretation provisions", kind:"One block", loc:"1.2", v:[
+    {m:"prec", r:[R("Precedent",us,"In this agreement: (a) clause and schedule headings do not affect its interpretation; (b) a reference to a statute includes any modification or re-enactment of it; (c) words in the singular include the plural; and (d) \"including\" means including without limitation.")]},
+    {m:"kes", o:"held", r:tri(x=>x,"In this agreement: (a) clause and schedule headings do not affect its interpretation; (b) a reference to a statute includes any modification or re-enactment of it; (c) words in the singular include the plural; and (d) \"including\" means including without limitation.","In this agreement: (a) clause and schedule headings do not affect its interpretation; (b) a reference to a statute includes any modification or re-enactment of it, whether before or after the date of this agreement; (c) words in the singular include the plural; and (d) \"including\" means including without limitation.","In this agreement: (a) clause and schedule headings do not affect its interpretation; (b) a reference to a statute includes any modification or re-enactment of it; (c) words in the singular include the plural; and (d) \"including\" means including without limitation.")},
+    {m:"bra", o:"held", r:[R("v3 agreed",agreed,"In this agreement: (a) headings do not affect interpretation; (b) a reference to a statute includes any modification or re-enactment of it, whether before or after the date of this agreement; and (c) \"including\" means including without limitation.")]},
+  ]},
+  {id:"consents", doc:"sha", group:"Investor protections", title:"Investor consents", kind:"Long list", loc:"S2", children:["consent-shares","consent-business","consent-dividends","consent-borrowing"]},
+  {id:"consent-shares", doc:"sha", group:"Investor protections", parent:"consents", title:"Share issues", kind:"List item", loc:"S2(a)", leadIn:LEAD, v:[
+    {m:"prec", r:[R("Precedent",us,shares(", or grant any right to subscribe for or convert into shares"))]},
+    {m:"kes", o:"compromised", r:tri(shares,""," or grant any right to subscribe for or convert into shares, including under any share option plan",", or grant any right to subscribe for or convert into shares")},
+    {m:"pin", o:"held", r:tri(shares,"",", or grant any option over shares","")},
+    {m:"bra", o:"held", r:tri(shares,", or grant any right to subscribe for or convert into shares","",", or grant any right to subscribe for or convert into shares")},
+  ]},
+  {id:"consent-business", doc:"sha", group:"Investor protections", parent:"consents", title:"Change of business", kind:"List item", loc:"S2(c)", leadIn:LEAD, v:[
+    {m:"prec", r:[R("Precedent",us,biz(" or start any new business not ancillary to it"))]},
+    {m:"kes", o:"held", r:tri(biz,""," or start any new business not ancillary to it","")},
+    {m:"tal", o:"conceded", r:tri(biz,""," or start any new business"," or start any new business")},
+    {m:"hal", o:"held", r:tri(biz," or start any new business not ancillary to it",""," or start any new business not ancillary to it")},
+  ]},
+  {id:"consent-dividends", doc:"sha", group:"Investor protections", parent:"consents", title:"Dividends", kind:"List item", loc:"S2(d)", leadIn:LEAD, v:[
+    {m:"prec", r:[R("Precedent",us,divs)]},
+    {m:"kes", o:"held", r:[R("v1 ours",us,divs),R("v2 theirs",them,divs),R("v3 agreed",agreed,divs)]},
+    {m:"bra", o:"deleted", note:"Deleted in round 2 at their request", r:[R("v1 ours",us,divs),R("v2 theirs",them,""),R("v3 agreed",agreed,"")]},
+  ]},
+  {id:"consent-borrowing", doc:"sha", group:"Investor protections", parent:"consents", title:"Borrowing", kind:"List item", loc:"S2(f)", leadIn:LEAD, key:{label:"Borrowing limit", unit:"gbp"}, v:[
+    {m:"prec", r:[R("Precedent",us,borrow("£[50,000]"))]},
+    {m:"qui", o:"open", r:duo(borrow,"£250,000","£50,000")},
+    {m:"bra", o:"held", val:25000, r:tri(borrow,"£25,000","£100,000","£25,000")},
+    {m:"kes", o:"compromised", val:100000, r:tri(borrow,"£250,000","£50,000","£100,000")},
+    {m:"pin", o:"held", val:250000, r:tri(borrow,"£250,000","£100,000","£250,000")},
+    {m:"tal", o:"conceded", val:50000, r:tri(borrow,"£100,000","£50,000","£50,000")},
+    {m:"old", o:"unknown", val:100000, r:[R("Signed",signed,borrow("£100,000"))]},
+  ]},
+  {id:"board-director", doc:"sha", group:"Board and information", title:"Investor director", kind:"Clause", loc:"3.1", key:{label:"Investor directors", unit:"count"}, v:[
+    {m:"prec", r:[R("Precedent",us,board("[one person]","[a director]"))]},
+    {m:"bra", o:"compromised", val:1, r:[R("v1 ours",us,board("two persons","directors")),R("v2 theirs",them,board("one person","a director")),R("v3 agreed",agreed,board("one person","a director")+" The Investor may also appoint one observer to attend Board meetings.")]},
+    {m:"kes", o:"held", val:1, r:tri(n=>board(n,"a director"),"one person","two persons","one person")},
+    {m:"pin", o:"conceded", val:2, r:tri(n=>board(n,n==="one person"?"a director":"directors"),"one person","two persons","two persons")},
+    {m:"hal", o:"held", val:1, r:[R("v1 ours",us,board("one person","a director")),R("v3 agreed",agreed,board("one person","a director"))]},
+  ]},
+  {id:"info-rights", doc:"sha", group:"Board and information", title:"Information rights", kind:"Clause", loc:"3.4", key:{label:"Accounts deadline", unit:"days"}, v:[
+    {m:"prec", r:[R("Precedent",us,info("[20]"))]},
+    {m:"bra", o:"held", val:15, r:tri(info,15,30,15)},
+    {m:"kes", o:"compromised", val:20, r:tri(info,30,15,20)},
+    {m:"pin", o:"held", val:30, r:tri(info,30,20,30)},
+    {m:"hal", o:"compromised", val:20, r:tri(info,15,30,20)},
+    {m:"tal", o:"conceded", val:15, r:tri(info,30,15,15)},
+  ]},
+  {id:"leaver", doc:"sha", group:"Leavers", title:"Leaver provisions", kind:"Split by function", loc:"7", children:["leaver-defs","leaver-triggers","leaver-price","leaver-timing"]},
+  {id:"leaver-defs", doc:"sha", group:"Leavers", parent:"leaver", title:"Definitions", kind:"Part of Leaver provisions", loc:"7.1", v:[
+    {m:"prec", r:[R("Precedent",us,ldefs(" The Board may, with Investor Majority Consent, treat a Bad Leaver as a Good Leaver."))]},
+    {m:"kes", o:"held", r:tri(ldefs," The Board may treat a Bad Leaver as a Good Leaver.",""," The Board may treat a Bad Leaver as a Good Leaver.")},
+    {m:"pin", o:"compromised", r:tri(ldefs," The Board may treat a Bad Leaver as a Good Leaver.",""," The Board may, with Investor Majority Consent, treat a Bad Leaver as a Good Leaver.")},
+    {m:"bra", o:"held", r:tri(ldefs,"","",""), },
+  ]},
+  {id:"leaver-triggers", doc:"sha", group:"Leavers", parent:"leaver", title:"Triggers", kind:"Part of Leaver provisions", loc:"7.2", v:[
+    {m:"prec", r:[R("Precedent",us,trigT(" and not continuing in any of those roles"))]},
+    {m:"kes", o:"held", r:tri(trigT," and not continuing in any of those roles",""," and not continuing in any of those roles")},
+    {m:"tal", o:"conceded", r:tri(trigT," and not continuing in any of those roles",", or on serving or receiving notice to end that role",", or on serving or receiving notice to end that role")},
+    {m:"bra", o:"held", r:tri(trigT,", or on serving or receiving notice to end that role"," and not continuing in any of those roles",", or on serving or receiving notice to end that role")},
+  ]},
+  {id:"leaver-price", doc:"sha", group:"Leavers", parent:"leaver", title:"Price", kind:"Part of Leaver provisions", loc:"7.3", v:[
+    {m:"prec", r:[R("Precedent",us,lprice("the lower of their Issue Price and their Fair Value"))]},
+    {m:"kes", o:"compromised", r:tri(lprice,"Fair Value","nominal value","the lower of their Issue Price and their Fair Value")},
+    {m:"pin", o:"held", r:tri(lprice,"the lower of their Issue Price and their Fair Value","nominal value","the lower of their Issue Price and their Fair Value")},
+    {m:"bra", o:"held", r:tri(lprice,"nominal value","the lower of their Issue Price and their Fair Value","nominal value")},
+    {m:"tal", o:"conceded", r:tri(lprice,"the lower of their Issue Price and their Fair Value","nominal value","nominal value")},
+  ]},
+  {id:"leaver-timing", doc:"sha", group:"Leavers", parent:"leaver", title:"Timing and vesting", kind:"Part of Leaver provisions", loc:"7.4", key:{label:"Vesting period", unit:"months"}, v:[
+    {m:"prec", r:[R("Precedent",us,vest("[48]"))]},
+    {m:"bra", o:"held", val:48, r:tri(vest,48,36,48)},
+    {m:"kes", o:"held", val:36, r:tri(vest,36,48,36)},
+    {m:"pin", o:"compromised", val:36, r:tri(vest,24,48,36)},
+    {m:"hal", o:"compromised", val:42, r:tri(vest,48,36,42)},
+    {m:"tal", o:"conceded", val:48, r:tri(vest,36,48,48)},
+    {m:"old", o:"unknown", val:36, r:[R("Signed",signed,vest(36))]},
+  ]},
+  {id:"drag", doc:"sha", group:"Share transfers", title:"Drag-along", kind:"Split by function", loc:"8", children:["drag-threshold","drag-trigger","drag-price","drag-notice"]},
+  {id:"drag-threshold", doc:"sha", group:"Share transfers", parent:"drag", title:"Threshold", kind:"Part of Drag-along", loc:"8.1", key:{label:"Drag threshold", unit:"pct"}, v:[
+    {m:"prec", r:[R("Precedent",us,dragT("[75]%"))]},
+    {m:"qui", o:"open", r:duo(dragT,"75%","60%")},
+    {m:"bra", o:"held", val:60, r:tri(dragT,"60%","75%","60%")},
+    {m:"kes", o:"compromised", val:70, r:tri(dragT,"75%","60%","70%")},
+    {m:"pin", o:"held", val:75, r:tri(dragT,"75%","60%","75%")},
+    {m:"hal", o:"compromised", val:70, r:tri(dragT,"60%","75%","70%")},
+    {m:"tal", o:"conceded", val:66, r:tri(dragT,"75%","66%","66%")},
+    {m:"old", o:"unknown", val:75, r:[R("Signed",signed,dragT("75%"))]},
+  ]},
+  {id:"drag-trigger", doc:"sha", group:"Share transfers", parent:"drag", title:"Trigger", kind:"Part of Drag-along", loc:"8.2", v:[
+    {m:"prec", r:[R("Precedent",us,trig(" [and the price per Share is not less than the Original Subscription Price]"))]},
+    {m:"kes", o:"compromised", r:tri(trig," and the price per Share is not less than twice the Original Subscription Price",""," and the price per Share is not less than the Original Subscription Price")},
+    {m:"pin", o:"held", r:tri(trig," and the price per Share is not less than the Original Subscription Price",""," and the price per Share is not less than the Original Subscription Price")},
+    {m:"tal", o:"conceded", r:tri(trig," and the price per Share is not less than the Original Subscription Price","","")},
+  ]},
+  {id:"drag-price", doc:"sha", group:"Share transfers", parent:"drag", title:"Price", kind:"Part of Drag-along", loc:"8.3", v:[
+    {m:"prec", r:[R("Precedent",us,dprice(""))]},
+    {m:"kes", o:"held", r:tri(dprice,""," (less any costs of the sale borne by the Called Shareholders)","")},
+    {m:"pin", o:"held", r:tri(dprice,"","","")},
+    {m:"hal", o:"compromised", r:tri(dprice," (less their pro rata share of the costs of the sale)",""," (less their pro rata share of the costs of the sale, capped at 1% of their proceeds)")},
+  ]},
+  {id:"drag-notice", doc:"sha", group:"Share transfers", parent:"drag", title:"Notice and process", kind:"Part of Drag-along", loc:"8.4", key:{label:"Drag notice", unit:"days"}, v:[
+    {m:"prec", r:[R("Precedent",us,dnote("[10]"))]},
+    {m:"bra", o:"held", val:10, r:tri(dnote,10,20,10)},
+    {m:"kes", o:"compromised", val:15, r:tri(dnote,20,10,15)},
+    {m:"pin", o:"held", val:20, r:tri(dnote,20,10,20)},
+    {m:"tal", o:"conceded", val:10, r:tri(dnote,20,10,10)},
+  ]},
+  {id:"tag", doc:"sha", group:"Share transfers", title:"Tag-along", kind:"Clause", loc:"9", v:[
+    {m:"prec", r:[R("Precedent",us,tagT(""))]},
+    {m:"kes", o:"held", r:tri(tagT,""," and at the highest price paid by the Proposed Buyer in the previous 12 months","")},
+    {m:"pin", o:"held", r:tri(tagT,"","","")},
+    {m:"hal", o:"conceded", their:true, r:[R("v2 theirs",them,tagT(" and at the highest price paid by the Proposed Buyer in the previous 6 months")),R("v3 agreed",agreed,tagT(" and at the highest price paid by the Proposed Buyer in the previous 6 months"))]},
+  ]},
+
+  /* Subscription Agreement */
+  {id:"w-ip", doc:"sa", group:"Warranties", title:"IP warranties", kind:"Warranty heading", loc:"S4.10", children:["w-ip-own","w-ip-inf"]},
+  {id:"w-ip-own", doc:"sa", group:"Warranties", parent:"w-ip", title:"Ownership of Company IP", kind:"Warranty paragraph", loc:"S4.10.1", v:[
+    {m:"prec", r:[R("Precedent",us,ipown(""))]},
+    {m:"kes", o:"conceded", r:tri(ipown,"registered ","","")},
+    {m:"pin", o:"held", r:tri(ipown,"registered ","","registered ")},
+    {m:"bra", o:"held", r:tri(ipown,"","registered ","")},
+  ]},
+  {id:"w-ip-inf", doc:"sa", group:"Warranties", parent:"w-ip", title:"No infringement", kind:"Warranty paragraph", loc:"S4.10.5", v:[
+    {m:"prec", r:[R("Precedent",us,ipinf("[So far as the Warrantors are aware,] "))]},
+    {m:"kes", o:"held", r:tri(ipinf,"So far as the Warrantors are aware, ","","So far as the Warrantors are aware, ")},
+    {m:"tal", o:"conceded", r:tri(ipinf,"So far as the Warrantors are aware, ","","")},
+    {m:"bra", o:"held", r:tri(ipinf,"","So far as the Warrantors are aware, ","")},
+  ]},
+  {id:"w-emp", doc:"sa", group:"Warranties", title:"Employment warranties", kind:"Warranty heading", loc:"S4.12", children:["w-emp-terms","w-emp-claims"]},
+  {id:"w-emp-terms", doc:"sa", group:"Warranties", parent:"w-emp", title:"Terms of employment", kind:"Warranty paragraph", loc:"S4.12.1", key:{label:"Disclosure threshold", unit:"gbp"}, v:[
+    {m:"prec", r:[R("Precedent",us,empT("£[60,000]"))]},
+    {m:"kes", o:"compromised", val:80000, r:tri(empT,"£100,000","£50,000","£80,000")},
+    {m:"pin", o:"held", val:100000, r:tri(empT,"£100,000","£60,000","£100,000")},
+    {m:"bra", o:"held", val:50000, r:tri(empT,"£50,000","£100,000","£50,000")},
+  ]},
+  {id:"w-emp-claims", doc:"sa", group:"Warranties", parent:"w-emp", title:"Employee claims", kind:"Warranty paragraph", loc:"S4.12.6", v:[
+    {m:"prec", r:[R("Precedent",us,empC("[, and so far as the Warrantors are aware, no such claim is threatened]"))]},
+    {m:"kes", o:"held", r:tri(empC,"",", and no such claim is threatened","")},
+    {m:"bra", o:"compromised", r:tri(empC,", and no such claim is threatened","",", and so far as the Warrantors are aware, no such claim is threatened")},
+  ]},
+  {id:"limits", doc:"sa", group:"Warranty limitations", title:"Limitations on claims", kind:"Split by function", loc:"6", children:["lim-cap","lim-deminimis","lim-time"]},
+  {id:"lim-cap", doc:"sa", group:"Warranty limitations", parent:"limits", title:"Founder cap", kind:"Part of Limitations on claims", loc:"6.1", key:{label:"Founder cap", unit:"mult"}, v:[
+    {m:"prec", r:[R("Precedent",us,cap("[one times]"))]},
+    {m:"bra", o:"compromised", val:1.5, r:tri(cap,"two times","one times","one and a half times")},
+    {m:"kes", o:"compromised", val:1, r:tri(cap,"half","two times","one times")},
+    {m:"pin", o:"held", val:1, r:tri(cap,"one times","two times","one times")},
+    {m:"hal", o:"held", val:2, r:tri(cap,"two times","one times","two times")},
+    {m:"tal", o:"conceded", val:2, r:tri(cap,"one times","two times","two times")},
+  ]},
+  {id:"lim-deminimis", doc:"sa", group:"Warranty limitations", parent:"limits", title:"De minimis", kind:"Part of Limitations on claims", loc:"6.2", key:{label:"De minimis", unit:"gbp"}, v:[
+    {m:"prec", r:[R("Precedent",us,demin("£[5,000]"))]},
+    {m:"bra", o:"held", val:2500, r:tri(demin,"£2,500","£10,000","£2,500")},
+    {m:"kes", o:"held", val:10000, r:tri(demin,"£10,000","£2,500","£10,000")},
+    {m:"pin", o:"compromised", val:5000, r:tri(demin,"£10,000","£2,500","£5,000")},
+  ]},
+  {id:"lim-time", doc:"sa", group:"Warranty limitations", parent:"limits", title:"Time limit", kind:"Part of Limitations on claims", loc:"6.3", key:{label:"Claims period", unit:"months"}, v:[
+    {m:"prec", r:[R("Precedent",us,tlim("[18]"))]},
+    {m:"bra", o:"compromised", val:18, r:tri(tlim,24,12,18)},
+    {m:"kes", o:"held", val:12, r:tri(tlim,12,24,12)},
+    {m:"pin", o:"compromised", val:18, r:tri(tlim,12,24,18)},
+    {m:"tal", o:"conceded", val:24, r:tri(tlim,12,24,24)},
+  ]},
+  {id:"proceeds", doc:"sa", group:"Company undertakings", title:"Use of proceeds", kind:"Clause", loc:"10.2", v:[
+    {m:"prec", r:[R("Precedent",us,proceeds)]},
+    {m:"kes", o:"held", partOf:{title:"Clause 10, Promotion of the business", text:"10.1 Each Founder shall promote the best interests of the Company and devote their full working time to the Business.\n10.2 The Company shall use the Subscription Monies for the purposes set out in the Business Plan and for no other purpose without {{Investor Majority}} Consent.\n10.3 The Company shall maintain key person insurance on the life of each Founder for not less than £500,000."}, r:[R("v1 ours",us,proceeds),R("v3 agreed",agreed,proceeds)]},
+    {m:"pin", o:"held", r:[R("v3 agreed",agreed,proceeds)]},
+  ]},
+
+  /* Lease */
+  {id:"rent-review", doc:"lease", group:"Rent", title:"Rent review", kind:"Clause", loc:"Sch3", v:[
+    {m:"prec", r:[R("Precedent",us,rrev(", and the rent shall not fall below the rent payable immediately before the review date"))]},
+    {m:"lan", o:"conceded", r:tri(rrev,", upwards or downwards",", and the rent shall not fall below the rent payable immediately before the review date",", and the rent shall not fall below the rent payable immediately before the review date")},
+    {m:"vic", o:"held", r:tri(rrev,", and the rent shall not fall below the rent payable immediately before the review date",", upwards or downwards",", and the rent shall not fall below the rent payable immediately before the review date")},
+  ]},
+  {id:"break", doc:"lease", group:"Break", title:"Tenant's break", kind:"Split by function", loc:"9", children:["break-conditions","break-notice"]},
+  {id:"break-conditions", doc:"lease", group:"Break", parent:"break", title:"Conditions", kind:"Part of Tenant's break", loc:"9.2", v:[
+    {m:"prec", r:[R("Precedent",us,bcond(" and giving up vacant possession of the whole of the Property"))]},
+    {m:"lan", o:"compromised", r:tri(bcond,""," and having materially complied with its covenants in this lease, and giving up vacant possession"," and giving up vacant possession of the whole of the Property")},
+    {m:"vic", o:"held", r:tri(bcond," and having materially complied with its covenants in this lease, and giving up vacant possession",""," and having materially complied with its covenants in this lease, and giving up vacant possession")},
+  ]},
+  {id:"break-notice", doc:"lease", group:"Break", parent:"break", title:"Notice", kind:"Part of Tenant's break", loc:"9.1", key:{label:"Break notice", unit:"months"}, v:[
+    {m:"prec", r:[R("Precedent",us,bnote("[6]"))]},
+    {m:"lan", o:"compromised", val:6, r:tri(bnote,3,9,6)},
+    {m:"vic", o:"conceded", val:6, r:tri(bnote,9,6,6)},
+  ]},
+];
+
+/* Scriptum's clause taxonomies as at 19 October 2026: one line per group, "Group|Clause type:intensity~..." */
+const TAX={"sha": "Preliminary|Definitions and interpretation:m~Effective date and conditionality:l~Parties and capacity:l~Status and relationship of the parties:l\nBoard and governance|Board composition:h~Board meetings and frequency:l~Board observer rights:m~Board quorum:h~Chair and casting vote:m~Conflicts and related party transactions:m~Director fees and expenses:l~Director indemnity and D and O insurance:m~Founder director appointment:m~Independent or non-executive director:m~Investor director appointment and removal:h\nBusiness and conduct|Annual budget preparation and approval:m~Anti-bribery, sanctions and modern slavery:l~Business of the company:m~Business plan adoption and review:m~ESG and responsible business:l~General compliance undertakings:l\nConfidentiality and announcements|Announcements:l~Confidentiality:m~Permitted disclosures:m~Use of name and logo:l\nDuration, adherence and termination|Cessation of rights on ceasing to hold shares:m~Consequences of breach:m~Deed of adherence:h~Duration:m~Survival of provisions:l~Termination on exit or listing:m\nEmployee and incentive matters|EMI scheme operation:m~Key hire commitments:m~Option pool establishment and size:h~Option pool top-up and dilution:h~Service agreements and terms:m\nExit|Anti-embarrassment:l~Application of exit proceeds:h~Appointment of exit advisers:m~Exit intention and target horizon:m~IPO cooperation and lock-up:m~Obligation to cooperate on an exit:h\nFounder provisions|Covenant duration and scope:h~Founder and director loans:l~Founder IP assignment:h~Founder non-compete:h~Founder time commitment:h~Non-solicitation of customers and suppliers:h~Non-solicitation of employees:h~Outside interests and other business activities:m\nInformation and reporting|Access and inspection rights:m~Annual audited accounts:m~Capitalisation table maintenance:m~Cessation of information rights:m~Delivery of annual budget:m~Investor reporting for fund purposes:m~Monthly management accounts:h\nInvestor consent and control|Board reserved matters:h~Deemed consent and response periods:m~Investor consent matters:h~Investor majority definition:h~Materiality thresholds on consents:m\nRelationship with the articles|Company obligations and statutory powers:m~Conflict with the articles:h~Shareholder voting undertakings:h~Undertaking to amend the articles:m\nShare capital and transfers|Admission of new shareholders:m~Drag along:h~Further funding and follow-on rights:h~Permitted transfers:m~Pre-emption on new issues:h~Pre-emption on transfer:h~Restrictions on transfer:h~Tag along:h~Valuation mechanism:h\nWarranties|Company warranties:h~Disclosure against warranties:m~Founder warranties:h~Warranty limitations:h\nGeneral|Assignment:m~Costs:l~Counterparts:l~Entire agreement:m~Further assurance:l~Governing law:l~Jurisdiction:l~No partnership or agency:l~Notices:l~Severance:l~Third party rights:l~Variation and consent threshold:h", "sa": "Preliminary|Definitions and interpretation:m~Parties, founders and investors:l\nThe subscription|Completion mechanics:l~Conditions to completion:m~Option pool creation and sizing:h~Subscription for shares:l~Subscription price and pre-money valuation:h~Tranched completion and milestones:h~Use of proceeds:m\nWarranties and limitations|Capitalisation table warranty:m~Company warranties:h~De minimis and threshold:m~Disclosure against warranties:m~Founder warranties:h~IP ownership and assignment warranty:h~Time limits:h~Warranty liability cap:h\nUndertakings and governance|Annual budget approval:m~Board composition:h~Board observer rights:m~Information rights:h~Investor consent and reserved matters:h~Investor director appointment rights:h~Negative undertakings:m~Positive undertakings:m\nFounder provisions|Founder IP assignment:h~Founder restrictive covenants:h~Founder time commitment:h~Service agreements:m\nSEIS and EIS|Advance assurance:m~Allocation of SEIS and EIS between investors:m~Compliance statements and certificates:m~Indemnity for loss of relief:h~Qualifying company and qualifying trade warranty:h~Undertaking not to prejudice relief:h\nGeneral|Announcements:l~Assignment and transferee rights:m~Confidentiality:l~Counterparts:l~Entire agreement:l~Governing law and jurisdiction:l~Investor costs contribution:m~Notices:l~Third party rights:l", "art": "Share capital and rights|Anti-dilution carve-outs:m~Anti-dilution protection:h~Automatic conversion:m~Dividend rights:m~Liquidation preference:h~Optional conversion:l~Redemption rights:m~Seniority and stacking:h~Share classes and capital structure:m~Voting rights:m\nIssues and transfers|Disapplication of pre-emption:m~Drag along:h~Permitted transfers:m~Pre-emption on new share issues:h~Pre-emption on transfer:h~Tag along:h~Transfer mechanics and board discretion:l~Valuation mechanism for transfers:h\nFounder shares and leavers|Acceleration on exit:h~Bad leaver provisions:h~Compulsory transfer on leaving:h~Founder share vesting or reverse vesting:h~Good leaver provisions:h~Leaver share price:h\nGovernance|Appointment and removal of directors:h~Board proceedings and written resolutions:l~Board quorum:h~Director indemnity and D and O insurance:m~Directors conflicts of interest:m~General meetings and shareholder proceedings:l~Investor director rights:h~Shareholder reserved matters:h~Variation of class rights:h\nExit and general|Exclusion of model articles:l~Exit and sale process:h~Information rights:m~Lien on shares:l", "spa": "Preliminary|Definitions and interpretation:m~Interpretation provisions:l~Parties and recitals:l\nSale and purchase|Agreement to sell and purchase:l~All or nothing obligation:l~Sale free of encumbrances:l~Waiver of pre-emption rights:l\nConsideration|Allocation between sellers:l~Completion accounts mechanism:h~Consideration amount and form:h~Deferred consideration:h~Earn-out:h~Locked box mechanism:h~Price adjustment mechanics:m~Retention or escrow account:h~Set-off against consideration:h\nConditions and pre-completion|Conditions precedent:m~Conduct of business pre-completion:m~Material adverse change termination right:h~Merger control clearance:l~National Security and Investment Act clearance:m~Satisfaction, waiver and longstop:m~Shareholder approval:l~Third party and change of control consents:m\nCompletion|Board and shareholder resolutions at completion:l~Buyer completion obligations:l~Completion time and place:l~Consequences of failure to complete:m~Sellers completion obligations:l\nWarranties|Accounts and financial warranties:h~Awareness and knowledge qualification:h~Buyer warranties:l~Data protection warranties:m~Employment and pensions warranties:m~General business warranties:h~Insurance warranties:l~Intellectual property and IT warranties:h~Litigation and compliance warranties:m~Material contracts warranties:m~Property warranties:m~Repetition at completion:m~Tax warranties:h~Title and capacity warranties:l\nDisclosure|Data room disclosure and bundle:m~Disclosure letter mechanics:l~General disclosure:h~Specific disclosure:m\nLimitations on liability|Aggregate financial cap:h~Buyer knowledge and due diligence:h~Conduct of third party claims:m~Contingent and future liabilities:m~De minimis per claim:h~Duty to mitigate:m~Effect of disclosure:h~Fraud and dishonesty carve-out:l~No double recovery:l~Recovery from insurers and third parties:m~Several, not joint, liability of sellers:h~Threshold or basket:h~Time limits for claims:h\nIndemnities and insurance|Specific indemnities:h~W and I premium allocation:m~Warranty and indemnity insurance provisions:h\nTax|Conduct of tax affairs and claims:m~Group relief and surrenders:l~Pre-completion tax returns:m~Tax covenant:h~Tax covenant limitations and exclusions:h\nPost-completion protections|Access to records post-completion:l~Change of company name:l~Consideration for covenants:l~Covenant severability and blue pencil:m~Non-compete:h~Non-dealing:m~Non-solicitation of customers:h~Non-solicitation of employees:h~Release of seller guarantees and security:m~Wrong pockets and misdirected assets:l\nGuarantees and security|Guarantee of buyer obligations:m~Security for deferred consideration:h\nGeneral and boilerplate|Announcements and publicity:l~Assignment:m~Confidentiality:l~Costs and expenses:l~Counterparts:l~Entire agreement:m~Further assurance:l~Governing law:l~Interest on late payment:l~Jurisdiction:l~Non-reliance and exclusion of misrepresentation:h~Notices:l~Sellers representative:m~Severance:l~Third party rights:l~Variation:l~Waiver and cumulative remedies:l", "asa": "Advance subscription terms|Advance subscription amount:l~Conversion triggers:h~Discount rate:h~Longstop date:h~Non-refundable and non-interest-bearing:h~Qualifying round definition:h~Valuation cap:h", "lease": "Preliminary and interpretation|Contractual term and statutory continuation:m~Definitions:m~Fair proportion determined by the Landlord:m~General interpretation provisions:l~Land Registry prescribed clauses:l~Obligation not to permit and best endeavours to prevent:m~Parties:l~Working day definition:l\nGrant and demise|Development despite loss of light or amenity:h~Exclusion of liability for exercising reservations:m~Extent of the Property:m~Grant of the lease:l~Landlord's rights of entry:m~Lease subject to Third Party Rights:l~Premium:m~Rights granted to the Tenant:m~Rights reserved to the Landlord:h~Sums reserved as rent:l~Title guarantee on grant:m\nRent and payments|Contribution to common items:m~Guarantor covenants:h~Interest on late payment:m~Landlord's costs:h~Payment without set-off:m~Rates and taxes:m~Rent:h~Rent deposit:m~Rent payment dates and method:l~Rent review:h~Service charge:h~Tenant warranty on option to tax:m~Utilities:l~VAT on sums payable:l\nRepair and condition|Decoration:m~Landlord's self-help for disrepair:m~Notify defects:l~Refuse:l~Reinstatement of alterations:m~Renewal of landlord's fixtures:l~Schedule of condition:h~Sewers and drains:l~Tenant's repairing covenant:h~Windows and landscaping:l~Yield up at end of term:h\nAlterations and use|Alterations:h~Information on current use:l~Nuisance and annoyance:m~Overloading:l~Permitted use:h~Prohibited uses:l~Signage:l\nAlienation|Assignment:h~Authorised guarantee agreement:h~Charging the lease:l~Notification of dealings:l~Release of outgoing tenant on assignment:h~Sharing with group companies:l~Underletting of part:m~Underletting of the whole:m\nInsurance and damage|Arbitration of destruction disputes:m~Insurance policy terms:m~Insured Risks:m~Notification of insurance matters:l~Rebuild following damage or destruction:h~Reinstatement cost and valuation:m~Reinstatement impossible:h~Rent suspension:h~Tenant's obligation to insure:h~Uninsured risks:m\nCompliance|Compliance with laws:m~Compliance with Third Party Rights:l~Construction health and safety:l~Encroachments and acquisition of rights:l~Energy performance certificates:m~Green lease provisions:m~Statutory notices:l~Tenant's indemnity:h\nLandlord covenants|Landlord's consent:m~Landlord's insurance cooperation:m~Quiet enjoyment:l\nTermination and security of tenure|Break clause:h~Business tenancy protection (NI):h~Contracting out of the 1954 Act:h~Forfeiture:h~Mortgagee protection:h~Renunciation of renewal rights:h\nBoilerplate and implied rights|Entire agreement:m~Exclusion of implied rights and general words:m~Governing law:l~Joint and several liability:l~Jurisdiction:l~Light enjoyed by consent:l~Notices:l~Third party rights:l", "cfs": "Preliminary and incorporation|Amendments to the standard conditions:m~Definitions:m~Incorporation of standard conditions:m~Parties:l\nConditionality|Buyer's Unacceptable Conditions:h~Condition precedent:h~Long Stop Date:h~Satisfaction Date and challenge period:h~Satisfactory Planning Permission:h~Seller's Unacceptable Conditions:h~Termination after Long Stop Date:m~Waiver of the condition:m\nPlanning process|Amendment and resubmission:m~Approval of the permission:m~Community Infrastructure Levy:h~Counsel's opinion:m~Development contributions:h~Independent surveyor disputes:m~Notification of planning decisions:l~Planning agreements:h~Planning appeal:h~Planning Application:h~Reporting and meetings:l~Right to waive unacceptable conditions:m~Seller's approval of the application:m~Seller's co-operation:m~Third Party Applications:h\nPrice and tax|Buyer's option to tax warranty:m~Capital allowances election:m~Independent Valuer:m~Overage:h~Price by reference to market value:h~Purchase Price:m~VAT on the price:h\nTitle and condition|Buyer's acknowledgement of condition:h~Buyer's knowledge:m~Deducing title:m~Matters affecting the Property:h~Missing documents:m~Title guarantee:h~Vacant possession:h\nBefore completion|Access for investigations:m~Deposit:h~Risk after the Unconditional Date:m~Risk and insurance before the Unconditional Date:m~Seller's dealings with the Property:m\nTransfer and completion|Buyer's indemnity covenant:m~Completion:m~Completion undertaking:m~Form of transfer:m~Health and safety file licences:l~Levelling-up Act Part 11 assistance:l~Registration of the contract:m~Registration of the transfer:l~Transfer of doubtful title land:m\nTermination and boilerplate|Consequences of termination:h~Entire agreement:m~Governing law:l~Joint and several liability:l~Jurisdiction:l~Non-assignment:h~Notices:l~Termination on buyer insolvency or breach:m~Third party rights:l", "dl": ""};
+const INT={h:"High",m:"Medium",l:"Low"};
+const slug=(d,n)=>d+"-"+n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+(function buildFromTaxonomy(){
+  const old=new Map(E.map(e=>[e.id,e]));
+  old.delete("leaver"); old.delete("limits");
+  const P={defs:{tax:"Definitions and interpretation",children:["interp"]}, interp:{parent:"defs"},
+    consents:{tax:"Investor consent matters",kind:"Clause type, split item by item"}, "board-director":{tax:"Investor director appointment and removal"},
+    "info-rights":{tax:"Monthly management accounts"}, drag:{tax:"Drag along",kind:"Clause type, split by function"}, tag:{tax:"Tag along"},
+    "leaver-defs":{doc:"art",tax:"Good leaver provisions",parent:null,loc:"A14.1"}, "leaver-triggers":{doc:"art",tax:"Compulsory transfer on leaving",parent:null,loc:"A14.2"},
+    "leaver-price":{doc:"art",tax:"Leaver share price",parent:null,loc:"A14.3"}, "leaver-timing":{doc:"art",tax:"Founder share vesting or reverse vesting",parent:null,loc:"A14.4"},
+    "w-ip":{tax:"IP ownership and assignment warranty",kind:"Clause type, split into warranty paragraphs"}, "w-emp":{tax:"Company warranties",kind:"Clause type, split into warranty paragraphs"},
+    "lim-cap":{tax:"Warranty liability cap",parent:null}, "lim-deminimis":{tax:"De minimis and threshold",parent:null}, "lim-time":{tax:"Time limits",parent:null}, proceeds:{tax:"Use of proceeds"},
+    "rent-review":{tax:"Rent review"}, "break":{tax:"Break clause",kind:"Clause type, split by function"}};
+  Object.entries(P).forEach(([id,x])=>Object.assign(old.get(id),x));
+  const out=[];
+  Object.entries(TAX).forEach(([doc,txt])=>{
+    if(!txt.trim()) return;
+    txt.split("\n").forEach(line=>{
+      const [group,rest]=line.split("|");
+      rest.split("~").forEach(item=>{
+        const i=item.lastIndexOf(":"), name=item.slice(0,i).trim(), intensity=INT[item.slice(i+1)];
+        const d=[...old.values()].find(e=>e.doc===doc&&e.tax===name&&!e.parent);
+        const e=d||{id:slug(doc,name),doc,v:[]};
+        Object.assign(e,{group,title:name,intensity});
+        if(!d||(!e.children&&e.kind!=="definitions")) e.kind="Clause type";
+        out.push(e);
+        (e.children||[]).forEach(c=>{const ce=old.get(c);Object.assign(ce,{doc,group,intensity:ce.intensity||intensity,kind:"Part of "+name});out.push(ce);});
+      });
+    });
+  });
+  E.length=0; out.forEach(e=>E.push(e));
+})();
+
+/* Definitions, per matter. "src" says where the definition was found. */
+const TERMS = [
+  {term:"Bad Leaver", words:{
+    prec:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause;\n(b) following a material breach of their restrictive covenants; or\n(c) by resigning [within 24 months of Completion]."},
+    kes:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause;\n(b) following a material breach of their restrictive covenants; or\n(c) by resigning within 12 months of Completion."},
+    pin:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause; or\n(b) following a material breach of their restrictive covenants."},
+    bra:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause;\n(b) following a material breach of their restrictive covenants; or\n(c) by resigning before the fourth anniversary of Completion."},
+    tal:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause;\n(b) following a material breach of their restrictive covenants; or\n(c) by resigning within 36 months of Completion."},
+    hal:{src:"Definitions clause", text:"\"Bad Leaver\" means a Founder who becomes a Leaver:\n(a) as a result of dismissal for Cause;\n(b) following a material breach of their restrictive covenants; or\n(c) by resigning within 24 months of Completion."},
+  }},
+  {term:"Business Day", words:{
+    prec:{src:"Definitions clause", text:"\"Business Day\" means a day other than a Saturday, Sunday or public holiday in England when banks in London are open for business."},
+    kes:{src:"Definitions clause", text:"\"Business Day\" means a day other than a Saturday, Sunday or public holiday in England when banks in London are open for business."},
+    tal:{src:"Definitions clause", text:"\"Business Day\" means a day other than a Saturday, Sunday or public holiday in Northern Ireland when banks in Belfast are open for business."},
+  }},
+  {term:"Company", inline:true, words:{
+    kes:{src:"Inline, in the parties", text:"KESTREL ROBOTICS LIMITED, a company incorporated in England and Wales with company number 13456789 (the \"Company\")"},
+    pin:{src:"Inline, in the parties", text:"PINECREST ANALYTICS LIMITED, a company incorporated in England and Wales with company number 11872230 (the \"Company\")"},
+    tal:{src:"Inline, in the parties", text:"TALLOW HEALTH LIMITED, a company incorporated in Northern Ireland with company number NI690112 (the \"Company\")"},
+  }},
+  {term:"Data Protection Legislation", words:{
+    prec:{src:"Definitions clause", text:"\"Data Protection Legislation\" means:\n(a) the UK GDPR;\n(b) the Data Protection Act 2018; and\n(c) [the Privacy and Electronic Communications (EC Directive) Regulations 2003]."},
+    kes:{src:"Definitions clause", text:"\"Data Protection Legislation\" means:\n(a) the UK GDPR; and\n(b) the Data Protection Act 2018."},
+    bra:{src:"Definitions clause", text:"\"Data Protection Legislation\" means:\n(a) the UK GDPR;\n(b) the Data Protection Act 2018;\n(c) the Privacy and Electronic Communications (EC Directive) Regulations 2003; and\n(d) any guidance or codes of practice issued by the Information Commissioner."},
+  }},
+  {term:"Deferred Shares", words:{
+    kes:{src:"Definitions clause", pointer:"the Articles"},
+    pin:{src:"Definitions clause", pointer:"the Articles"},
+  }},
+  {term:"Good Leaver", words:{
+    prec:{src:"Definitions clause", text:"\"Good Leaver\" means a Leaver who is not a Bad Leaver."},
+    kes:{src:"Definitions clause", text:"\"Good Leaver\" means a Leaver who is not a Bad Leaver."},
+    pin:{src:"Definitions clause", text:"\"Good Leaver\" means a Leaver who is not a Bad Leaver."},
+    bra:{src:"Definitions clause", text:"\"Good Leaver\" means a Leaver who is not a Bad Leaver."},
+    tal:{src:"Definitions clause", text:"\"Good Leaver\" means a Leaver who is not a Bad Leaver."},
+  }},
+  {term:"Investor Majority", aka:["Majority Investors"], words:{
+    prec:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than [50]% of the Series A Shares in issue."},
+    kes:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than 50% of the Series A Shares in issue."},
+    pin:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than 60% of the Preferred Shares in issue, including Ardent Growth while it holds any Preferred Shares."},
+    bra:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than 50% of the Series A Shares in issue."},
+    qui:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than 50% of the Series A Shares in issue."},
+    tal:{src:"Definitions clause", text:"\"Investor Majority\" means the holders of more than 50% of the Seed Shares in issue."},
+    hal:{src:"Definitions clause", called:"Majority Investors", text:"\"Majority Investors\" means the holders of more than 50% of the Seed Shares in issue."},
+    old:{src:"Definitions clause", called:"Majority Investors", text:"\"Majority Investors\" means the holders of more than two thirds of the Series A Shares in issue."},
+  }},
+  {term:"Original Subscription Price", words:{
+    kes:{src:"Schedule 1", text:"\"Original Subscription Price\" means £1.20 per Series A Share."},
+    pin:{src:"Schedule 1", text:"\"Original Subscription Price\" means £3.45 per Series B Share."},
+    tal:{src:"Schedule 1", text:"\"Original Subscription Price\" means £0.40 per Seed Share."},
+  }},
+];
+
+/* How each document type was split (shown on request) */
+const OUTLINE = {
+  sha:[
+    {role:"front", title:"Front", nodes:[["","Date and parties"],["","Background (A) to (D)"]]},
+    {role:"definitions", title:"Definitions", nodes:[["1.1","Definitions (64 terms)","1.1"],["1.2–1.9","Interpretation provisions","1.2"]]},
+    {role:"body", title:"Body", nodes:[["2","Investment"],["3","Board and information"],["3.1","Investor director","3.1",2],["3.4","Information rights","3.4",2],["4","Investor consents (see Schedule 2)"],["8","Drag-along","8"],["8.1","Threshold","8.1",2],["8.2","Trigger","8.2",2],["8.3","Price","8.3",2],["8.4","Notice and process","8.4",2],["9","Tag-along","9"],["10–24","Boilerplate"]]},
+    {role:"schedule", title:"Schedule 2: Investor consents", nodes:[["S2","Lead-in","S2"],["(a)","Share issues","S2(a)",2],["(c)","Change of business","S2(c)",2],["(d)","Dividends","S2(d)",2],["(f)","Borrowing","S2(f)",2],["(g)–(t)","14 further items"]]},
+    {role:"schedule", title:"Schedule 3: Deed of adherence", nodes:[["1–6","Deed of adherence"]]},
+    {role:"execution", title:"Execution", nodes:[["","Signature blocks"]]},
+  ],
+  sa:[
+    {role:"front", title:"Front", nodes:[["","Date and parties"]]},
+    {role:"definitions", title:"Definitions", nodes:[["1.1","Definitions (48 terms)"]]},
+    {role:"body", title:"Body", nodes:[["2–5","Subscription and completion"],["6","Warranty limitations"],["6.1","Founder cap","6.1",2],["6.2","De minimis","6.2",2],["6.3","Time limit","6.3",2],["10","Promotion of the business"],["10.2","Use of proceeds","10.2",2]]},
+    {role:"schedule", title:"Schedule 4: Warranties", nodes:[["10","IP warranties","S4.10"],["10.1","Ownership of Company IP","S4.10.1",2],["10.5","No infringement","S4.10.5",2],["12","Employment warranties","S4.12"],["12.1","Terms of employment","S4.12.1",2],["12.6","Employee claims","S4.12.6",2]]},
+    {role:"execution", title:"Execution", nodes:[["","Signature blocks"]]},
+  ],
+  art:[
+    {role:"front", title:"Front", nodes:[["","Company name and adoption"]]},
+    {role:"definitions", title:"Definitions", nodes:[["1","Definitions and interpretation"]]},
+    {role:"body", title:"Body", nodes:[["2–13","Share rights, issues and transfers"],["14","Leavers"],["14.1","Good leaver provisions","A14.1",2],["14.2","Compulsory transfer on leaving","A14.2",2],["14.3","Leaver share price","A14.3",2],["14.4","Founder share vesting","A14.4",2],["15–40","Governance and general"]]},
+  ],
+  lease:[
+    {role:"front", title:"Particulars", nodes:[["LR1–LR14","Prescribed clauses"]]},
+    {role:"definitions", title:"Definitions", nodes:[["1","Definitions and interpretation"]]},
+    {role:"body", title:"Body", nodes:[["9","Tenant's break","9"],["9.1","Notice","9.1",2],["9.2","Conditions","9.2",2]]},
+    {role:"schedule", title:"Schedule 3: Rent review", nodes:[["1–8","Rent review","Sch3"]]},
+    {role:"execution", title:"Execution", nodes:[["","Executed as a deed"]]},
+  ],
+};
+
+const MARKET = {
+  "drag-threshold":{firms:7,matters:41,mid:75,lo:60,hi:75},
+  "consent-borrowing":{firms:6,matters:33,mid:100000,lo:25000,hi:250000},
+  "leaver-timing":{firms:5,matters:22,mid:48,lo:36,hi:48},
+  "lim-cap":{firms:3,matters:12,mid:1,lo:1,hi:2},
+  "break-notice":{firms:4,matters:9,mid:6,lo:3,hi:6},
+  "info-rights":{firms:5,matters:26,mid:20,lo:15,hi:30},
+  "board-director":{firms:6,matters:30,mid:1,lo:1,hi:2},
+  "lim-deminimis":{firms:5,matters:21,mid:5000,lo:2500,hi:10000},
+  "lim-time":{firms:5,matters:20,mid:18,lo:12,hi:24},
+  "drag-notice":{firms:5,matters:24,mid:10,lo:10,hi:20},
+  "w-emp-terms":{firms:2,matters:6,mid:60000,lo:50000,hi:100000},
+};
+const QA = [
+  {k:/break/i, e:"break-notice", q:"How much notice do we usually agree for a tenant's break?"},
+  {k:/drag.*(notice|days)|notice.*drag/i, e:"drag-notice"},
+  {k:/drag/i, e:"drag-threshold", q:"What drag-along threshold do we usually agree?"},
+  {k:/borrow|debt|indebted/i, e:"consent-borrowing", q:"What borrowing limit needs investor consent?"},
+  {k:/vest/i, e:"leaver-timing", q:"Over how many months do founder shares usually vest?"},
+  {k:/de ?minimis|minimum claim|small claim/i, e:"lim-deminimis"},
+  {k:/time limit|claims? period|how long.*claim/i, e:"lim-time"},
+  {k:/cap|liabilit/i, e:"lim-cap", q:"What founder warranty cap do we usually agree?"},
+  {k:/accounts|information/i, e:"info-rights", q:"How quickly must management accounts be delivered?"},
+  {k:/director|board seat/i, e:"board-director"},
+  {k:/employ|salary threshold/i, e:"w-emp-terms"},
+];
+
+/* Uploaded document: parts the AI is less than 85% sure about */
+const UP_ITEMS = [
+  {id:"u1", where:"Clause 3.6", text:"The Company shall procure that the Investor Director is appointed to the remuneration committee and the audit committee of the Board.", suggest:"board-director", conf:78},
+  {id:"u2", where:"Schedule 2, paragraph (k)", lead:LEAD, text:"(k) incur any capital expenditure in excess of £75,000 in any financial year;", suggest:"consent-borrowing", conf:71},
+  {id:"u3", where:"Clause 7.6", text:"No Founder shall transfer any Shares for 24 months after Completion, other than by way of a Permitted Transfer.", suggest:slug("sha","Restrictions on transfer"), conf:64},
+  {id:"u4", where:"Clause 12.2", text:"The Company shall adopt and maintain an environmental, social and governance policy in a form approved by the Investor Director.", suggest:slug("sha","General compliance undertakings"), conf:58},
+];
+
+/* ---------------- State ---------------- */
+const S = {doc:"sha", entry:"drag-threshold", role:"associate", f:{side:"all",outcome:"all",cp:"all"}, rounds:{}, changes:true,
+  term:"Investor Majority", termQ:"", answer:null, proposals:[], optIn:true, moving:null, upload:null, uploaded:false, propose:false, nextCustom:1, groupOpen:{}, onlyFilled:false, addPart:null};
+try{ const r=localStorage.getItem("cl-role"); if(r==="admin"||r==="associate") S.role=r; }catch(e){}
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const byId=id=>E.find(e=>e.id===id);
+const last=v=>v.r[v.r.length-1];
+const isLeaf=e=>!e.children && e.kind!=="definitions";
+const pathName=x=>(x.parent?byId(x.parent).title+" › ":"")+x.title;
+const displayKind=e=>e.kind==="definitions"?"Clause type, filed term by term":e.kind;
+function headingOptions(doc,skip){
+  return groupsOf(doc).map(g=>`<optgroup label="${esc(g)}">${docEntries(doc).filter(x=>x.group===g&&isLeaf(x)&&x.id!==skip).map(x=>`<option value="${x.id}">${esc(pathName(x))}</option>`).join("")}</optgroup>`).join("");
+}
+function addPart(parentId,name,item){
+  let p=byId(parentId); if(p.parent) p=byId(p.parent);
+  if(!p.children){
+    p.children=[];
+    if(p.v&&p.v.length){const main={id:"part-"+(S.nextCustom++),doc:p.doc,group:p.group,parent:p.id,title:"Main wording",kind:"Part of "+p.title,intensity:p.intensity,loc:p.loc,key:p.key,leadIn:p.leadIn,v:p.v};E.push(main);p.children.push(main.id);p.v=[];}
+    p.kind="Clause type, split into parts";
+  }
+  const id="part-"+(S.nextCustom++);
+  E.push({id,doc:p.doc,group:p.group,parent:p.id,title:name,kind:"Part of "+p.title,intensity:p.intensity,firm:true,v:item?[{m:"fer",o:"open",r:[R("v1 ours",us,item.text)]}]:[]});
+  p.children.push(id);
+  return id;
+}
+
+function fmt(val,unit){
+  if(val==null) return "";
+  switch(unit){
+    case "pct": return val+"%";
+    case "gbp": return "£"+Number(val).toLocaleString("en-GB");
+    case "months": return val+" months";
+    case "days": return val+" business days";
+    case "mult": return (val===1?"1x":val+"x")+" salary";
+    case "count": return val===1?"1 investor director":val+" investor directors";
+    default: return String(val);
+  }
+}
+function median(a){const s=[...a].sort((x,y)=>x-y);const n=s.length;return n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;}
+function roundNice(v,unit){ if(unit==="gbp") return Math.round(v/1000)*1000; if(unit==="mult") return Math.round(v*2)/2; return Math.round(v); }
+
+/* ---------------- Text rendering ---------------- */
+function lookupDef(m,term){
+  const t=TERMS.find(x=>x.term===term||(x.aka||[]).includes(term));
+  const w=t&&t.words[m];
+  return w&&w.text?w:null;
+}
+function renderText(text,m,opts={}){
+  if(text==="") return `<p class="gone">Clause deleted in this round.</p>`;
+  const lines=text.split("\n");
+  return lines.map(line=>{
+    let h=esc(line).replace(/\{\{([^}]+)\}\}/g,(_,term)=>{
+      const d=lookupDef(m,term);
+      const shown=d&&d.called?d.called:term;
+      if(!d) return `<span>${esc(shown)}</span>`;
+      const body=d.text.replace(/^"[^"]+" means /,"").replace(/\n/g," ");
+      return `<span class="xref" data-act="xref" title="Click to hide or show the definition">${esc(shown)}<span class="xdef">means ${esc(body)}</span></span>`;
+    });
+    const limb=/^\([a-z]{1,3}\)/.test(line);
+    return `<p class="${limb?"limb":""}">${h}</p>`;
+  }).join("");
+}
+function tokens(s){return (s.replace(/\{\{([^}]+)\}\}/g,"$1").match(/\S+|\s+/g))||[];}
+function diffHtml(a,b){
+  if(b==="") return `<p class="gone">Clause deleted in this round.</p>`;
+  if(a==="") return `<p><ins>${esc(b.replace(/\{\{([^}]+)\}\}/g,"$1"))}</ins></p>`;
+  const A=tokens(a),B=tokens(b),n=A.length,m=B.length;
+  const dp=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)dp[i][j]=A[i]===B[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
+  let i=0,j=0,out="";
+  while(i<n&&j<m){
+    if(A[i]===B[j]){out+=esc(A[i]);i++;j++;}
+    else if(dp[i+1][j]>=dp[i][j+1]){out+=`<del>${esc(A[i])}</del>`;i++;}
+    else{out+=`<ins>${esc(B[j])}</ins>`;j++;}
+  }
+  while(i<n){out+=`<del>${esc(A[i++])}</del>`;}
+  while(j<m){out+=`<ins>${esc(B[j++])}</ins>`;}
+  return `<p>${out.replace(/<\/del><del>/g,"").replace(/<\/ins><ins>/g,"")}</p>`;
+}
+
+/* ---------------- Sidebar ---------------- */
+function docEntries(doc){return E.filter(e=>e.doc===doc);}
+function groupsOf(doc){const g=[];docEntries(doc).forEach(e=>{if(!g.includes(e.group))g.push(e.group);});return g;}
+function mattersOf(e){
+  if(e.kind==="definitions"){const s=new Set();TERMS.forEach(t=>Object.keys(t.words).forEach(k=>s.add(k)));return s;}
+  if(e.children){const s=new Set();e.children.forEach(c=>(byId(c).v||[]).forEach(v=>s.add(v.m)));return s;}
+  return new Set((e.v||[]).map(v=>v.m));
+}
+function renderSide(){
+  const docs=Object.entries(DOCS).map(([k,n])=>{const c=docEntries(k).filter(e=>!e.parent&&e.kind!=="Part").length;return `<button type="button" data-act="doc" data-v="${k}" aria-pressed="${S.doc===k}">${esc(n)}<small>${c?c+" types":"no taxonomy"}</small></button>`;}).join("");
+  const groups=groupsOf(S.doc);
+  const tree=groups.length?groups.map(g=>{
+    const tops=docEntries(S.doc).filter(e=>e.group===g&&!e.parent);
+    const vis=tops.filter(e=>!S.onlyFilled||mattersOf(e).size);
+    if(!vis.length) return "";
+    const key=S.doc+"|"+g;
+    const filled=tops.some(e=>mattersOf(e).size);
+    const here=tops.some(e=>e.id===S.entry||(e.children||[]).includes(S.entry));
+    const open=here||(S.groupOpen[key]!=null?S.groupOpen[key]:filled);
+    const items=vis.map(e=>nodeBtn(e,false)+(e.children||[]).map(c=>nodeBtn(byId(c),true)).join("")).join("");
+    return `<details class="tree-group" data-g="${esc(key)}" ${open?"open":""}><summary><span>${esc(g)}</span><span class="cnt">${tops.length}</span></summary><div class="tree-items">${items}</div></details>`;
+  }).join(""):`<p class="note" style="padding:0 10px">No clause taxonomy yet for this document type.</p>`;
+  $("#side").innerHTML=`<div class="eyebrow" style="padding:0 10px 6px">Document type</div><div class="doc-tabs">${docs}</div>
+    <div class="side-tools"><div class="eyebrow">Clause taxonomy</div><label class="check"><input type="checkbox" id="onlyFilled" ${S.onlyFilled?"checked":""}> Only headings with wordings</label></div>
+    <div class="tree">${tree}</div>
+    <div class="side-foot"><p>These headings are Scriptum's clause taxonomy for this document type. Parts sit under a clause type. Firms add their own parts with admin approval.</p></div>`;
+}
+function nodeBtn(e,child){
+  const n=mattersOf(e).size;
+  return `<button type="button" class="node${child?" child":""}${n?"":" empty-node"}" data-act="entry" data-v="${e.id}" aria-current="${S.entry===e.id}"><span>${esc(e.title)}${e.firm?' <span class="firm">Firm</span>':""}</span><span class="cnt">${n||""}</span></button>`;
+}
+function mobileTree(){
+  const opts=groupsOf(S.doc).map(g=>`<optgroup label="${esc(g)}">${docEntries(S.doc).filter(e=>e.group===g).map(e=>`<option value="${e.id}" ${e.id===S.entry?"selected":""}>${e.parent?"  ":""}${esc(e.title)}${mattersOf(e).size?` (${mattersOf(e).size})`:""}</option>`).join("")}</optgroup>`).join("");
+  const docs=Object.entries(DOCS).map(([k,n])=>`<button type="button" class="chip" data-act="doc" data-v="${k}" ${S.doc===k?'style="background:var(--ink);color:var(--bg);border-color:var(--ink)"':""}>${esc(n)}</button>`).join("");
+  return `<div class="mobile-tree"><div class="doc-row">${docs}</div>${opts?`<select id="mobileSel" aria-label="Choose a heading">${opts}</select>`:""}</div>`;
+}
+
+/* ---------------- Main ---------------- */
+function crumbs(e){
+  const parts=[`<span>${esc(DOCS[e.doc])}</span>`,`<span>${esc(e.group)}</span>`];
+  if(e.parent){const p=byId(e.parent);parts.push(`<button type="button" data-act="entry" data-v="${p.id}">${esc(p.title)}</button>`);}
+  return `<div class="crumbs">${parts.join("<span>›</span>")}</div>`;
+}
+function passFilters(v){
+  const m=M[v.m];
+  if(S.f.outcome!=="all"){ if(m.precedent||v.o!==S.f.outcome) return false; }
+  if(m.precedent) return true;
+  if(S.f.side!=="all"&&m.side!==S.f.side) return false;
+  if(S.f.cp!=="all"&&m.cp!==S.f.cp) return false;
+  return true;
+}
+function renderMain(){
+  let h=mobileTree();
+  if(S.answer) h+=answerHtml();
+  if(!S.entry){
+    h+=`<div class="entry-head"><div><h1>${esc(DOCS[S.doc])}</h1></div></div><div class="empty">There is no clause taxonomy for this document type yet. Its documents still parse, but nothing can be filed until the taxonomy is built.</div>`;
+    $("#main").innerHTML=h; return;
+  }
+  const e=byId(S.entry);
+  h+=crumbs(e);
+  const canPart=!e.parent&&e.kind!=="definitions";
+  const partBtn=canPart?`<button type="button" class="btn small" data-act="part-open">${S.role==="admin"?"Add a part":"Propose a part"}</button>`:"";
+  const actions=`<div class="head-actions">${partBtn}${OUTLINE[e.doc]?`<button type="button" class="btn small" data-act="outline">See how the document was split</button>`:""}</div>`;
+  const chips=`<span class="kind">${esc(displayKind(e))}</span>${e.intensity?` <span class="kind">${esc(e.intensity)} negotiation intensity</span>`:""}${e.firm?` <span class="kind firm-chip">Firm-only part</span>`:""}`;
+  h+=`<div class="entry-head"><div><h1>${esc(e.title)}</h1>${chips}</div>${actions}</div>`;
+  if(S.addPart===e.id) h+=`<form class="panel part-form" id="partForm"><label for="partName">${S.role==="admin"?`New firm-only part of ${esc(e.title)}`:`Propose a new part of ${esc(e.title)}`}</label><div class="inline-form"><input id="partName" placeholder="e.g. Capital expenditure" required><button class="btn small primary" type="submit">${S.role==="admin"?"Add part":"Send to admin"}</button><button class="btn small ghost" type="button" data-act="part-cancel">Cancel</button></div><p class="note">${S.role==="admin"?"Firm-only parts are visible to your firm and never change Scriptum's taxonomy for other firms.":"A firm admin approves new parts before clauses can be filed under them."}</p></form>`;
+  if(e.kind==="definitions") h+=definitionsView();
+  else if(e.children) h+=parentView(e);
+  else h+=leafView(e);
+  $("#main").innerHTML=h;
+}
+function outcomeCounts(vs){
+  const c={held:0,compromised:0,conceded:0,deleted:0,unknown:0,open:0};
+  vs.forEach(v=>{if(!M[v.m].precedent&&v.o) c[v.o]++;});
+  return c;
+}
+function statsHtml(vs){
+  const c=outcomeCounts(vs);
+  const decided=c.held+c.compromised+c.conceded+c.deleted;
+  const seg=["held","compromised","conceded","deleted"].map(k=>c[k]?`<i style="width:${c[k]/decided*100}%;background:${OUT_C[k]}" title="${OUT[k]}: ${c[k]}"></i>`:"").join("");
+  const leg=["held","compromised","conceded","deleted"].map(k=>`<span><i class="dot" style="background:${OUT_C[k]}"></i>${OUT[k]} <b>${c[k]}</b></span>`).join("");
+  const extra=[c.open?`${c.open} in negotiation`:"",c.unknown?`${c.unknown} with outcome unknown (signed copy only)`:""].filter(Boolean).join(", ");
+  return `<div class="panel"><div class="stat-title"><span class="eyebrow">Outcomes</span><span class="big">${decided?`Held ${c.held} of ${decided}`:"No outcomes yet"}</span></div>
+    ${decided?`<div class="stack">${seg}</div><div class="legend">${leg}</div>`:""}
+    ${extra?`<p class="note">Not counted: ${extra}.</p>`:""}</div>`;
+}
+function plotHtml(e,vs){
+  const pts=vs.filter(v=>v.val!=null&&!M[v.m].precedent);
+  if(!pts.length) return `<div class="panel"><span class="eyebrow">${esc(e.key.label)}</span><p class="note">No values match these filters.</p></div>`;
+  const vals=pts.map(v=>v.val), lo=Math.min(...vals), hi=Math.max(...vals), md=median(vals);
+  const W=600,H=86,pad=34, span=hi-lo||1;
+  const x=v=>hi===lo?W/2:pad+(v-lo)/span*(W-2*pad);
+  const groups={};pts.forEach(v=>{(groups[v.val]=groups[v.val]||[]).push(v);});
+  let dots="";
+  Object.entries(groups).forEach(([val,arr])=>{arr.forEach((v,i)=>{dots+=`<circle cx="${x(+val).toFixed(1)}" cy="${(40-i*13).toFixed(1)}" r="5.5" fill="${OUT_C[v.o]}" stroke="var(--card)" stroke-width="1.5"><title>${esc(M[v.m].name)}: ${esc(fmt(v.val,e.key.unit))} (${OUT[v.o]})</title></circle>`;});});
+  const ticks=[...new Set([lo,hi])].map(v=>`<text x="${x(v)}" y="72" text-anchor="middle">${esc(fmt(v,e.key.unit).replace(" business days"," days").replace(" investor directors","").replace(" investor director","").replace(" salary",""))}</text>`).join("");
+  const precNote=vs.some(v=>M[v.m].precedent)?`The precedent's bracketed value is a placeholder and is not counted.`:"";
+  return `<div class="panel plot"><div class="stat-title"><span class="eyebrow">${esc(e.key.label)} across matters</span><span class="big">Median ${esc(fmt(roundNice(md,e.key.unit),e.key.unit))}</span></div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(e.key.label)} values by matter"><line x1="${pad}" x2="${W-pad}" y1="52" y2="52" stroke="var(--line)" stroke-width="1.5"/>
+    <line x1="${x(md)}" x2="${x(md)}" y1="4" y2="56" stroke="var(--faint)" stroke-dasharray="3 3"/>${dots}${ticks}</svg>
+    ${precNote?`<p class="note">${precNote}</p>`:""}</div>`;
+}
+function filtersHtml(vs,full=true){
+  const sides=[...new Set(vs.map(v=>M[v.m].side).filter(Boolean))];
+  const cps=[...new Set(vs.map(v=>M[v.m].cp).filter(Boolean))].sort();
+  const sel=(id,label,key,opts)=>`<label for="${id}">${label}<select id="${id}" data-filter="${key}"><option value="all">All</option>${opts.map(o=>`<option value="${esc(o[0])}" ${S.f[key]===o[0]?"selected":""}>${esc(o[1])}</option>`).join("")}</select></label>`;
+  return `<div class="filters">${sel("fSide","Side we acted for","side",sides.map(s=>[s,s]))}${full?sel("fOut","Outcome","outcome",Object.keys(OUT).filter(k=>k!=="open"&&k!=="unknown").map(k=>[k,OUT[k]])):""}${sel("fCp","Counterparty","cp",cps.map(c=>[c,c]))}${full?`<span class="spacer"></span><label class="check"><input type="checkbox" id="fChanges" ${S.changes?"checked":""}> Show changes between rounds</label>`:""}</div>`;
+}
+function sorted(vs){return [...vs].sort((a,b)=>M[b.m].date.localeCompare(M[a.m].date));}
+function leafView(e){
+  const all=e.v||[];
+  if(!all.length) return `<div class="empty">No wordings filed under this clause type yet. Wording appears here as soon as a ${esc(DOCS[e.doc])} is uploaded and a clause is filed under it.${e.title==="Investor majority definition"?` <button type="button" class="linkish" data-act="term-jump">This definition is also filed term by term under Definitions and interpretation.</button>`:""}</div>`;
+  const vs=all.filter(passFilters);
+  let h=`<div class="summary${e.key?"":" single"}">${statsHtml(vs)}${e.key?plotHtml(e,vs):""}</div>`;
+  h+=filtersHtml(all);
+  h+=vs.length?`<div class="cards">${sorted(vs).map(v=>cardHtml(e,v)).join("")}</div>`:`<div class="empty">No matters match these filters.</div>`;
+  return h;
+}
+function sideLine(m){ if(m.precedent) return "Firm precedent, used as our starting point"; return `Acted for the ${m.side.toLowerCase()} side · ${esc(m.cp)}`; }
+function pillHtml(v){
+  const m=M[v.m];
+  if(m.precedent) return `<span class="pill prec">Precedent</span>`;
+  return `<span class="pill ${v.o}">${OUT[v.o]}</span>`;
+}
+function cardHtml(e,v){
+  const m=M[v.m], key=e.id+"|"+v.m;
+  const ri=S.rounds[key]!=null?S.rounds[key]:v.r.length-1;
+  const r=v.r[ri];
+  const prev=ri>0?v.r[ri-1][2]:null;
+  const body=(S.changes&&prev!=null&&prev!==r[2])?diffHtml(prev,r[2]):renderText(r[2],v.m);
+  const rounds=v.r.length>1?`<div class="rounds" role="group" aria-label="Rounds">${v.r.map((x,i)=>`<button type="button" data-act="round" data-k="${key}" data-i="${i}" aria-pressed="${i===ri}">${esc(x[0])}</button>`).join("")}</div>`:"";
+  const lead=e.leadIn?`<div class="lead">${renderText(e.leadIn,v.m)}</div>`:"";
+  const tags=[v.their?`<span class="tag">Their addition</span>`:"",v.note?`<span class="tag">${esc(v.note)}</span>`:""].join("");
+  const moving=S.moving===key;
+  const moveBtn=S.role==="admin"
+    ?`<button type="button" class="btn ghost small" data-act="move" data-k="${key}">Move</button>`
+    :`<button type="button" class="btn ghost small" aria-disabled="true" data-act="move-denied" title="Only a firm admin can move a clause">Move</button>`;
+  const opts=headingOptions(e.doc,e.id);
+  return `<article class="card${m.precedent?" prec":""}">
+    <div class="card-h"><div class="row"><h3>${esc(m.name)}</h3>${pillHtml(v)}</div>
+      <div class="meta">${esc(m.client)}</div><div class="meta">${sideLine(m)}</div>
+      <div class="meta">${fmtDate(m.date)} · ${esc(m.doc)}</div>${tags?`<div style="display:flex;gap:6px;flex-wrap:wrap">${tags}</div>`:""}</div>
+    ${rounds}
+    <div class="wording">${lead}${body}${v.partOf?`<p><button type="button" class="linkish" data-act="partof" data-k="${key}">Part of ${esc(v.partOf.title)}. See the whole clause</button></p>`:""}</div>
+    <div class="card-f"><button type="button" class="btn ghost small" data-act="copy" data-k="${key}">Copy wording</button><button type="button" class="btn ghost small" data-act="source" data-k="${key}">Open matter</button>${moveBtn}${v.val!=null?`<span class="val">${esc(fmt(v.val,e.key.unit))}</span>`:""}</div>
+    ${moving?`<div class="move-row"><select id="moveSel-${key.replace(/\W/g,"")}" aria-label="Move to heading">${opts}</select><button type="button" class="btn small primary" data-act="move-do" data-k="${key}">Move here</button><button type="button" class="btn small ghost" data-act="move-cancel">Cancel</button></div>`:""}
+  </article>`;
+}
+function fmtDate(d){const [y,mo,da]=d.split("-");return `${+da} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+mo-1]} ${y}`;}
+
+function parentView(e){
+  const kids=e.children.map(byId);
+  let h=`<p class="note" style="margin:-6px 0 12px">Open a part to compare it across matters and step through each round.</p><div class="parts">`;
+  h+=kids.map(k=>{
+    const c=outcomeCounts(k.v||[]);const tot=c.held+c.compromised+c.conceded+c.deleted||1;
+    const mini=["held","compromised","conceded","deleted"].map(o=>c[o]?`<i style="width:${c[o]/tot*100}%;background:${OUT_C[o]}"></i>`:"").join("");
+    const vals=(k.v||[]).filter(v=>v.val!=null).map(v=>v.val);
+    const med=k.key&&vals.length?`Median ${fmt(roundNice(median(vals),k.key.unit),k.key.unit)}`:`${(k.v||[]).length} wordings`;
+    return `<button type="button" class="part" data-act="entry" data-v="${k.id}"><b>${esc(k.title)}</b><span class="mini">${mini}</span><small>${esc(med)}</small></button>`;
+  }).join("");
+  h+=`</div>`;
+  const ms=[...mattersOf(e)].filter(m=>{const mm=M[m];if(mm.precedent)return true;return (S.f.side==="all"||mm.side===S.f.side)&&(S.f.cp==="all"||mm.cp===S.f.cp);});
+  const cards=ms.sort((a,b)=>M[b].date.localeCompare(M[a].date)).map(mk=>{
+    const m=M[mk];
+    const parts=kids.map(k=>{const v=(k.v||[]).find(x=>x.m===mk);if(!v) return "";const t=last(v)[2];return `<span class="part-label">${esc(k.title)}</span>${t===""?`<p class="gone">Deleted</p>`:renderText(t,mk)}`;}).join("");
+    const lead=kids[0].leadIn?`<div class="lead">${renderText(kids[0].leadIn,mk)}</div>`:"";
+    return `<article class="card${m.precedent?" prec":""}"><div class="card-h"><div class="row"><h3>${esc(m.name)}</h3>${m.precedent?`<span class="pill prec">Precedent</span>`:""}</div><div class="meta">${esc(m.client)}</div><div class="meta">${sideLine(m)}</div><div class="meta">${fmtDate(m.date)} · ${esc(m.doc)}</div></div><div class="wording">${lead}${parts}</div></article>`;
+  }).join("");
+  h+=`<div class="eyebrow" style="margin:6px 0 10px">The whole ${e.kind==="Long list"?"list":"clause"}, by matter</div>`;
+  h+=filtersHtml(kids.flatMap(k=>k.v||[]),false);
+  h+=cards?`<div class="cards">${cards}</div>`:`<div class="empty">${mattersOf(e).size?"No matters match these filters.":"No wordings filed under these parts yet."}</div>`;
+  return h;
+}
+
+function definitionsView(){
+  const q=S.termQ.toLowerCase();
+  const list=TERMS.filter(t=>!q||t.term.toLowerCase().includes(q)||(t.aka||[]).some(a=>a.toLowerCase().includes(q)));
+  const t=TERMS.find(x=>x.term===S.term)||TERMS[0];
+  const items=list.map(x=>`<button type="button" class="term" data-act="term" data-v="${esc(x.term)}" aria-current="${x.term===t.term}"><span>${esc(x.term)}</span><span class="cnt">${Object.keys(x.words).length}</span></button>`).join("");
+  const cards=sorted(Object.entries(t.words).map(([m,w])=>({m,w}))).map(({m,w})=>{
+    const mm=M[m];
+    const body=w.pointer?`<span class="pointer">Has the meaning given in ${esc(w.pointer)}</span>`:renderText(w.text,m);
+    return `<article class="card${mm.precedent?" prec":""}"><div class="card-h"><div class="row"><h3>${esc(mm.name)}</h3><span class="src">${esc(w.src)}</span></div><div class="meta">${esc(mm.client)}</div>${w.called?`<div><span class="tag">Called "${esc(w.called)}" in this matter</span></div>`:""}</div><div class="wording">${body}</div><div class="card-f"><button type="button" class="btn ghost small" data-act="copy-def" data-t="${esc(t.term)}" data-m="${m}">Copy wording</button><button type="button" class="btn ghost small" data-act="source" data-k="defs|${m}">Open matter</button></div></article>`;
+  }).join("");
+  const aka=t.aka?`<p class="aka">Also appears as ${t.aka.map(a=>`"${esc(a)}"`).join(", ")}. Linked automatically because the meaning matches.</p>`:"";
+  const inline=t.inline?`<p class="aka">Defined inline in the body of each document, not in the definitions clause.</p>`:"";
+  return `<p class="note" style="margin:-6px 0 14px">Each defined term is its own entry, including terms defined inline and in schedules. Limbs stay inside their definition.</p>
+  <div class="defs"><div class="term-list"><input id="termQ" type="search" placeholder="Find a term" aria-label="Find a term" value="${esc(S.termQ)}">${items||`<p class="note">No terms match.</p>`}</div>
+  <div><h2 style="font-family:var(--f-serif);font-weight:500;font-size:22px;margin-bottom:10px">${esc(t.term)}</h2>${aka}${inline}<div class="cards">${cards}</div></div></div>`;
+}
+
+/* ---------------- Ask ---------------- */
+function answerFor(q){
+  const hit=QA.find(x=>x.k.test(q));
+  if(!hit) return {q,none:true};
+  const e=byId(hit.e);
+  const vals=(e.v||[]).filter(v=>v.val!=null&&!M[v.m].precedent).map(v=>v.val);
+  const u=e.key.unit;
+  const mid=roundNice(median(vals),u), lo=Math.min(...vals), hi=Math.max(...vals);
+  const a=lo===hi?`Usually ${fmt(mid,u)}.`:`Usually ${fmt(mid,u)}, ranging from ${fmt(lo,u)} to ${fmt(hi,u)}.`;
+  const mk=MARKET[e.id];
+  let mkt;
+  if(!S.optIn) mkt={none:"Your firm has not opted in to benchmarks, so no market view is shown."};
+  else if(!mk||mk.firms<5||mk.matters<20) mkt={none:"Not enough market data yet to show a benchmark for this."};
+  else mkt={text:mk.lo===mk.hi?`Usually ${fmt(mk.mid,u)}.`:`Usually ${fmt(mk.mid,u)}, ranging from ${fmt(mk.lo,u)} to ${fmt(mk.hi,u)}.`};
+  return {q,a,mkt,e:e.id};
+}
+function answerHtml(){
+  const A=S.answer;
+  const close=`<button type="button" class="btn ghost small" data-act="answer-close" aria-label="Close answer">Close</button>`;
+  if(A.none){
+    return `<div class="panel answer"><div class="row"><p class="q">${esc(A.q)}</p>${close}</div><p class="a">I couldn't match that to a heading yet.</p><div class="suggest">${suggestions()}</div></div>`;
+  }
+  return `<div class="panel answer"><div class="row"><p class="q">${esc(A.q)}</p>${close}</div>
+    <p class="src">Our firm</p><p class="a">${esc(A.a)}</p>
+    <div class="mkt"><span class="src">Market benchmark</span>${A.mkt.text?`<span>${esc(A.mkt.text)}</span>`:`<span class="note" style="margin:0">${esc(A.mkt.none)}</span>`}</div>
+    <div class="suggest">${A.e!==S.entry?`<button type="button" class="chip" data-act="entry" data-v="${A.e}">Open the entry</button>`:""}${suggestions(A.q)}</div></div>`;
+}
+function suggestions(skip){return QA.filter(x=>x.q&&x.q!==skip).slice(0,4).map(x=>`<button type="button" class="chip" data-act="ask" data-v="${esc(x.q)}">${esc(x.q)}</button>`).join("");}
+
+/* ---------------- Drawers and modals ---------------- */
+function openOverlay(html,kind){
+  const o=$("#overlay");
+  o.innerHTML=`<div class="scrim" data-act="close"></div>${kind==="drawer"?`<div class="drawer" role="dialog" aria-modal="true">${html}</div>`:`<div class="modal"><div class="modal-box" role="dialog" aria-modal="true">${html}</div></div>`}`;
+  o.hidden=false;
+  const f=o.querySelector("button,input,select");if(f) f.focus();
+}
+function closeOverlay(){$("#overlay").hidden=true;$("#overlay").innerHTML="";}
+function outlineBody(doc,loc){
+  return OUTLINE[doc].map(r=>`<div class="region"><div class="region-h"><b>${esc(r.title)}</b><code>${r.role}</code></div>${r.nodes.map(n=>`<div class="onode${n[3]===2?" d2":""}${loc&&n[2]===loc?" hit":""}"><span class="ref">${esc(n[0])}</span><span class="t">${esc(n[1])}</span></div>`).join("")}</div>`).join("");
+}
+function outlineHtml(doc,loc,title){
+  const regions=outlineBody(doc,loc);
+  return `<div class="drawer-h"><div><div class="eyebrow">How the document was split</div><h2>${esc(title)}</h2></div><button type="button" class="btn small" data-act="close">Close</button></div>
+  <p class="note" style="margin:0 0 14px">Each part has its own place in the outline. Paragraph 10 of a schedule is never confused with clause 10 of the body, and every level of numbering is kept.</p>${regions}`;
+}
+function sourceHtml(e,mk){
+  const m=M[mk];
+  return `<div class="drawer-h"><div><div class="eyebrow">${m.precedent?"Firm precedent":"Matter"}</div><h2>${esc(m.name)}</h2></div><button type="button" class="btn small" data-act="close">Close</button></div>
+  <div class="panel" style="display:grid;gap:4px;margin-bottom:14px"><div>${esc(m.client)}</div><div class="meta">${sideLine(m)}</div><div class="meta">${DOCS[e.doc]} · ${esc(m.doc)} · ${fmtDate(m.date)}</div></div>
+  <p class="note" style="margin:0 0 12px">In the app this opens the matter's document at this clause. Here is how that document was split.</p>
+  ${outlineBody(e.doc,e.loc)}`;
+}
+
+/* Upload flow */
+function uploadHtml(){
+  const U=S.upload;
+  if(U.step==="form") return `<div class="drawer-h" style="margin-bottom:6px"><div><div class="eyebrow">Upload</div><h2>Add a document to a matter</h2></div><button type="button" class="btn small" data-act="close">Close</button></div>
+    <div class="file"><span class="ico">DOCX</span><div><b>Ferngrove Energy - SHA v1 (ours).docx</b><div class="meta">Sample file for this demo · 84 KB</div></div></div>
+    <form id="upForm"><div class="form-grid">
+      <label for="upMatter">Matter<input id="upMatter" value="Ferngrove Energy Series A"></label>
+      <label for="upClient">Client<input id="upClient" value="Ferngrove Energy Ltd"></label>
+      <label for="upSide">Side we act for<select id="upSide"><option>Company</option><option>Investor</option></select></label>
+      <label for="upCp">Counterparty<input id="upCp" value="Harbourline Capital"></label>
+    </div><p class="note">For historical uploads this short form is filled in once per matter. Outcomes for signed-only documents are left as unknown.</p>
+    <div class="modal-f"><span></span><button type="submit" class="btn primary">Upload and file</button></div></form>`;
+  if(U.step==="parsing"){
+    const L=["Reading the Word structure and numbering","Found 6 regions: front, definitions, body, 2 schedules, execution","Split into 214 parts, down to the deepest level","Following each clause by its wording, not its number","Filing each part under a heading"];
+    return `<div class="eyebrow">Upload</div><h2>Splitting and filing</h2><div class="log">${L.map((l,i)=>`<div class="${i<U.tick?"ok":"run"}">${esc(l)}</div>`).slice(0,Math.min(U.tick+1,L.length)).join("")}</div>`;
+  }
+  if(U.step==="check"){
+    const items=UP_ITEMS.map(it=>{
+      const d=U.dec[it.id];
+      const s=byId(it.suggest);
+      const sName=pathName(s);
+      const opts=headingOptions("sha");
+      let act;
+      if(d){
+        const where=d.kind==="propose"?`a proposed new part "${d.name}" of ${pathName(byId(d.parent).parent?byId(byId(d.parent).parent):byId(d.parent))} (waiting for a firm admin)`:pathName(byId(d.target));
+        act=`<div class="actions"><span class="resolved">Filed under ${esc(where)}</span><button type="button" class="btn ghost small" data-act="up-undo" data-v="${it.id}">Change</button></div>`;
+      } else if(U.mode[it.id]==="other"){
+        act=`<div class="actions"><select id="sel-${it.id}" aria-label="Choose a clause type">${opts}</select><button type="button" class="btn small primary" data-act="up-other" data-v="${it.id}">File here</button></div>
+        <div class="actions"><input id="prop-${it.id}" placeholder="Or propose a new part of it, e.g. Capital expenditure" aria-label="New part name"><button type="button" class="btn small" data-act="up-propose" data-v="${it.id}">Propose part</button><button type="button" class="btn small ghost" data-act="up-cancel" data-v="${it.id}">Back</button></div>`;
+      } else {
+        act=`<div class="actions"><button type="button" class="btn small primary" data-act="up-agree" data-v="${it.id}">Agree</button><button type="button" class="btn small" data-act="up-choose" data-v="${it.id}">Choose another heading</button></div>`;
+      }
+      return `<div class="check-item${d?" done":""}"><div class="where">${esc(it.where)}</div>${it.lead?`<div class="txt" style="color:var(--faint);font-style:italic;font-size:13px">${esc(it.lead.replace(/\{\{|\}\}/g,""))}</div>`:""}<div class="txt">${esc(it.text)}</div>
+        <div class="ask-line">We think this should be filed under <b>${esc(s.group)} › ${esc(sName)}</b>. Do you agree? <span class="conf">${it.conf}% sure</span></div>${act}</div>`;
+    }).join("");
+    const left=UP_ITEMS.filter(it=>!U.dec[it.id]).length;
+    return `<div class="drawer-h"><div><div class="eyebrow">Upload · Ferngrove Energy Series A</div><h2>4 clauses need your decision</h2></div><button type="button" class="btn small" data-act="close">Close</button></div>
+      <p class="note" style="margin:0 0 12px">210 of 214 parts were filed automatically because the AI was at least 85% sure. Your answer here is final for these four.</p>${items}
+      <div class="modal-f"><span class="note" style="margin:0">${left?`${left} left to decide`:"All decided"}</span><button type="button" class="btn primary" data-act="up-finish" ${left?'aria-disabled="true"':""}>Finish and add to the library</button></div>`;
+  }
+}
+function finishUpload(){
+  const U=S.upload;
+  M.fer={name:"Ferngrove Energy Series A", client:U.client, side:U.side, cp:U.cp, date:"2026-10-19", doc:"v1 ours (in negotiation)"};
+  byId("drag-threshold").v.push({m:"fer",o:"open",r:[R("v1 ours",us,dragT("75%"))]});
+  byId("consent-borrowing").v.push({m:"fer",o:"open",r:[R("v1 ours",us,borrow("£150,000"))]});
+  UP_ITEMS.forEach(it=>{
+    const d=U.dec[it.id];
+    if(d.kind==="propose"){S.proposals.push({name:d.name,parent:d.parent,item:it});}
+    else byId(d.target).v.push({m:"fer",o:"open",r:[R("v1 ours",us,it.text)]});
+  });
+  S.uploaded=true; S.upload=null;
+  closeOverlay(); renderAll();
+  toast(S.proposals.length?`Added to the library. ${S.proposals.length} new part${S.proposals.length>1?"s":""} sent to a firm admin for approval.`:"Added to the library. Ferngrove Energy now appears under its headings.");
+}
+
+/* Admin queue */
+function queueHtml(){
+  const items=S.proposals.map((p,i)=>{const par=byId(p.parent);const top=par.parent?byId(par.parent):par;return `<div class="queue-item"><div><b>${esc(p.name)}</b> <span class="meta">proposed as a part of ${esc(top.group)} › ${esc(top.title)} (${esc(DOCS[top.doc])})</span></div>${p.item?`<div class="txt" style="font-family:var(--f-serif)">${esc(p.item.text)}</div><div class="meta">${esc(p.item.where)}, Ferngrove Energy Series A</div>`:`<div class="meta">Proposed from the library, with no clause yet</div>`}<div class="actions"><button type="button" class="btn small primary" data-act="q-approve" data-v="${i}">Approve heading</button><button type="button" class="btn small" data-act="q-reject" data-v="${i}">Reject</button></div></div>`;}).join("");
+  return `<div class="drawer-h"><div><div class="eyebrow">Firm admin</div><h2>Parts to approve</h2></div><button type="button" class="btn small" data-act="close">Close</button></div>
+    ${items||`<p class="note">Nothing waiting. Parts proposed by lawyers appear here.</p>`}
+    <div class="toggle-row"><div><b>Share anonymised data for market benchmarks</b><div class="meta">Only firms that contribute see benchmarks. A benchmark appears once it rests on at least 5 firms and 20 matters.</div></div><button type="button" class="btn small" data-act="optin">${S.optIn?"On":"Off"}</button></div>`;
+}
+
+/* ---------------- Render + events ---------------- */
+function renderRole(){
+  $("#roleAssoc").setAttribute("aria-pressed",S.role==="associate");
+  $("#roleAdmin").setAttribute("aria-pressed",S.role==="admin");
+  $("#queueBtn").hidden=S.role!=="admin";
+  $("#queueCount").textContent=S.proposals.length;
+}
+function renderAll(){renderRole();renderSide();renderMain();}
+let toastT;
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true;},3600);}
+function goEntry(id){const e=byId(id);S.entry=id;S.doc=e.doc;S.moving=null;S.addPart=null;S.f={side:"all",outcome:"all",cp:"all"};renderAll();window.scrollTo({top:0});}
+function findV(key){const [eid,m]=key.split("|");return {e:byId(eid),v:(byId(eid).v||[]).find(x=>x.m===m),m};}
+function doAsk(q){if(!q.trim())return;S.answer=answerFor(q.trim());$("#askInput").value=q;renderMain();window.scrollTo({top:0});}
+
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest("[data-act]");if(!b) return;
+  const a=b.dataset.act, v=b.dataset.v;
+  if(a==="xref"){b.classList.toggle("closed");return;}
+  if(a==="doc"){const de=docEntries(v);const first=(v==="sha"&&byId("drag-threshold"))||de.find(e=>isLeaf(e)&&e.key)||de.find(e=>mattersOf(e).size)||de.find(isLeaf);if(first){goEntry(first.id);}else{S.doc=v;S.entry=null;renderAll();}return;}
+  if(a==="part-open"){S.addPart=S.entry;renderMain();const i=$("#partName");if(i)i.focus();return;}
+  if(a==="part-cancel"){S.addPart=null;renderMain();return;}
+  if(a==="term-jump"){S.term="Investor Majority";goEntry("defs");return;}
+  if(a==="entry"){goEntry(v);return;}
+  if(a==="term"){S.term=v;renderMain();return;}
+  if(a==="role"){S.role=v;S.moving=null;S.propose=false;try{localStorage.setItem("cl-role",v);}catch(e){}renderAll();toast(v==="admin"?"Viewing as a firm admin.":"Viewing as an associate.");return;}
+  if(a==="round"){S.rounds[b.dataset.k]=+b.dataset.i;renderMain();return;}
+  if(a==="copy"){const {v:vv}=findV(b.dataset.k);copy(last(vv)[2].replace(/\{\{([^}]+)\}\}/g,"$1"));return;}
+  if(a==="copy-def"){const t=TERMS.find(x=>x.term===b.dataset.t);const w=t.words[b.dataset.m];copy(w.text||`Has the meaning given in ${w.pointer}.`);return;}
+  if(a==="source"){const [eid,m]=b.dataset.k.split("|");openOverlay(sourceHtml(byId(eid),m),"drawer");return;}
+  if(a==="outline"){const e=byId(S.entry);openOverlay(outlineHtml(e.doc,e.loc,DOCS[e.doc]),"drawer");return;}
+  if(a==="partof"){const {v:vv,m}=findV(b.dataset.k);openOverlay(`<div class="drawer-h"><div><div class="eyebrow">${esc(M[m].name)}</div><h2>${esc(vv.partOf.title)}</h2></div><button type="button" class="btn small" data-act="close">Close</button></div><p class="note" style="margin:0 0 12px">This clause covers more than one topic, so each part is filed under its own heading and links back here.</p><div class="panel wording">${renderText(vv.partOf.text,m)}</div>`,"drawer");return;}
+  if(a==="close"){closeOverlay();S.upload=null;return;}
+  if(a==="move-denied"){toast("Only a firm admin can move a clause. Switch to Firm admin at the top to try it.");return;}
+  if(a==="move"){S.moving=b.dataset.k;renderMain();return;}
+  if(a==="move-cancel"){S.moving=null;renderMain();return;}
+  if(a==="move-do"){const key=b.dataset.k;const {e,v:vv}=findV(key);const target=$("#moveSel-"+key.replace(/\W/g,"")).value;e.v=e.v.filter(x=>x!==vv);byId(target).v.push(vv);S.moving=null;renderAll();toast(`Moved to ${byId(target).title}. Future documents at this firm will be filed the same way.`);return;}
+  if(a==="answer-close"){S.answer=null;renderMain();return;}
+  if(a==="ask"){doAsk(v);return;}
+  if(a==="upload"){S.upload={step:"form",dec:{},mode:{}};openOverlay(uploadHtml(),"modal");return;}
+  if(a==="up-agree"){S.upload.dec[v]={kind:"agree",target:UP_ITEMS.find(x=>x.id===v).suggest};refreshUpload();return;}
+  if(a==="up-choose"){S.upload.mode[v]="other";refreshUpload();return;}
+  if(a==="up-cancel"){S.upload.mode[v]=null;refreshUpload();return;}
+  if(a==="up-undo"){delete S.upload.dec[v];S.upload.mode[v]=null;refreshUpload();return;}
+  if(a==="up-other"){S.upload.dec[v]={kind:"other",target:$("#sel-"+v).value};refreshUpload();return;}
+  if(a==="up-propose"){const n=$("#prop-"+v).value.trim();if(!n){toast("Give the new part a name first.");return;}S.upload.dec[v]={kind:"propose",name:n,parent:$("#sel-"+v).value};refreshUpload();return;}
+  if(a==="up-finish"){if(b.getAttribute("aria-disabled")==="true"){toast("Decide each clause first.");return;}finishUpload();return;}
+  if(a==="queue"){openOverlay(queueHtml(),"drawer");return;}
+  if(a==="optin"){S.optIn=!S.optIn;if(S.answer&&!S.answer.none)S.answer=answerFor(S.answer.q);openOverlay(queueHtml(),"drawer");renderMain();toast(S.optIn?"Benchmarks on.":"Benchmarks off. Market views are hidden.");return;}
+  if(a==="q-approve"){const p=S.proposals.splice(+v,1)[0];const id=addPart(p.parent,p.name,p.item);renderAll();openOverlay(queueHtml(),"drawer");toast(`"${p.name}" approved. It now appears as a firm-only part of ${byId(byId(id).parent).title}.`);return;}
+  if(a==="q-reject"){const p=S.proposals.splice(+v,1)[0];if(p.item) byId(p.item.suggest).v.push({m:"fer",o:"open",r:[R("v1 ours",us,p.item.text)]});renderAll();openOverlay(queueHtml(),"drawer");toast(p.item?"Rejected. The clause was filed under the AI's suggestion.":"Rejected.");return;}
+});
+function refreshUpload(){const box=document.querySelector("#overlay .modal-box");if(box){box.innerHTML=uploadHtml();}}
+document.addEventListener("change",ev=>{
+  const t=ev.target;
+  if(t.dataset&&t.dataset.filter){S.f[t.dataset.filter]=t.value;renderMain();return;}
+  if(t.id==="fChanges"){S.changes=t.checked;renderMain();return;}
+  if(t.id==="mobileSel"){goEntry(t.value);return;}
+  if(t.id==="onlyFilled"){S.onlyFilled=t.checked;renderSide();return;}
+});
+document.addEventListener("input",ev=>{
+  if(ev.target.id==="termQ"){S.termQ=ev.target.value;const pos=ev.target.selectionStart;renderMain();const i=$("#termQ");i.focus();try{i.setSelectionRange(pos,pos);}catch(e){}}
+});
+document.addEventListener("submit",ev=>{
+  ev.preventDefault();
+  const f=ev.target;
+  if(f.id==="askForm"){doAsk($("#askInput").value);return;}
+  if(f.id==="partForm"){const n=$("#partName").value.trim();if(!n)return;const pid=S.addPart;S.addPart=null;
+    if(S.role==="admin"){const id=addPart(pid,n,null);renderAll();toast(`Added "${n}" as a firm-only part of ${byId(byId(id).parent).title}.`);}
+    else{S.proposals.push({name:n,parent:pid,item:null});renderAll();toast(`"${n}" sent to a firm admin for approval.`);}
+    return;}
+  if(f.id==="upForm"){
+    const U=S.upload;U.client=$("#upClient").value;U.side=$("#upSide").value;U.cp=$("#upCp").value;U.step="parsing";U.tick=0;refreshUpload();
+    const iv=setInterval(()=>{U.tick++;if(U.tick>=5){clearInterval(iv);U.step="check";}if(S.upload===U)refreshUpload();else clearInterval(iv);},550);
+  }
+});
+document.addEventListener("toggle",ev=>{const d=ev.target;if(d&&d.dataset&&d.dataset.g!==undefined)S.groupOpen[d.dataset.g]=d.open;},true);
+document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!$("#overlay").hidden){closeOverlay();S.upload=null;}});
+function copy(text){
+  const done=()=>toast("Wording copied.");
+  try{navigator.clipboard.writeText(text).then(done,()=>toast("Couldn't copy here. Select the wording and copy it instead."));}
+  catch(e){toast("Couldn't copy here. Select the wording and copy it instead.");}
+}
+
+renderAll();
+</script>
+
+</body></html>

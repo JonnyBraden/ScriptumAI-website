@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scriptum agents preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>
+/* VOICE work: a shipped product screen inside the Scriptum portal
+   IDEA the Agents home, the task launcher and the matter's Agents tab as they will ship, clickable end to end
+   PICTURE the working app itself: task list, launcher, decision cards, step rail
+   COLOUR Scriptum app palette: stone ground, paper cards, navy ink, terracotta accent, dark sidebar
+   TYPE Source Serif 4 headings + Inter text
+   LAYOUT sidebar | content; matter: rail | step | inspector; phone: stacked, rail scrolls sideways */
+:root{color-scheme:light dark;--bg:light-dark(#EEECE7,#12161d);--card:light-dark(#FCFBF8,#1b2029);--ink:light-dark(#1D2434,#ECEAE4);--mute:light-dark(#5F6372,#A6AAB6);--line:light-dark(#DFDBD3,#313846);--btn:light-dark(#464F6D,#9AA5CF);--btnink:light-dark(#ffffff,#0f131a);--acc:light-dark(#A84E2A,#EBA081);--accbg:light-dark(#F5E5DC,#3b2920);--ok:light-dark(#0E7754,#62CDA3);--okbg:light-dark(#E1F0E9,#16302a);--bad:light-dark(#A72420,#F29590);--amb:light-dark(#704800,#F2C46D);--ambbg:light-dark(#FBEFD6,#362c18);--soft:light-dark(#F4F2ED,#232935);--side:#101928}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;font-weight:600;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(26px,3vw,32px);line-height:1.1}
+h2{font-size:20px;line-height:1.2}
+h3{font-size:17px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.demo{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:8px max(2vw,16px);background:var(--ambbg);color:var(--amb);font-size:13px;border-bottom:1px solid var(--line)}
+.demo span{flex:1 1 260px}
+.demo label{display:flex;gap:6px;align-items:center;font-weight:500}
+.demo select{font-size:14px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);min-height:34px}
+.app{display:grid;grid-template-columns:216px minmax(0,1fr);min-height:calc(100vh - 44px)}
+.side{background:var(--side);color:#D9DCE4;padding:20px 12px;display:flex;flex-direction:column;gap:4px}
+.logo{font-family:"Source Serif 4",serif;font-size:21px;color:#fff;padding:4px 10px 18px}
+.nv{display:flex;align-items:center;width:100%;text-align:left;background:none;border:0;color:#D9DCE4;padding:9px 10px;border-radius:8px;font-size:14px;min-height:40px}
+.nv:hover{background:#1c2638}
+.nv.on{background:#2a3754;color:#fff}
+.topnav{display:none;gap:4px;overflow-x:auto;background:var(--side);padding:6px 10px}
+.topnav .nv{width:auto;white-space:nowrap}
+main{padding:24px max(3vw,16px) 120px;max-width:1240px}
+@media(max-width:899px){.app{grid-template-columns:1fr}.side{display:none}.topnav{display:flex}}
+.ph{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end;margin-bottom:20px}
+.sub{color:var(--mute);margin:4px 0 0}
+.back{display:block;background:none;border:0;padding:0;color:var(--acc);font-size:14px;margin-bottom:6px;min-height:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);font-weight:500;font-size:14px;white-space:nowrap}
+.btn:hover{border-color:var(--btn)}
+.btn.pri{background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.btn.ghost{background:transparent}
+.btn.link{border:0;background:none;color:var(--acc);padding:4px 6px;min-height:32px}
+.btn.arm{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.blk{margin-bottom:28px}
+.blk>h2{margin-bottom:10px}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.task{display:grid;grid-template-columns:84px minmax(0,1fr) minmax(0,260px);gap:14px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-height:64px}
+.task:hover{border-color:var(--btn)}
+.tt{display:flex;flex-direction:column}
+.tt span{color:var(--mute);font-size:13px}
+.st{font-size:13px;color:var(--acc);font-weight:500;text-align:right}
+@media(max-width:600px){.task{grid-template-columns:1fr;gap:6px}.st{text-align:left}}
+.kind{font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--soft);justify-self:start}
+.k-review{background:var(--accbg);color:var(--acc)}
+.k-draft,.k-template{background:var(--okbg);color:var(--ok)}
+.k-ask{background:var(--ambbg);color:var(--amb)}
+.empty{color:var(--mute);background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:16px;margin:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:10px}
+.tile{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:110px}
+.tile span{color:var(--mute);font-size:13px}
+.tile.on{border-color:var(--btn);box-shadow:inset 0 0 0 1px var(--btn)}
+.tile:disabled{opacity:.55;cursor:not-allowed}
+.pro{font-family:Inter,sans-serif;font-size:11px;font-weight:600;background:var(--btn);color:var(--btnink);padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:2px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:18px;max-width:760px}
+.lab{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px;display:block}
+textarea,input[type=text],select.in{width:100%;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg .btn[aria-pressed=true]{background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.files{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.file{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:6px 6px 6px 12px;background:var(--soft);border-radius:8px;font-size:14px}
+.file small{color:var(--mute);display:block}
+.samp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.samp input[type=file]{font-size:14px;max-width:100%}
+.ins{display:grid;gap:6px}
+.ins label{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.ins input{width:18px;height:18px;margin-top:2px;flex:none}
+.lv{font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;background:var(--soft);color:var(--mute);flex:none;margin-top:2px}
+.note{font-size:14px;padding:10px 12px;border-radius:8px;background:var(--ambbg);color:var(--amb);margin:0 0 12px}
+.runrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-end}
+.cost{color:var(--mute);font-size:14px}
+.log{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font:13px/1.7 ui-monospace,Menlo,monospace;max-width:760px;margin-bottom:16px}
+.lh{display:flex;justify-content:space-between;margin-bottom:6px;font-family:Inter,sans-serif}
+.log ol{list-style:none;margin:0;padding:0}
+.log li::before{content:"";display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:50%;border:2px solid var(--ok);vertical-align:-1px}
+.log li.ok::before{background:var(--ok)}
+.log li.spin::before{border-color:var(--line);border-top-color:var(--acc);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.log li.spin::before{animation:none}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
+.gate{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:10px 14px;border-radius:8px;background:var(--soft);border:1px solid var(--line);margin:0 0 16px}
+.gate svg{flex:none;margin-top:3px}
+.lay{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
+@media(max-width:1099px){.lay{grid-template-columns:1fr}}
+.sec{margin-bottom:22px}
+.sh{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px}
+.sh .cnt{color:var(--mute);font-size:13px;flex:1}
+.secp{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.secp p{flex:1 1 100%;margin:0 0 4px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.ch{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+.ch h4{margin:0;font-size:15px;font-weight:600;flex:1}
+.ref{font-size:13px;font-weight:600;color:var(--mute);white-space:nowrap}
+.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px}
+.b-High{background:var(--accbg);color:var(--acc)}
+.b-Medium{background:var(--soft);color:var(--btn);border:1px solid var(--line)}
+.b-Low{background:var(--soft);color:var(--mute);border:1px solid var(--line)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+.two>div{background:var(--soft);border-radius:8px;padding:10px 12px}
+.two p{margin:0;font-size:14px}
+del{color:var(--bad);text-decoration-thickness:1px}
+ins{color:var(--ok);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.why{font-size:14px;margin:10px 0 6px}
+.held{font-size:13px;margin:8px 0;padding:8px 10px;border-radius:6px;background:var(--ambbg);color:var(--amb)}
+.tag{font-size:13px;margin:0 0 10px;padding:6px 10px;border-radius:6px;background:var(--okbg);color:var(--ok);font-weight:500}
+.tag.no{background:var(--soft);color:var(--mute)}
+details{font-size:13px;margin:6px 0}
+summary{cursor:pointer;color:var(--acc);font-weight:500;min-height:32px;display:flex;align-items:center}
+details ul{margin:4px 0 0;padding-left:18px}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
+.dn{display:flex;align-items:center;gap:6px;margin:10px 0 0;font-size:14px;color:var(--ok);font-weight:500;flex-wrap:wrap}
+.wait{font-size:13px;color:var(--mute);margin:10px 0 0}
+.sugg{margin-top:10px;padding:10px 12px;border:1px dashed var(--btn);border-radius:8px}
+.sugg p{margin:0 0 6px;font-size:14px}
+.askbox{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.askbox input{flex:1 1 220px}
+.esc{background:var(--ambbg);color:var(--amb);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.esc p{margin:0;flex:1 1 100%}
+.qbox{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:24px 0 16px}
+.qbox>summary{padding:12px 16px;font-family:"Source Serif 4",serif;font-size:17px;color:var(--ink)}
+.q{border-top:1px solid var(--line);padding:14px 16px}
+.q .to{font-size:12px;font-weight:600;color:var(--acc)}
+.q>p{margin:4px 0 8px;font-size:14px}
+.qrule{font-size:13px;color:var(--mute);padding:0 16px 14px;margin:0}
+.foot{position:sticky;bottom:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:20px;box-shadow:0 -6px 18px light-dark(rgba(29,36,52,.07),rgba(0,0,0,.35))}
+.foot .cnt{font-weight:600;font-size:14px}
+.fa{display:flex;flex-wrap:wrap;gap:6px}
+.insp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:13px;position:sticky;top:16px}
+.insp h3{font-size:15px;margin-bottom:10px}
+.insp dl{margin:0;display:grid;gap:10px}
+.insp dt{font-weight:600;color:var(--mute);font-size:12px}
+.insp dd{margin:0}
+.big{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.banner{padding:12px 14px;border-radius:8px;background:var(--okbg);color:var(--ok);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;font-size:14px}
+.mhead{margin-bottom:14px}
+.tabs{display:flex;gap:4px;overflow-x:auto;margin-top:12px}
+.tab{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:13px;white-space:nowrap;min-height:36px}
+.tab.on{background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.vstrip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:16px;font-size:13px}
+.vc{padding:3px 9px;border-radius:6px;background:var(--soft);white-space:nowrap}
+.vc.cur{background:var(--btn);color:var(--btnink)}
+.vs-r{margin-left:auto;font-weight:600;color:var(--acc)}
+.mx{display:grid;grid-template-columns:220px minmax(0,1fr) 250px;gap:20px;align-items:start}
+@media(max-width:1199px){.mx{grid-template-columns:210px minmax(0,1fr)}.mx>.insp{grid-column:2;position:static}}
+@media(max-width:760px){.mx{grid-template-columns:1fr}.mx>.insp{grid-column:1}.rail ol{display:flex;overflow-x:auto;gap:6px;padding-bottom:4px}.rail .rg{display:none}.step{min-width:180px}}
+.rail ol{list-style:none;margin:0;padding:0}
+.rg{font-size:12px;font-weight:600;color:var(--mute);margin:14px 0 4px}
+.rg:first-child{margin-top:0}
+.step{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:8px;padding:8px;font-size:14px;min-height:44px}
+.step small{display:block;color:var(--mute);font-size:12px}
+.dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);margin-top:2px;display:grid;place-items:center;color:#fff}
+.step.done .dot{background:var(--ok);border-color:var(--ok)}
+.step.cur{background:var(--card);border-color:var(--btn)}
+.step.cur .dot{border-color:var(--acc);background:var(--accbg)}
+.step.next{opacity:.55;cursor:default}
+.step.sel{background:var(--card);border-color:var(--line)}
+.stephead{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.actor{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--accbg);color:var(--acc)}
+.sn{font-size:12px;color:var(--mute);margin-left:8px}
+.stephead h2{margin:8px 0 6px}
+.stephead>p{margin:0 0 4px;font-size:14px}
+.bh{margin:24px 0 10px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card)}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--mute);font-weight:600}
+.tbl{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.email{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.email pre{white-space:pre-wrap;font:14px/1.55 Inter,sans-serif;margin:0 0 10px}
+.meta{font-size:13px;color:var(--mute);margin:0 0 10px}
+.err{color:var(--bad);font-size:13px;font-weight:500;margin:6px 0}
+.ans{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;margin-bottom:20px}
+@media(max-width:760px){.ans{grid-template-columns:1fr}}
+.lead{font-size:17px;margin:0 0 10px}
+.bars{display:grid;gap:12px;align-content:start}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) 3ch;gap:4px 10px;align-items:center;font-size:13px}
+.bar .bl{grid-column:1/-1}
+.tr{height:22px;background:var(--soft);border-radius:4px;position:relative;overflow:hidden}
+.fl{position:absolute;inset:0 auto 0 0;background:var(--btn);border-radius:4px}
+.num{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.srcs{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.src{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px}
+.src small{color:var(--mute);grid-column:1/-1}
+.live{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--ambbg);color:var(--amb);white-space:nowrap;align-self:start}
+.fu{margin-top:10px;padding:10px 12px;background:var(--soft);border-radius:8px;font-size:14px}
+.fu p{margin:0}
+.dw-bg{position:fixed;inset:0;background:rgba(16,25,40,.35);border:0;z-index:20;cursor:default}
+.dw{position:fixed;top:0;right:0;bottom:0;width:min(640px,100%);background:var(--bg);z-index:21;overflow-y:auto;padding:18px;border-left:1px solid var(--line)}
+.dwh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.dtools select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-height:40px}
+.docp{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font:15px/1.6 "Source Serif 4",Georgia,serif}
+.docp p{margin:0 0 14px}
+.cm{display:block;font:12px/1.4 Inter,sans-serif;background:var(--ambbg);color:var(--amb);padding:4px 8px;border-radius:4px;margin-top:4px}
+.mod{position:fixed;inset:0;z-index:30;background:rgba(16,25,40,.45);display:grid;place-items:center;padding:16px}
+.mbox{background:var(--card);border-radius:12px;padding:20px;width:min(500px,100%);display:grid;gap:10px;max-height:90vh;overflow:auto}
+.pick{text-align:left;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:56px}
+.pick span{color:var(--mute);font-size:13px}
+.pick.on{border-color:var(--btn);box-shadow:inset 0 0 0 1px var(--btn)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--side);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:40;width:max-content;max-width:min(560px,92vw)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P={associate:'Sam Patel',partner:'Ruth Okafor'};
+const TICK='<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>';
+const LOCK='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+const CLIENTS=['Nimbus Health','Lumen Bio','Northgate Ventures','Kestrel Robotics'];
+const LIM=['12%','£25,000'];
+
+const RV=[
+{id:'r1',int:'High',ref:'7.2',title:'Drag-along threshold',del:'holders of 75% of the Shares',ins:'holders of 50% of the Shares',put:'holders of 75% of the Shares',why:'Our Company-side position is 75%. We have gone lower on 3 of 11 closed deals, never below 65%.',ev:[['Firm playbook, Company side','Drag-along at 75% of all Shares'],['Project Finch SHA, cl. 8.1, closed Mar 2026','"holders of not less than 65% of the Shares"']],alt:['holders of 70% of the Shares, provided the drag price is at least the Subscription Price','Finch settled at 65% with a price floor, so 70% with a floor is a credible middle ground.']},
+{id:'r2',int:'High',ref:'9.1',title:'Bad leaver on resignation',del:'within 12 months of Completion',ins:'within 36 months of Completion',put:'within 12 months of Completion',why:'36 months is longer than any leaver period we have agreed for founders on the Company side.',ev:[['Firm playbook, Company side','Bad leaver on resignation within 12 months'],['Project Lark SHA, cl. 10.2, closed Jan 2026','"resigns within 18 months of Completion"']],alt:['within 24 months of Completion, with good leaver treatment for resignation after 12 months','Splits the difference and protects founders who stay past the first year.']},
+{id:'r3',int:'High',ref:'Sch 4, 2.1',title:'Warranty cap',del:'an amount equal to the Subscription Amount',ins:'two times the Subscription Amount',put:'an amount equal to the Subscription Amount',why:"1x is the firm position and Nimbus Health's own instruction. At 2x the founders could face claims of up to £4.2m.",held:'Figure check: £4.2m in the reasoning is not in any source. Check it, then decide this point on its own.',ev:[['Saved client instruction, Nimbus Health','Warranty cap no more than 1x'],['Firm playbook, Company side','Cap at 1x the Subscription Amount']],alt:['an amount equal to the Subscription Amount, with 1.5x for title and capacity warranties only','Title warranties are where investors push hardest. A separate cap there often closes the point.']},
+{id:'r4',int:'Medium',ref:'5.3',title:'Monthly management accounts',del:'within 20 Business Days',ins:'within 15 days',put:'within 20 Business Days',why:'15 calendar days is tight for a company this size. 20 Business Days is what we usually agree.',ev:[['Clause Library, Information rights','20 Business Days on 9 of 12 closed deals']],alt:['within 20 Business Days, or 15 Business Days for quarter-end accounts','Gives the investor faster quarterly figures without a monthly scramble.']},
+{id:'r5',int:'Medium',ref:'11.2(k)',title:'Investor consent: senior hires',del:'',ins:'hiring any employee on a salary above £80,000',put:'hiring any employee on a salary above £120,000',why:'£80,000 would catch most engineering hires. We agreed £120,000 on Project Finch.',ev:[['Project Finch SHA, cl. 12.2(m), closed Mar 2026','"salary above £120,000"']],alt:['hiring any employee on a salary above £100,000, unless the hire is in the approved budget','Budgeted hires are the usual carve-out.']},
+{id:'r6',int:'Low',ref:'1.1',title:'Business Day',del:'England',ins:'England or Northern Ireland',rec:'accept',why:'Harmless and accurate for a Belfast company. Accept.',ev:[['Clause Library, Definitions','Accepted on every deal where it was raised']],alt:['England, Scotland or Northern Ireland','Covers the whole UK in one go.']},
+{id:'r7',int:'Low',ref:'14.4',title:'Notices by email',del:'',ins:'Notices may be given by email to the addresses in Schedule 1.',rec:'accept',why:'Usual and helpful. Accept.',ev:[['Firm playbook','Email notices accepted']],alt:['Notices may be given by email to the addresses in Schedule 1, and take effect at 9am on the next Business Day if sent outside business hours.','Avoids a notice landing at midnight.']}
+];
+const KS=[
+{id:'k1',int:'High',ref:'4.1',title:'Liquidation preference',theirs:'1x non-participating',ours:'1x participating, capped at 2x',esc:true},
+{id:'k2',int:'High',ref:'6.3',title:'Option pool top-up',theirs:'10% of the fully diluted share capital',ours:'15% of the fully diluted share capital',counter:'12.5% of the fully diluted share capital',check:"Within the limit Ruth Okafor approved. Code check passed."},
+{id:'k3',int:'Medium',ref:'9.4',title:'Independent chair',theirs:'an independent chair appointed by the Founders',ours:'no chair provision',counter:'an independent chair appointed by the Board with the consent of the Investor Director',check:'Text point. Ruth Okafor approved this wording at sign-off on v3.'},
+{id:'k4',int:'Low',ref:'15.1',title:'Investor costs cap',theirs:'£30,000',ours:'£40,000',counter:'£30,000 plus VAT',check:'Within limit. Code check passed.'}
+];
+const DRC=[
+{id:'d1',int:'High',ref:'2.1',title:'Subscription',t:a=>`The Investor shall subscribe for ${a==='£1.5m'?'1,500,000':'1,250,000'} Seed Shares at £1.00 per share, a total of ${a==='£1.5m'?'£1,500,000':'£1,250,000'}.`,src:'Investment amount, as you settled it'},
+{id:'d2',int:'High',ref:'6.1',title:'Option pool',t:()=>'Before Completion the Company shall create an option pool of 10% of the fully diluted share capital.',src:'Lumen Bio term sheet.pdf, p.2: "10% unallocated option pool, pre-money"'},
+{id:'d3',int:'Medium',ref:'3.2',title:'Valuation',t:()=>'The pre-money valuation of the Company is £6,000,000 on a fully diluted basis.',src:'Lumen Bio term sheet.pdf, p.1: "Pre-money valuation £6m"'},
+{id:'d4',int:'Low',ref:'8.1',title:'Investor director',t:()=>'For so long as it holds 5% or more of the Shares, the Investor may appoint one director.',src:'Lumen Bio term sheet.pdf, p.2: "One board seat while holding 5%"'}
+];
+const TPL=[
+{id:'t1',int:'High',ref:'12.1',title:'Founder non-compete',del:'24 months',ins:'12 months',ev:'Cut to 12 months on 7 of 8 closed matters since March.',ms:['Finch','Lark','Swift','Tern','Wren','Avocet','Plover']},
+{id:'t2',int:'Medium',ref:'5.3',title:'Information rights',del:'within 30 days',ins:'within 20 Business Days',ev:'Agreed at 20 Business Days on 6 of 8 closed matters since March.',ms:['Finch','Lark','Swift','Tern','Wren','Avocet']},
+{id:'t3',int:'Low',ref:'1.1',title:'Business Day',del:'England',ins:'England or Northern Ireland',ev:'Added by the other side on 5 of 8 closed matters since March, and accepted every time.',ms:['Lark','Swift','Wren','Avocet','Plover']}
+];
+const SRC=[
+{m:'Project Finch',d:'Mar 2026',st:'closed',v:'1x non-participating',ref:'4.1'},
+{m:'Project Lark',d:'Jan 2026',st:'closed',v:'1x non-participating',ref:'4.1'},
+{m:'Project Plover',d:'Oct 2025',st:'closed',v:'1x participating, capped at 2x',ref:'5.2'},
+{m:'Project Swift',d:'Jul 2025',st:'closed',v:'1x non-participating',ref:'4.1'},
+{m:'Project Tern',d:'Apr 2025',st:'closed',v:'1x non-participating',ref:'4.2'},
+{m:'Project Dunlin',d:'Dec 2024',st:'closed',v:'1x participating, capped at 2x',ref:'4.1'},
+{m:'Project Curlew',d:'Sep 2024',st:'closed',v:'1x non-participating',ref:'4.1'},
+{m:'Project Kestrel',d:'Nov 2026',st:'live',lead:'Sam Patel',v:'Lex & Co have offered 1x non-participating. Under negotiation.',ref:'4.1'},
+{m:'Project Heron',d:'Nov 2026',st:'live',lead:'Priya Shah',v:'Northgate proposed 1.5x participating. Under negotiation.',ref:'6.1'}
+];
+const SAMP={review:[['Brightwater SHA markup.docx','Shareholders Agreement',false],['Supplier terms.pdf','No clause types in Scriptum',true]],draft:[['Seed subscription template.docx','Subscription Agreement',false],['Lumen Bio term sheet.pdf','Context document',false],['Email from Lumen Bio CFO.eml','Context document',false]]};
+const KINDS=[['review','Review a document','Check a markup or any document against the playbook, the client\'s saved positions and your instructions.'],['draft','Draft a document','A first draft from a template you upload, using a term sheet or emails as context.'],['ask',"Ask the firm's knowledge",'What we have agreed before, with every source listed.'],['template','Improve a template','Tracked changes to a firm template, from what recent closed deals agreed. Template owners only.']];
+const EMAIL=`Dear Lex & Co,
+
+Thank you for v4 of the Shareholders Agreement. We attach v5 with our responses.
+
+Option pool (6.3): we can move to 12.5% of the fully diluted share capital.
+Independent chair (9.4): we agree, on the basis that the chair is appointed by the Board with the consent of the Investor Director.
+Costs (15.1): we accept your cap of £30,000 plus VAT.
+Liquidation preference (4.1): please see our response in the draft.
+
+We would be happy to discuss on a call this week.
+
+Kind regards,
+Sam Patel`;
+const SUM='Lex & Co have come back on four points in v4 and accepted most of our earlier changes. The main open point is the liquidation preference: they want your money returned first, but without a further share of any surplus. We are discussing this internally and will come back to you. We expect to settle the option pool, the chair and costs in this round.';
+const Q3="Would Northgate accept 1x non-participating if Lex & Co will not move? Ruth's view is that we should hold at a 1.5x cap first.";
+const RQ1='Would the founders accept bad leaver treatment if one of them resigns in the first 24 months? The investor has asked for 36.';
+const RQ2='Nimbus Health has told us 1x on the warranty cap. Do we hold there, or can we offer 1.5x for title and capacity warranties only?';
+
+const freshRv=()=>({title:'Brightwater SHA markup',client:'Nimbus Health',side:'Company',dec:{},put:{},sugg:{},askOpen:{},edit:{},shared:null,moved:false,qs:{q1:'proposed',q2:'proposed'},ans:{},used:false,pos:false,qBy:{}});
+const freshDr=()=>({title:'Seed subscription, first draft',client:'Lumen Bio',side:'Investor',conflict:null,dec:{},edit:{}});
+const fresh=()=>({route:'home',as:'associate',plan:'pro',sec:null,nt:{kind:null,files:[],side:'',client:'',ins:{}},run:null,rv:freshRv(),dr:freshDr(),ak:{q:'What have we agreed on liquidation preference with Northgate Ventures?',fu:[]},tp:{dec:{},edit:{},saved:false},ks:{dec:{},edit:{},esc:null,escBy:'',issues:null,email:'proposed',emailText:EMAIL,emBy:'',emErr:'',sum:'proposed',sumText:SUM,sumErr:'',q3:'proposed',sent:false,view:null},os:{dec:{},edit:{},view:null}});
+let S=fresh();
+try{const j=localStorage.getItem('scr-agents-v1');if(j)S=Object.assign(fresh(),JSON.parse(j));}catch(e){}
+S.pending=null;S.modal=null;S.drawer=null;S.toast='';
+const F={};
+const me=()=>P[S.as];
+const isP=()=>S.as==='partner';
+
+function B(a,id,label,o={}){const key=a+'|'+id+'|'+(o.x||'');const arm=o.c&&S.pending===key;return `<button type="button" class="btn ${o.cls||''}${arm?' arm':''}" data-a="${a}" data-id="${esc(id)}"${o.x?` data-x="${esc(o.x)}"`:''}${o.c?' data-c="1"':''}${o.dis?' disabled':''}>${esc(arm?o.c:label)}</button>`}
+function toast(m){S.toast=m;clearTimeout(window._tt);window._tt=setTimeout(()=>{S.toast='';render()},4200)}
+function go(r){S.route=r;S.drawer=null;S.modal=null;S.sec=null;S.pending=null;if(location.hash.slice(1)!==r){try{history.replaceState(null,'','#'+r)}catch(e){}}render();window.scrollTo(0,0)}
+function clientOpts(sel){return `<option value="">No client</option>`+CLIENTS.map(c=>`<option${c===sel?' selected':''}>${c}</option>`).join('')}
+const LIST={rv:()=>RV,os:()=>RV,ks:()=>KS,dr:()=>DRC,tp:()=>TPL};
+const rvCan=()=>!S.rv.moved&&(!isP()||S.rv.shared==='Ruth Okafor');
+function isHeld(ctx,i){return ctx==='rv'?!!i.held:ctx==='ks'?!!i.esc&&!S.ks.esc:false}
+function canSec(ctx){return {rv:rvCan(),os:isP(),ks:!S.ks.sent&&S.plan==='pro',dr:!isP()&&!!S.dr.conflict,tp:!isP()&&!S.tp.saved}[ctx]}
+const accRec=i=>i.rec==='accept'&&!S.rv.put[i.id];
+function rvFinal(i,d){return d.v==='rec'?(accRec(i)?i.ins:(S.rv.put[i.id]||i.put)):d.v==='theirs'?i.ins:d.text}
+function ksCounter(i){if(!i.esc)return i.counter;return S.ks.esc==='auth'?'1x non-participating':S.ks.esc==='hold'?'1x participating, capped at 1.5x':null}
+function curText(ctx,id){if(ctx==='rv'){const i=RV.find(r=>r.id===id);return S.rv.put[id]||i.put||i.ins}if(ctx==='os'){const i=RV.find(r=>r.id===id),d=S.rv.dec[id];return d?rvFinal(i,d):(i.put||i.ins)}if(ctx==='ks')return ksCounter(KS.find(k=>k.id===id))||'';if(ctx==='dr')return DRC.find(k=>k.id===id).t(S.dr.conflict);return ''}
+function decLabel(ctx,i,d){if(d.v==='edit')return 'Edited: '+d.text;if(ctx==='rv')return d.v==='rec'?(accRec(i)?'Accepted their change':'Put back our position'):'Accepted their change';return {os:{approve:'Approved',revert:'Reverted to our wording'},ks:{accept:'Counter accepted',reject:'Rejected, our v3 wording stays'},dr:{accept:'Accepted',reject:'Rejected'},tp:{accept:'Change accepted',reject:'Change rejected'}}[ctx][d.v]}
+function doneLine(ctx,i,d,can){return `<p class="dn">${TICK} ${esc(d.by)}: ${esc(decLabel(ctx,i,d))}${d.batch?' (section approval)':''} ${can?B('undo',ctx,'Change',{x:i.id,cls:'link'}):''}</p>`}
+function editBox(ctx,i){const k='ed_'+ctx+i.id;return `<div><label class="lab" for="${k}" style="margin-top:10px">Your wording</label><textarea id="${k}" data-m="${k}" rows="3">${esc(F[k]||'')}</textarea><div class="ctl">${B('editsave',ctx,'Save',{x:i.id,c:'Confirm save',cls:'pri'})}${B('editcancel',ctx,'Cancel',{x:i.id,cls:'ghost'})}</div></div>`}
+const evid=ev=>`<details><summary>Evidence the agent relied on</summary><ul>${ev.map(([s,t])=>`<li><b>${esc(s)}</b>: ${esc(t)}</li>`).join('')}</ul></details>`;
+const head=(i)=>`<div class="ch"><span class="ref">${esc(i.ref)}</span><h4>${esc(i.title)}</h4><span class="badge b-${i.int}">${i.int}</span></div>`;
+const gate=t=>`<p class="gate">${LOCK}<span><b>Human gate.</b> ${t}</span></p>`;
+
+function sections(ctx){const list=LIST[ctx](),dec=S[ctx].dec;return ['High','Medium','Low'].map(g=>{const its=list.filter(i=>i.int===g);if(!its.length)return '';const pend=its.filter(i=>!dec[i.id]&&!isHeld(ctx,i)),held=its.filter(i=>!dec[i.id]&&isHeld(ctx,i));const can=canSec(ctx);
+const panel=S.sec===ctx+g?`<div class="secp"><p>This approves ${pend.length} point${pend.length>1?'s':''}: ${pend.map(i=>esc(i.ref+' '+i.title)).join(', ')}.${held.length?` It leaves out ${held.map(i=>esc(i.ref)).join(', ')}, which you decide on ${held.length>1?'their':'its'} own.`:''} Each point gets its own decision.</p>${B('secok',ctx,'Approve these',{x:g,c:'Confirm approve',cls:'pri'})}${B('seccancel',ctx,'Cancel',{cls:'ghost'})}</div>`:'';
+return `<section class="sec"><div class="sh"><h3>${g}</h3><span class="cnt">${its.length} point${its.length>1?'s':''}</span>${can&&pend.length?B('sec',ctx,`Approve section (${pend.length})`,{x:g,cls:'ghost'}):''}</div>${panel}${its.map(i=>CARD[ctx](i)).join('')}</section>`}).join('')}
+
+const CARD={
+rv:i=>{const rv=S.rv,d=rv.dec[i.id],can=rvCan(),put=rv.put[i.id]||i.put,ar=accRec(i);
+let ctl='';
+if(d)ctl=doneLine('rv',i,d,can);
+else if(!can)ctl=`<p class="wait">${rv.moved?'Moved into Project Osprey. Decide it there.':'Only Sam Patel and anyone he shares this with can decide it.'}</p>`;
+else if(rv.edit[i.id])ctl=editBox('rv',i);
+else ctl=`<div class="ctl">${ar?B('dec','rv','Accept their change',{x:i.id+':rec',c:'Confirm accept',cls:'pri'}):B('dec','rv','Put back our position',{x:i.id+':rec',c:'Confirm put back',cls:'pri'})+B('dec','rv','Accept their change',{x:i.id+':theirs',c:'Confirm accept'})}${B('editopen','rv','Edit',{x:i.id,cls:'ghost'})}${B('askopen','rv','Ask the agent',{x:i.id,cls:'ghost'})}</div>`;
+const k='aq_'+i.id;
+const ask=!d&&can&&rv.askOpen[i.id]?`<div class="askbox"><label class="lab" for="${k}" style="flex:1 1 100%;margin:0">Ask the agent about this point</label><input type="text" id="${k}" data-m="${k}" value="${esc(F[k]||'')}" placeholder="Is there a middle ground?">${B('askgo','rv','Ask',{x:i.id,cls:'pri'})}</div>`:'';
+const sg=rv.sugg[i.id]?`<div class="sugg"><div class="lab">Agent suggestion</div><p>${esc(rv.sugg[i.id].text)}</p><p class="wait" style="margin:0 0 6px">${esc(rv.sugg[i.id].why)}</p><div class="ctl">${B('usesugg','rv','Use this',{x:i.id,cls:'pri'})}${B('keep','rv','Keep mine',{x:i.id,cls:'ghost'})}</div></div>`:'';
+return `<article class="card">${head(i)}<div class="two"><div><div class="lab">Their markup</div><p>${i.del?`<del>${esc(i.del)}</del> `:''}<ins>${esc(i.ins)}</ins></p></div><div><div class="lab">${ar?'Recommendation':'Position to put back'}</div><p>${ar?'Accept their change.':esc(put)}</p></div></div><p class="why"><b>Why.</b> ${esc(i.why)}</p>${i.held&&!d?`<p class="held">${esc(i.held)}</p>`:''}${evid(i.ev)}${ctl}${ask}${sg}</article>`},
+os:i=>{const d0=S.rv.dec[i.id],d=S.os.dec[i.id];const pos=d0?rvFinal(i,d0):(i.put||i.ins);
+let ctl='';if(d)ctl=doneLine('os',i,d,isP());else if(!isP())ctl=`<p class="wait">Waiting for Ruth Okafor.</p>`;else if(S.os.edit[i.id])ctl=editBox('os',i);else ctl=`<div class="ctl">${B('dec','os','Approve',{x:i.id+':approve',c:'Confirm approve',cls:'pri'})}${B('dec','os','Revert to our wording',{x:i.id+':revert',c:'Confirm revert'})}${B('editopen','os','Edit',{x:i.id,cls:'ghost'})}</div>`;
+return `<article class="card">${head(i)}<p class="tag${d0?'':' no'}">${d0?`Decided outside the matter by ${esc(d0.by)}: ${esc(decLabel('rv',i,d0))}`:'Not decided outside the matter'}</p><div class="two"><div><div class="lab">Their markup</div><p>${i.del?`<del>${esc(i.del)}</del> `:''}<ins>${esc(i.ins)}</ins></p></div><div><div class="lab">Position for sign-off</div><p>${esc(pos)}</p></div></div><p class="why"><b>Why.</b> ${esc(i.why)}</p>${evid(i.ev)}${ctl}</article>`},
+ks:i=>{const d=S.ks.dec[i.id],c=ksCounter(i),open=i.esc&&!S.ks.esc,can=!S.ks.sent;
+let ctl='';
+if(open)ctl=`<div class="esc"><p><b>Escalated to Ruth Okafor.</b> Lex & Co's reply is outside the limit she approved (participating, with a cap no lower than 1.5x). The agent has not proposed a move.</p>${isP()?B('escd','ks','Authorise up to 1x non-participating',{x:'auth',c:'Confirm authorise',cls:'pri'})+B('escd','ks','Hold at 1.5x cap',{x:'hold',c:'Confirm hold'}):'<span>Waiting for Ruth Okafor. Switch Acting as to Ruth to decide.</span>'}</div>`;
+else if(d)ctl=doneLine('ks',i,d,can);
+else if(S.ks.edit[i.id])ctl=editBox('ks',i);
+else if(can)ctl=`<div class="ctl">${B('dec','ks','Accept',{x:i.id+':accept',c:'Confirm accept',cls:'pri'})}${B('dec','ks','Reject',{x:i.id+':reject',c:'Confirm reject'})}${B('editopen','ks','Edit',{x:i.id,cls:'ghost'})}</div>`;
+const chk=i.esc?(S.ks.esc?`${S.ks.escBy} ${S.ks.esc==='auth'?'authorised 1x non-participating':'held at a 1.5x cap'}. The agent retried with the new limit.`:''):i.check;
+return `<article class="card">${head(i)}<div class="two"><div><div class="lab">Their reply in v4</div><p>${esc(i.theirs)}</p><p class="wait" style="margin-top:4px">Ours in v3: ${esc(i.ours)}</p></div><div><div class="lab">Counter for v5</div><p>${c?`<del>${esc(i.theirs)}</del> <ins>${esc(c)}</ins>`:'<span class="wait">No move proposed</span>'}</p></div></div>${chk?`<p class="why">${esc(chk)}</p>`:''}${ctl}</article>`},
+dr:i=>{const d=S.dr.dec[i.id],can=!isP();let ctl='';if(d)ctl=doneLine('dr',i,d,can);else if(!can)ctl='<p class="wait">Only Sam Patel can decide this.</p>';else if(S.dr.edit[i.id])ctl=editBox('dr',i);else ctl=`<div class="ctl">${B('dec','dr','Accept',{x:i.id+':accept',c:'Confirm accept',cls:'pri'})}${B('dec','dr','Reject',{x:i.id+':reject',c:'Confirm reject'})}${B('editopen','dr','Edit',{x:i.id,cls:'ghost'})}</div>`;
+return `<article class="card">${head(i)}<div class="two"><div><div class="lab">Drafted wording</div><p><ins>${esc(i.t(S.dr.conflict))}</ins></p></div><div><div class="lab">Source</div><p>${esc(i.src)}</p></div></div>${ctl}</article>`},
+tp:i=>{const d=S.tp.dec[i.id],own=!isP()&&!S.tp.saved;let ctl='';if(d)ctl=doneLine('tp',i,d,own);else if(isP())ctl='<p class="wait">Only the template owner, Sam Patel, can decide this.</p>';else ctl=`<div class="ctl">${B('dec','tp','Accept change',{x:i.id+':accept',c:'Confirm accept',cls:'pri'})}${B('dec','tp','Reject',{x:i.id+':reject',c:'Confirm reject'})}</div>`;
+return `<article class="card">${head(i)}<div class="two"><div><div class="lab">Proposed change</div><p><del>${esc(i.del)}</del> <ins>${esc(i.ins)}</ins></p></div><div><div class="lab">Evidence</div><p>${esc(i.ev)}</p></div></div><details><summary>Matters behind this</summary><ul>${i.ms.map(m=>`<li>Project ${esc(m)} (closed)</li>`).join('')}</ul></details>${ctl}</article>`}
+};
+
+function side(){const r=S.route,m=r==='kestrel'||r==='osprey';const it=[['Dashboard','nyi',''],['Matters','go','kestrel',m],['Agents','go','home',!m],['Clause Library','nyi',''],['Settings','nyi','']];const h=it.map(([l,a,id,on])=>`<button type="button" class="nv${on?' on':''}" data-a="${a}" data-id="${id}"${on?' aria-current="page"':''}>${l}</button>`).join('');return [`<nav class="side" aria-label="Main"><div class="logo">Scriptum</div>${h}</nav>`,`<nav class="topnav" aria-label="Main">${h}</nav>`]}
+function demoBar(){return `<div class="demo"><span>Preview with sample data. Every name, matter and figure here is fictional.</span><label>Acting as <select id="as"><option value="associate"${S.as==='associate'?' selected':''}>Sam Patel, associate</option><option value="partner"${isP()?' selected':''}>Ruth Okafor, partner</option></select></label><label>Plan <select id="plan"><option value="starter"${S.plan==='starter'?' selected':''}>Starter</option><option value="pro"${S.plan==='pro'?' selected':''}>Pro</option></select></label>${B('reset','','Start again',{cls:'ghost'})}</div>`}
+
+const nDec=ctx=>Object.keys(S[ctx].dec).length;
+function rvStatus(){const rv=S.rv;return rv.moved?'Moved into Project Osprey':rv.shared?`Shared with ${rv.shared} · ${nDec('rv')} of 7 decided`:`${nDec('rv')} of 7 decided`}
+function osDone(){return nDec('os')===RV.length}
+function row(route,kind,title,meta,st){return `<li><button type="button" class="task" data-a="go" data-id="${route}"><span class="kind k-${kind.toLowerCase()}">${kind}</span><span class="tt"><b>${esc(title)}</b><span>${esc(meta)}</span></span><span class="st">${esc(st)}</span></button></li>`}
+function vHome(){const rv=S.rv,k=S.ks;
+const ks=k.sent?'Waiting on Lex & Co':!k.esc?(isP()?'Escalation waiting for you':'Your move: respond to v4. One point is with Ruth Okafor'):'Your move: respond to v4';
+const os=!rv.moved?'No agent work yet':osDone()?'Plan approved. Next: draft and send v3':isP()?'Your move: partner sign-off':'Waiting for Ruth Okafor: partner sign-off';
+const inM=row('kestrel','Matter','Project Kestrel: Series A','Northgate Ventures · We act for the Investor',ks)+row('osprey','Matter','Project Osprey: Series A','Nimbus Health · We act for the Company',os);
+let out='';
+if(!isP())out=row('review','Review',rv.title,`${rv.client||'No client'} · We act for the ${rv.side}`,rvStatus())+row('draft','Draft',S.dr.title,`${S.dr.client||'No client'} · We act for the ${S.dr.side}`,!S.dr.conflict?'Paused: 1 conflict to settle':`${nDec('dr')} of 4 decided`)+row('ask','Ask','Liquidation preference with Northgate','Firm knowledge','Answered')+row('template','Template','Series A SHA, Company side v4','You own this template',S.tp.saved?'v5 saved':`${nDec('tp')} of 3 changes decided`);
+else if(rv.shared==='Ruth Okafor'&&!rv.moved)out=row('review','Review',rv.title,`Shared by Sam Patel · ${rv.client||'No client'} · We act for the ${rv.side}`,`${nDec('rv')} of 7 decided`);
+return `<header class="ph"><div><h1>Agents</h1><p class="sub">Every agent task you are part of, in and out of matters.</p></div>${B('go','new','New task',{cls:'pri'})}</header><section class="blk"><h2>In matters</h2><ul class="tasks">${inM}</ul></section><section class="blk"><h2>${isP()?'Shared with you':'Outside matters'}</h2>${out?`<ul class="tasks">${out}</ul>`:'<p class="empty">Nothing is shared with you yet. Switch Acting as to Sam Patel, open the review and use Ask a partner to check.</p>'}</section>`}
+
+function insList(){const L=[['f1','Firm','Company side: hold drag-along at 75% unless the partner agrees otherwise.'],['f2','Firm','Warranty cap: up to 1.5x the Subscription Amount.']];if(S.nt.client==='Nimbus Health')L.push(['c1','Client','Nimbus Health: warranty cap no more than 1x.']);L.push(['p1','Personal','Always mark drag-along and leaver periods as High.']);return L}
+const ticked=id=>S.nt.ins[id]!==false;
+function vNew(){const nt=S.nt;
+if(isP())return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>New task</h1></div></header><p class="note">In this preview new tasks run as Sam Patel. Switch Acting as to Sam to try the launcher.</p>`;
+const tiles=KINDS.map(([k,t,d])=>{const dis=k==='template'&&S.plan!=='pro';return `<button type="button" class="tile${nt.kind===k?' on':''}" data-a="kind" data-id="${k}" aria-pressed="${nt.kind===k}"${dis?' disabled':''}><b>${esc(t)}${k==='template'?'<span class="pro">Pro</span>':''}</b><span>${dis?'Available on Pro.':esc(d)}</span></button>`}).join('');
+return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>New task</h1><p class="sub">Outside a matter. Only you can see it until you share it.</p></div></header><section class="blk"><h2 style="margin-bottom:10px">What do you want to do?</h2><div class="tiles">${tiles}</div></section>${nt.kind?form():''}`}
+function form(){const nt=S.nt,k=nt.kind;
+const cl=`<div><label class="lab" for="client">Client (optional)</label><select id="client" class="in">${clientOpts(nt.client)}</select></div>`;
+if(k==='ask')return `<section class="panel"><div><label class="lab" for="askq">Your question</label><textarea id="askq" data-m="askq" rows="3">${esc(F.askq??S.ak.q)}</textarea></div>${cl}<div class="runrow"><span class="cost">About £0.05</span>${B('run','ask','Run',{cls:'pri'})}</div></section>`;
+if(k==='template')return `<section class="panel"><div><label class="lab" for="tpl">Template</label><select id="tpl" class="in"><option>Series A SHA, Company side v4 (you own it)</option></select></div><p class="sub" style="margin:0">The agent compares the template with what was agreed on closed matters since March, and proposes tracked changes with the evidence for each.</p><div class="runrow"><span class="cost">About £1.20</span>${B('run','template','Run',{cls:'pri'})}</div></section>`;
+const files=nt.files.length?`<ul class="files">${nt.files.map((f,i)=>`<li class="file"><span>${esc(f.name)}<small>${esc(f.type)}</small></span>${B('rmf','',`Remove`,{x:String(i),cls:'link'})}</li>`).join('')}</ul>`:'';
+const samples=SAMP[k].map((s,i)=>B('addf',String(i),'Add '+s[0],{cls:'ghost'})).join('');
+const sides=['Investor','Company','Founder'].map(s=>`<button type="button" class="btn" data-a="side" data-id="${s}" aria-pressed="${nt.side===s}">${s}</button>`).join('');
+const ins=insList().map(([id,lv,t])=>`<label><input type="checkbox" data-ins="${id}"${ticked(id)?' checked':''}><span class="lv">${lv}</span><span>${esc(t)}</span></label>`).join('');
+const conflict=nt.client==='Nimbus Health'&&ticked('f2')&&ticked('c1')?'<p class="note" style="margin:6px 0 0">The firm and client instructions differ on the warranty cap. The firmer one applies: 1x.</p>':'';
+const untyped=k==='review'&&nt.files.some(f=>f.untyped);
+const ok=nt.files.length&&nt.side;
+return `<section class="panel"><div><span class="lab">${k==='draft'?'Template and context documents':'Document'}</span>${files}<div class="samp">${samples}<label class="btn ghost" for="fileup">Upload a file</label><input type="file" id="fileup" style="position:absolute;opacity:0;width:1px;height:1px"></div></div><div><span class="lab">We act for</span><div class="seg" role="group" aria-label="We act for">${sides}</div></div>${cl}<div><span class="lab">Instructions</span><div class="ins">${ins}</div>${conflict}<label class="lab" for="typed" style="margin-top:10px">Anything else for this task</label><textarea id="typed" data-m="typed" rows="2" placeholder="e.g. The client cares most about the leaver terms">${esc(F.typed||'')}</textarea></div>${untyped?'<p class="note" style="margin:0">This document has no clause types in Scriptum. Every point will be marked High and there are no firm positions to compare against.</p>':''}<div class="runrow">${!ok?`<span class="cost">Add a ${k==='draft'?'template':'document'} and choose who we act for.</span>`:`<span class="cost">About ${k==='draft'?'£0.90':'£0.60'}</span>`}${B('run',k,untyped?'Run anyway':'Run',{cls:'pri',dis:!ok})}</div></section>`}
+
+const AG={review:'Review agent',draft:'Drafting agent',ask:'Ask',template:'Template agent'};
+function startRun(kind){const nt=S.nt;
+if(kind==='review'){S.rv=freshRv();S.rv.title=nt.files[0].name.replace(/\.[^.]+$/,'');S.rv.client=nt.client;S.rv.side=nt.side;S.os={dec:{},edit:{},view:null}}
+if(kind==='draft'){S.dr=freshDr();S.dr.client=nt.client;S.dr.side=nt.side;S.dr.title=nt.files[0].name.replace(/\.[^.]+$/,'')+', first draft'}
+if(kind==='ask'){S.ak.q=((F.askq??S.ak.q)+'').trim()||S.ak.q;S.ak.fu=[]}
+if(kind==='template')S.tp={dec:{},edit:{},saved:false};
+const n=insList().filter(([id])=>ticked(id)).length+(F.typed?1:0);
+const L={review:[`Reading ${S.rv.title}`,'Matching 214 clauses to the Clause Library',`Comparing with firm positions for the ${S.rv.side} side`,`Applying ${n} instructions`,'Checking every figure against its source','7 points ready for you'],draft:['Reading the template and context documents','Taking each deal term with a quote from its source','Found a conflict: investment amount','Paused for you to settle it'],ask:["Searching the firm's matters, playbook and outcomes",'Found 9 matters with Northgate Ventures','Counting closed matters only','Answer ready with 10 sources'],template:['Reading Series A SHA, Company side v4','Comparing with 8 closed matters since March','Checking each change against its evidence','3 changes ready for the template owner']}[kind];
+S.run={kind,lines:L,shown:0};go('run');
+const tick=()=>{if(!S.run||S.route!=='run')return;S.run.shown++;render();if(S.run.shown<L.length)setTimeout(tick,reduce?0:550);else setTimeout(()=>{if(S.route==='run')go(kind)},reduce?0:700)};setTimeout(tick,reduce?0:400)}
+function vRun(){const r=S.run;if(!r)return vHome();const done=r.shown>=r.lines.length;return `<header class="ph"><div><h1>${done?'Ready':'Running'}</h1><p class="sub">${AG[r.kind]}. You can leave this page; the task keeps running.</p></div></header><section class="log" aria-live="polite"><div class="lh"><b>${AG[r.kind]}</b><span>${done?'Complete':'Running'}</span></div><ol>${r.lines.slice(0,Math.min(r.lines.length,r.shown+1)).map((l,i)=>`<li class="${i<r.shown?'ok':'spin'}">${esc(l)}</li>`).join('')}</ol></section>${done?B('go',r.kind,'Open results',{cls:'pri'}):''}`}
+
+function taskHead(title,chips,ctx,extra=''){return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>${esc(title)}</h1><div class="chips">${chips.map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div></div><div class="fa">${B('doc',ctx,'View document',{cls:'ghost'})}${B('iss',ctx,'Issues list',{cls:'ghost'})}${extra}</div></header>`}
+function insp(rows){return `<aside class="insp" aria-label="How this step runs"><h3>How this ${S.route==='kestrel'||S.route==='osprey'?'step':'task'} runs</h3><dl>${rows.map(([t,d,big])=>`<dt>${t}</dt><dd${big?' class="big"':''}>${d}</dd>`).join('')}</dl></aside>`}
+function lockMsg(){return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>Not shared with you</h1></div></header><p class="note">This task belongs to Sam Patel and has not been shared with you. Work outside a matter is private to its owner until they use Ask a partner to check.</p>`}
+
+function vReview(){const rv=S.rv;if(isP()&&rv.shared!=='Ruth Okafor')return lockMsg();
+const n=nDec('rv');
+const qb=S.plan==='pro'?rvQBox():'<p class="note">Questions for the client or a partner come from the collaboration agent, which is on Pro.</p>';
+return taskHead(rv.title,[rv.client||'No client','We act for the '+rv.side,'Outside a matter'].concat(rv.shared?['Shared with '+rv.shared]:[]),'rv')+
+`<div class="lay"><div>${rv.moved?`<div class="banner"><span>Moved into Project Osprey. Decisions continue there, with partner sign-off.</span>${B('go','osprey','Open Project Osprey',{cls:'pri'})}</div>`:''}${gate('You decide each point. Nothing leaves Scriptum until you download it, and nothing here reaches the firm playbook unless this moves into a matter that later closes.')}${sections('rv')}${qb}
+<div class="foot"><span class="cnt">${n} of ${RV.length} decided</span><div class="fa">${B('dl','','Download Word')}${rv.moved?B('go','osprey','Open Project Osprey',{cls:'pri'}):B('share','','Ask a partner to check',{dis:isP()})+B('move','','Move into a matter',{cls:'pri',dis:isP()})}</div></div></div>
+${insp([['Reads',`${esc(rv.title)}, firm playbook (${esc(rv.side)} side)${rv.client?', '+esc(rv.client)+"'s saved positions":''}, your saved instructions`],['Model','Fable weighs each point. Sonnet reads the file.'],['Who sees what',`You${rv.shared?' and '+esc(rv.shared):''}. Nobody outside the firm.`],['Decisions so far',`${n} by people, 0 by agents`],['Spend on this task','£0.58',1]])}</div>`}
+
+function rvQBox(){const rv=S.rv,can=rvCan();
+const q1=(()=>{const st=rv.qs.q1;let h=`<div class="q"><div class="to">Question for ${esc(rv.client||'the client')} · 9.1 Bad leaver</div><p>${esc(RQ1)}</p>`;
+if(st==='proposed')h+=can?`<div class="ctl">${B('qok','rv','Approve',{x:'q1',c:'Confirm approve',cls:'pri'})}${B('qdis','rv','Dismiss',{x:'q1',cls:'ghost'})}</div>`:'';
+if(st==='approved')h+=`<p class="dn">${TICK} Approved by ${esc(rv.qBy.q1)}. Outside a matter you send it yourself.</p><div class="ctl">${B('dl','','Download as Word')}${B('mailq','','Open as email')}</div>${can?`<label class="lab" for="ans_q1" style="margin-top:12px">Paste the client's answer</label><textarea id="ans_q1" data-m="ans_q1" rows="3" placeholder="Paste their reply. Leave blank to use a sample answer.">${esc(F.ans_q1||'')}</textarea><div class="ctl">${B('ansave','rv','Add answer',{x:'q1',cls:'pri'})}</div>`:''}`;
+if(st==='answered'){h+=`<p><b>Answer:</b> ${esc(rv.ans.q1)}</p>`+(can?`<div class="ctl">${rv.used?`<span class="dn">${TICK} Used on 9.1</span>`:B('useans','rv','Use this answer',{x:'q1',cls:'pri'})}</div>`:'');
+h+=rv.client?(rv.pos?`<p class="dn">${TICK} Saved as ${esc(rv.client)}'s position on leaver provisions. Used on their later matters and tasks.</p>`:can?`<div class="ctl">${B('savepos','rv',`Save as ${rv.client}'s position`,{x:'q1',c:'Confirm save'})}</div>`:''):`<p class="note" style="margin-top:10px">Tag a client to save this as their position.</p><label class="lab" for="tagc">Client</label><select id="tagc" class="in">${clientOpts('')}</select>`}
+if(st==='dismissed')h+=`<p class="wait">Dismissed.</p>`;return h+'</div>'})();
+const q2=(()=>{const st=rv.qs.q2;let h=`<div class="q"><div class="to">Question for a partner · Sch 4, 2.1 Warranty cap</div><p>${esc(RQ2)}</p>`;
+if(st==='proposed')h+=can&&!isP()?`<div class="ctl">${B('qok','rv','Approve and ask Ruth Okafor',{x:'q2',c:'Confirm approve',cls:'pri'})}${B('qdis','rv','Dismiss',{x:'q2',cls:'ghost'})}</div>`:'';
+if(st==='approved')h+=isP()?`<label class="lab" for="ans_q2">Your answer</label><textarea id="ans_q2" data-m="ans_q2" rows="2" placeholder="Leave blank to use a sample answer.">${esc(F.ans_q2||'')}</textarea><div class="ctl">${B('ansave','rv','Send answer',{x:'q2',cls:'pri'})}</div>`:`<p class="wait">Sent to Ruth Okafor with this task. Switch Acting as to Ruth to answer.</p>`;
+if(st==='answered')h+=`<p><b>Ruth Okafor:</b> ${esc(rv.ans.q2)}</p>`;
+if(st==='dismissed')h+=`<p class="wait">Dismissed.</p>`;return h+'</div>'})();
+return `<details class="qbox" open><summary>Questions from the collaboration agent (2)</summary>${q1}${q2}<p class="qrule">Questions can mention a figure from a partner's limits. Notes and summaries cannot.</p></details>`}
+
+function vDraft(){const d=S.dr;if(isP())return lockMsg();
+const terms=[['Investment amount',d.conflict||'Conflict','Settled by you'],['Pre-money valuation','£6,000,000','Lumen Bio term sheet.pdf, p.1'],['Option pool','10%, pre-money','Lumen Bio term sheet.pdf, p.2'],['Investor director','One seat while holding 5%','Lumen Bio term sheet.pdf, p.2']];
+const table=`<div class="scroll tbl"><table><thead><tr><th>Term</th><th>Value</th><th>Source</th></tr></thead><tbody>${terms.map(t=>`<tr>${t.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+const conf=!d.conflict?`<div class="esc" style="margin:0 0 16px"><p><b>Two sources disagree on the investment amount.</b> The run is paused until you choose.</p><p>Lumen Bio term sheet.pdf, p.1: "Series Seed investment of £1,500,000"</p><p>Email from Lumen Bio CFO.eml: "we have agreed to reduce the round to £1.25m"</p>${B('conf','dr','Use £1.5m',{x:'£1.5m',c:'Confirm £1.5m',cls:'pri'})}${B('conf','dr','Use £1.25m',{x:'£1.25m',c:'Confirm £1.25m'})}</div><h3 style="margin-bottom:10px">Deal terms</h3>${table}`:`<details style="margin-bottom:16px"><summary>Deal terms (4), each with its source</summary>${table}</details>`;
+return taskHead(d.title,[d.client||'No client','We act for the '+d.side,'Outside a matter'],'dr')+`<div class="lay"><div>${gate('You decide each drafted clause. A source that contradicts another pauses the run for you to settle.')}${conf}${d.conflict?sections('dr'):''}<div class="foot"><span class="cnt">${nDec('dr')} of 4 decided</span><div class="fa">${B('dl','','Download Word')}${B('share','','Ask a partner to check')}${B('movedr','','Move into a matter',{cls:'pri'})}</div></div></div>${insp([['Reads','The template, Lumen Bio term sheet, the CFO email'],['Model','Sonnet drafts each clause.'],['Who sees what','Only you, until you share it.'],['Spend on this task','£0.86',1]])}</div>`}
+
+function fuAnswer(q){if(/cap|particip/i.test(q))return 'Where we agreed participating, the cap was 2x both times (Plover and Dunlin). Neither live matter has agreed a cap yet.';if(/when|recent|latest/i.test(q))return 'The most recent closed matter with Northgate is Project Finch (March 2026): 1x non-participating.';return "Nothing in the firm's matters, playbook or confirmed outcomes covers that. Try naming a clause, a counterparty or a matter."}
+function vAsk(){const closed=SRC.filter(s=>s.st==='closed'),live=SRC.filter(s=>s.st==='live');const g={};closed.forEach(s=>g[s.v]=(g[s.v]||0)+1);const ent=Object.entries(g).sort((a,b)=>b[1]-a[1]);
+const np=g['1x non-participating']||0,pc=g['1x participating, capped at 2x']||0;
+const def=S.ak.q===fresh().ak.q;
+return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>${esc(S.ak.q)}</h1><div class="chips"><span class="chip">Ask the firm's knowledge</span><span class="chip">Every matter in the firm, open and closed</span></div>${def?'':'<p class="wait">This preview always answers the sample question about Northgate Ventures.</p>'}</div></header>
+<section class="ans"><div><p class="lead">On ${closed.length} closed matters with Northgate Ventures, we agreed 1x non-participating on ${np} and 1x participating, capped at 2x, on ${pc}.</p><p>Our playbook position on both sides is 1x non-participating. ${live.length} live matters are still in negotiation. They are listed below and not counted.</p></div><div class="bars" aria-label="Closed matters by outcome">${ent.map(([v,c])=>`<div class="bar"><span class="bl">${esc(v)}</span><div class="tr"><div class="fl" style="width:${c/closed.length*100}%"></div></div><span class="num">${c}</span></div>`).join('')}<p class="wait" style="margin:0">Closed matters only. Live matters are never counted.</p></div></section>
+<h2 style="margin-bottom:10px">Sources</h2><ul class="srcs"><li><button type="button" class="src" data-a="srcgo" data-id="Firm playbook"><span><b>Firm playbook</b>, liquidation preference</span><span></span><small>Investor and Company side: 1x non-participating</small></button></li>${SRC.map(s=>`<li><button type="button" class="src" data-a="srcgo" data-id="${esc(s.m)}"><span><b>${esc(s.m)}</b>, clause ${esc(s.ref)} · ${esc(s.d)}</span>${s.st==='live'?'<span class="live">Live matter, not agreed</span>':'<span></span>'}<small>${esc(s.v)}${s.lead?' · Lead lawyer: '+esc(s.lead):''}</small></button></li>`).join('')}</ul>
+<section class="panel" style="margin-top:20px"><div><label class="lab" for="fu">Ask a follow-up</label><div class="askbox" style="margin:0"><input type="text" id="fu" data-m="fu" value="${esc(F.fu||'')}" placeholder="What cap did we agree where it was participating?">${B('askfu','','Ask',{cls:'pri'})}</div></div>${S.ak.fu.map(f=>`<div class="fu"><p><b>${esc(f.q)}</b></p><p>${esc(f.a)}</p></div>`).join('')}</section>`}
+
+function vTpl(){const t=S.tp;if(S.plan!=='pro')return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>Series A SHA, Company side v4</h1></div></header><p class="note">Improving templates is on Pro. Switch Plan to Pro in the bar above.</p>`;
+const n=nDec('tp');
+return `<header class="ph"><div><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>Series A SHA, Company side v4</h1><div class="chips"><span class="chip">Firm template</span><span class="chip">Owner: Sam Patel</span></div></div><div class="fa">${B('doc','tp','View document',{cls:'ghost'})}</div></header><div class="lay"><div>${gate('Only the template owner decides. Approved changes make a new version, and v4 stays in the history.')}${isP()?'<p class="note">Only the template owner, Sam Patel, can decide these changes.</p>':''}${t.saved?`<div class="banner"><span>v5 saved with ${Object.values(t.dec).filter(d=>d.v==='accept').length} changes. v4 stays in the template's history.</span></div>`:''}${sections('tp')}<div class="foot"><span class="cnt">${n} of 3 decided</span><div class="fa">${B('tpsave','','Save as v5',{c:'Confirm save',cls:'pri',dis:n<3||t.saved||isP()})}</div></div></div>${insp([['Reads','The template and 8 closed matters since March'],['Model','Fable weighs the evidence across matters.'],['Who sees what','The template owner decides. Every lawyer in the firm sees the saved version.'],['Spend on this task','£1.12',1]])}</div>`}
+
+function mhead(t,meta){return `<div class="mhead"><button type="button" class="back" data-a="go" data-id="home">Back to Agents</button><h1>${esc(t)}</h1><p class="sub">${esc(meta)}</p><div class="tabs">${['Documents','Review','Release','Questions','Agents'].map(x=>`<button type="button" class="tab${x==='Agents'?' on':''}" ${x==='Agents'?'aria-current="page"':'data-a="nyi"'}>${x}</button>`).join('')}</div></div>`}
+function vstrip(vs,right){return `<div class="vstrip" aria-label="Versions">${vs.map((v,i)=>`${i?'<span aria-hidden="true">›</span>':''}<span class="vc${v[1]?' cur':''}">${esc(v[0])}</span>`).join('')}<span class="vs-r">${esc(right)}</span></div>`}
+function rail(ctx,steps){let g='';const v=S[ctx].view;return `<nav class="rail" aria-label="Steps"><ol>${steps.map(s=>{let h='';if(s.g!==g){g=s.g;h=`<li class="rg">${esc(g)}</li>`}const act=s.st==='done'?`data-a="view" data-id="${ctx}" data-x="${s.id}"`:s.st==='cur'?`data-a="view" data-id="${ctx}" aria-current="step"`:'disabled';return h+`<li><button type="button" class="step ${s.st}${v===s.id?' sel':''}" ${act}><span class="dot">${s.st==='done'?TICK:''}</span><span>${esc(s.t)}<small>${esc(s.who)}</small></span></button></li>`}).join('')}</ol></nav>`}
+function readOnly(ctx,s,txt){return `<div class="stephead"><span class="actor">${esc(s.who)}</span><span class="sn">${esc(s.g)}</span><h2>${esc(s.t)}</h2><p>${esc(txt)}</p><div class="ctl">${B('view',ctx,'Back to the current step',{cls:'ghost'})}</div></div>`}
+
+function ksSteps(){const sent=S.ks.sent;return [{id:'fd',g:'First draft',t:'First draft, v1',who:'Drafting agent',st:'done'},{id:'a1',g:'Turn 1',t:'v2 arrives',who:'Compare, code only',st:'done'},{id:'r1',g:'Turn 1',t:'Respond to v2',who:'Review agent',st:'done'},{id:'s1',g:'Turn 1',t:'Partner sign-off',who:'Ruth Okafor',st:'done'},{id:'d1',g:'Turn 1',t:'Draft and send v3',who:'You',st:'done'},{id:'a2',g:'Turn 2',t:'v4 arrives',who:'Compare, code only',st:'done'},{id:'r2',g:'Turn 2',t:'Respond to v4',who:'Negotiation agent',st:sent?'done':'cur'},{id:'d2',g:'Turn 2',t:'Send v5',who:'You',st:sent?'done':'next'}].concat(sent?[{id:'w',g:'Turn 3',t:'Waiting on Lex & Co',who:'Lex & Co',st:'cur'}]:[]).concat([{id:'co',g:'Close-out',t:'Close-out',who:'You and Ruth Okafor',st:'next'}])}
+const KSUM={fd:"v1 drafted from the firm's Series A template and the Northgate term sheet. 31 clauses tailored and 1 conflict settled (investment amount £3m). Sent to Lex & Co.",a1:'Lex & Co sent v2. Compare found 9 changed clauses, 2 new and 1 deleted. One change was made without a tracked change (12.3) and was shown first.',r1:'You handed 8 points to the review agent and did 4 by hand. The plan set a position and limits for each.',s1:'Ruth Okafor approved 10 points and reverted 2 to our wording. Limits were set on 6 points.',d1:'Counter wording accepted on 9 points. v3 recorded as sent by email.',a2:'Lex & Co sent v4 with replies on 4 open points. No changes were made without a tracked change.',r2:'Counters, the issues list and the covering email approved.',d2:'v5 recorded as sent by email.'};
+function vKestrel(){const k=S.ks,steps=ksSteps(),vs=[['v1 Your draft'],['v2 Lex & Co'],['v3 Your draft'],['v4 Lex & Co',!k.sent]].concat(k.sent?[['v5 Your draft',1]]:[]);
+const sel=k.view&&steps.find(s=>s.id===k.view);
+const nk=nDec('ks')+(k.issues?1:0)+(k.email==='approved'?1:0);
+return mhead('Project Kestrel: Series A','Northgate Ventures · We act for the Investor · Lex & Co act for Kestrel Robotics')+vstrip(vs,k.sent?'Waiting on Lex & Co':'Your move: respond to v4')+`<div class="mx">${rail('ks',steps)}<div>${sel?readOnly('ks',sel,KSUM[sel.id]):ksMain()}</div>${insp([['Reads','v4 from Lex & Co, their covering email, the limits Ruth Okafor approved, the issues list'],['Model','Fable proposes moves. Sonnet reads their markup.'],['Who sees what',"Your team's lawyers only. Lex & Co sees only what you send. Northgate sees only notes you approve."],['Decisions so far',`${41+nk} by people, 0 by agents`],['Spend on this document','£3.84',1]])}</div>`}
+function ksMain(){const k=S.ks;
+const sh=`<div class="stephead"><span class="actor">Negotiation agent</span><span class="sn">Turn 2</span><h2>Respond to v4</h2><p>Lex & Co sent v4 with replies on 4 points. The agent checked each reply against the limits Ruth Okafor approved, and proposed a move or escalated where a reply is outside them.</p><div class="ctl">${B('doc','ks','View document',{cls:'ghost'})}${B('iss','ks','Issues list',{cls:'ghost'})}</div></div>`;
+if(k.sent)return `<div class="stephead"><span class="actor">Lex & Co</span><span class="sn">Turn 3</span><h2>Waiting on Lex & Co</h2><p>v5 is recorded as sent. When v6 arrives, Turn 3 opens. Nothing runs on its own: you choose to respond with the agents or by hand, point by point.</p></div>`;
+if(S.plan!=='pro')return sh+'<p class="note">The negotiation agent is on Pro. Respond to v4 by hand, or switch Plan to Pro in the bar above.</p>';
+const nk=nDec('ks')+(k.issues?1:0)+(k.email==='approved'?1:0),all=nk===6;
+return sh+gate('Nothing reaches Lex & Co until you approve each item below and send v5 yourself.')+`<section class="log"><div class="lh"><b>Negotiation agent</b><span>Complete</span></div><ol><li class="ok">Read v4 and the covering email from Lex & Co</li><li class="ok">Checked 4 replies against Ruth Okafor's limits in code</li><li class="ok">Proposed 3 moves and escalated 1</li><li class="ok">Updated the issues list and drafted a covering email</li></ol></section>
+<h3 class="bh">1. Counter wording</h3>${sections('ks')}
+<h3 class="bh">2. Updated issues list</h3>${ksIssues()}
+<h3 class="bh">3. Covering email to Lex & Co</h3>${ksEmail()}
+${ksQBox()}
+<div class="foot"><span class="cnt">${nk} of 6 decided</span><div class="fa">${B('dl','','Download for the other side')}${B('sendk','','Release in Scriptum',{x:'release',c:'Confirm release',dis:!all})}${B('sendk','','Record as sent by email',{x:'email',c:'Confirm sent',cls:'pri',dis:!all})}</div></div>`}
+function ksRows(){const st=i=>S.ks.dec[i.id]?(S.ks.dec[i.id].v==='reject'?'Holding our wording':'Counter ready'):i.esc&&!S.ks.esc?'With Ruth Okafor':'Open';return KS.map(i=>[i.ref+' '+i.title,i.int,st(i),ksCounter(i)||i.ours,i.theirs]).concat([['7.1 Drag-along','High','Agreed in v3','75% of all Shares','75% of all Shares'],['11.2 Consent matters','Medium','Agreed in v3','Schedule 3 list','Schedule 3 list']])}
+function issTable(rows){return `<div class="scroll tbl"><table><thead><tr><th>Point</th><th>Intensity</th><th>Status</th><th>Our position</th><th>Their position</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+function ksIssues(){const k=S.ks;return issTable(ksRows())+`<p class="wait">Internal. The issues list is never sent to Lex & Co from Scriptum. Download a client version for Northgate if you want one.</p>${k.issues?`<p class="dn">${TICK} Approved by ${esc(k.issues)} ${B('undoiss','','Change',{cls:'link'})}</p>`:`<div class="ctl">${B('issok','','Approve issues list',{c:'Confirm approve',cls:'pri'})}${B('dl','','Download as Word',{cls:'ghost'})}</div>`}`}
+function ksEmail(){const k=S.ks,st=k.email;let body;
+if(st==='editing')body=`<label class="lab" for="em">Email text</label><textarea id="em" data-m="em" rows="13">${esc(F.em??k.emailText)}</textarea>${k.emErr?`<p class="err">${esc(k.emErr)}</p>`:''}<div class="ctl">${B('emsave','','Save',{cls:'pri'})}${B('emcancel','','Cancel',{cls:'ghost'})}</div>`;
+else body=`<pre>${esc(k.emailText)}</pre>${st==='approved'?`<p class="dn">${TICK} Approved by ${esc(k.emBy)}</p><div class="ctl">${B('copy','','Copy')}${B('openmail','','Open in email')}</div>`:`<div class="ctl">${B('emok','','Approve',{c:'Confirm approve',cls:'pri'})}${B('emedit','','Edit',{cls:'ghost'})}</div>`}`;
+return `<div class="email">${gate("Scriptum never sends this. Check it does not reveal your client's limits before you send it.")}<p class="meta">To: Lex & Co, counsel@lexandco.example · Subject: Project Kestrel, v5 of the Shareholders Agreement</p>${body}</div>`}
+function ksQBox(){const k=S.ks;
+const sum=`<div class="q"><div class="to">Note for Northgate Ventures · Summary of v4</div>${k.sum==='editing'?`<label class="lab" for="sm" style="margin-top:6px">Summary</label><textarea id="sm" data-m="sm" rows="5">${esc(F.sm??k.sumText)}</textarea>${k.sumErr?`<p class="err">${esc(k.sumErr)}</p>`:''}<div class="ctl">${B('smsave','','Save',{cls:'pri'})}${B('smcancel','','Cancel',{cls:'ghost'})}</div>`:`<p>${esc(k.sumText)}</p>${k.sum==='sent'?`<p class="dn">${TICK} Sent. Northgate sees it under Notes from your lawyers.</p>`:k.sum==='dismissed'?'<p class="wait">Dismissed.</p>':`<div class="ctl">${B('smok','','Approve and send',{c:'Confirm send',cls:'pri'})}${B('smedit','','Edit',{cls:'ghost'})}${B('smdis','','Dismiss',{cls:'ghost'})}</div>`}`}</div>`;
+const q3=`<div class="q"><div class="to">Question for Northgate Ventures · 4.1 Liquidation preference</div><p>${esc(Q3)}</p>${k.q3==='sent'?`<p class="dn">${TICK} Sent to Northgate in the app.</p>`:k.q3==='dismissed'?'<p class="wait">Dismissed.</p>':`<div class="ctl">${B('q3ok','','Approve and send',{c:'Confirm send',cls:'pri'})}${B('q3dis','','Dismiss',{cls:'ghost'})}</div>`}</div>`;
+return `<details class="qbox" open><summary>For Northgate Ventures (2)</summary>${sum}${q3}<p class="qrule">Questions can mention a figure from a partner's limits. Notes and summaries cannot: try adding 12% to the summary.</p></details>`}
+
+function vOsprey(){const rv=S.rv;
+if(!rv.moved)return mhead('Project Osprey: Series A','Nimbus Health · We act for the Company · Brightwater Capital is the investor')+`<div class="panel"><h2>No agent work on this matter yet</h2><p class="sub" style="margin:0">Start the agents here when a draft arrives, or move in a review done outside the matter.</p><div>${B('go','review','Open the Brightwater review',{cls:'pri'})}</div></div>`;
+const steps=[{id:'o0',g:'Started outside the matter',t:'Review of '+rv.title,who:'Sam Patel',st:'done'},{id:'o1',g:'Turn 1',t:'v2 arrives',who:'Carried over',st:'done'},{id:'o2',g:'Turn 1',t:'Respond to v2',who:'Done outside the matter',st:'done'},{id:'o3',g:'Turn 1',t:'Partner sign-off',who:'Ruth Okafor',st:osDone()?'done':'cur'},{id:'o4',g:'Turn 1',t:'Draft and send v3',who:'You',st:osDone()?'cur':'next'},{id:'o5',g:'Close-out',t:'Close-out',who:'You and Ruth Okafor',st:'next'}];
+const OS={o0:`Sam Patel reviewed ${rv.title} outside the matter, acting for the Company, and decided ${nDec('rv')} of 7 points. It reopens read-only.`,o1:'The markup became v2 of the matter document, with each change kept as a tracked change.',o2:'The 7 points and the decisions made outside the matter became this turn\'s plan.',o3:'Ruth Okafor decided every point.'};
+const sel=S.os.view&&steps.find(s=>s.id===S.os.view);
+const n=nDec('os');
+const main=sel?readOnly('os',sel,OS[sel.id]):osDone()?`<div class="stephead"><span class="actor">You</span><span class="sn">Turn 1</span><h2>Draft and send v3</h2><p>Plan approved. In the app, this step opens with counter wording for each approved point, then Download for the other side, Release in Scriptum or Record as sent by email. This preview stops here.</p></div>`:`<div class="stephead"><span class="actor">Ruth Okafor</span><span class="sn">Turn 1</span><h2>Partner sign-off</h2><p>These points were reviewed outside the matter. None had partner approval, so each one needs Ruth Okafor's decision before counter wording is drafted.</p><div class="ctl">${B('doc','os','View document',{cls:'ghost'})}${B('iss','os','Issues list',{cls:'ghost'})}</div></div>${gate('Only Ruth Okafor can approve or revert these points. Decisions made outside the matter are kept and shown on each point.')}${isP()?'':'<p class="note">Waiting for Ruth Okafor. Switch Acting as to Ruth to sign off.</p>'}${sections('os')}<div class="foot"><span class="cnt">${n} of 7 decided</span><div class="fa">${B('dl','','Download Word')}</div></div>`;
+return mhead('Project Osprey: Series A','Nimbus Health · We act for the Company · Brightwater Capital is the investor')+vstrip([['v1 Your draft'],['v2 Brightwater counsel',1]],osDone()?'Your move: draft and send v3':'Waiting for Ruth Okafor')+`<div class="mx">${rail('os',steps)}<div>${main}</div>${insp([['Reads','The plan carried over from outside the matter, the firm playbook (Company side), Nimbus Health\'s saved positions'],['Model','None at this step. Sign-off is a person deciding.'],['Who sees what',"Your team's lawyers on Project Osprey. Brightwater's counsel sees nothing until you send v3."],['Decisions so far',`${nDec('rv')+n} by people, 0 by agents`],['Spend on this document','£0.58',1]])}</div>`}
+
+function drawer(){const d=S.drawer;if(!d)return '';
+let body='';
+if(d.k==='doc'){const auds=d.ctx==='ks'?[['internal','Internal'],['client','Version for the client'],['other','Version for the other side']]:d.ctx==='tp'?[['internal','Internal']]:[['internal','Internal'],['client','Version for the client']];
+const cm=t=>d.aud==='internal'?`<span class="cm">${esc(t)}</span>`:'';
+let ps='';
+if(d.ctx==='rv'||d.ctx==='os')ps=RV.map(i=>{const x=S.rv.dec[i.id];let t;if(!x)t=d.clean?esc(i.ins):`${i.del?`<del>${esc(i.del)}</del> `:''}<ins>${esc(i.ins)}</ins>${cm('Awaiting a decision')}`;else{const f=rvFinal(i,x);t=d.clean||f===i.ins?esc(f):`<del>${esc(i.ins)}</del> <ins>${esc(f)}</ins>${cm(i.why)}`}return `<p><b>${esc(i.ref)} ${esc(i.title)}.</b> ${t}</p>`}).join('');
+if(d.ctx==='ks')ps=KS.map(i=>{const x=S.ks.dec[i.id],c=ksCounter(i);let t;if(!x)t=d.aud==='other'?esc(i.theirs):d.clean?esc(i.theirs):`${esc(i.theirs)}${cm('Awaiting a decision')}`;else{const f=x.v==='accept'?c:x.v==='reject'?i.ours:x.text;t=d.clean?esc(f):`<del>${esc(i.theirs)}</del> <ins>${esc(f)}</ins>${cm(i.check||'Escalated, then decided by Ruth Okafor')}`}return `<p><b>${esc(i.ref)} ${esc(i.title)}.</b> ${t}</p>`}).join('');
+if(d.ctx==='dr')ps=S.dr.conflict?DRC.map(i=>`<p><b>${esc(i.ref)} ${esc(i.title)}.</b> ${d.clean?esc(i.t(S.dr.conflict)):`<ins>${esc(i.t(S.dr.conflict))}</ins>${cm(i.src)}`}</p>`).join(''):'<p>Settle the investment amount first. The drafted clauses appear here once the sources agree.</p>';
+if(d.ctx==='tp')ps=TPL.map(i=>{const x=S.tp.dec[i.id];const f=x&&x.v==='accept'?i.ins:x?i.del:null;return `<p><b>${esc(i.ref)} ${esc(i.title)}.</b> ${d.clean?esc(f||i.del):x?esc(f):`<del>${esc(i.del)}</del> <ins>${esc(i.ins)}</ins>${cm(i.ev)}`}</p>`}).join('');
+body=`<div class="dtools"><label class="lab" for="aud" style="margin:0">Audience</label><select id="aud">${auds.map(([v,l])=>`<option value="${v}"${d.aud===v?' selected':''}>${l}</option>`).join('')}</select><span class="seg">${['Tracked changes','Clean'].map((l,i)=>`<button type="button" class="btn" data-a="clean" data-id="${i}" aria-pressed="${!!d.clean===!!i}">${l}</button>`).join('')}</span>${B('dl','','Download Word',{cls:'pri'})}</div>${d.aud!=='internal'?'<p class="note">No internal comments, partner limits or plan in this version.</p>':''}<div class="docp">${ps}</div>`}
+else{let rows=d.ctx==='ks'?ksRows():d.ctx==='dr'?DRC.map(i=>{const x=S.dr.dec[i.id];return [i.ref+' '+i.title,i.int,x?'Decided':'Open',S.dr.conflict?i.t(S.dr.conflict):'Waiting on the conflict','Not applicable']}):RV.map(i=>{const x=(d.ctx==='os'?S.os.dec:S.rv.dec)[i.id];return [i.ref+' '+i.title,i.int,x?'Decided':'Open',x&&d.ctx==='rv'?rvFinal(i,x):(i.put||'Accept their change'),i.ins]});
+if(d.f==='open')rows=rows.filter(r=>!/Agreed|Decided|ready|Holding/.test(r[2]));if(d.f==='agreed')rows=rows.filter(r=>/Agreed|Decided|ready|Holding/.test(r[2]));
+body=`<div class="dtools"><span class="seg">${[['open','Open'],['agreed','Agreed or decided'],['all','All']].map(([v,l])=>`<button type="button" class="btn" data-a="ifil" data-id="${v}" aria-pressed="${d.f===v}">${l}</button>`).join('')}</span>${B('dl','','Download as Word',{cls:'pri'})}</div>${issTable(rows)}<p class="wait">Downloads as Word, internal or client version. Never shared with the other side from Scriptum.</p>`}
+return `<button type="button" class="dw-bg" data-a="close" aria-label="Close"></button><aside class="dw" role="dialog" aria-modal="true" aria-labelledby="dwt"><div class="dwh"><h2 id="dwt">${d.k==='doc'?'Document':'Issues list'}</h2>${B('close','','Close',{cls:'ghost'})}</div>${body}</aside>`}
+
+function modal(){const m=S.modal;if(!m)return '';
+if(m.k==='share')return `<div class="mod"><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt"><h2 id="mt">Ask a partner to check</h2><p class="sub" style="margin:0">They can see this task and decide points. Nobody else can.</p>${[['Ruth Okafor','Partner'],['Tom Hale','Associate']].map(([n,r])=>`<button type="button" class="pick" data-a="shareto" data-id="${n}"><b>${n}</b><span>${r}</span></button>`).join('')}${B('close','','Cancel',{cls:'ghost'})}</div></div>`;
+const MS=[['kestrel','Project Kestrel: Series A','Northgate Ventures · Your team acts for the Investor','Investor'],['osprey','Project Osprey: Series A','Nimbus Health · Your team acts for the Company','Company']];
+const sel=MS.find(x=>x[0]===m.sel);let msg='';
+if(sel){if(sel[3]!==S.rv.side)msg=`<p class="err">This was reviewed for the ${esc(S.rv.side)}. Your team on this matter acts for the ${sel[3]}.</p>`;else{const n=nDec('rv');msg=`<p class="note" style="margin:0">Your ${n} decision${n===1?'':'s'} carry over, shown as decided outside the matter by Sam Patel. None has partner approval, so all 7 points go to Ruth Okafor for sign-off before any counter wording is drafted.</p>${B('movego','','Move into Project Osprey',{c:'Confirm move',cls:'pri'})}`}}
+return `<div class="mod"><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt"><h2 id="mt">Move into a matter</h2><p class="sub" style="margin:0">Matters where you are on the team.</p>${MS.map(x=>`<button type="button" class="pick${m.sel===x[0]?' on':''}" data-a="movesel" data-id="${x[0]}" aria-pressed="${m.sel===x[0]}"><b>${x[1]}</b><span>${x[2]}</span></button>`).join('')}${msg}${B('close','','Cancel',{cls:'ghost'})}</div></div>`}
+
+const A={
+go:id=>go(id),nyi:()=>toast('Not part of this preview.'),
+reset:()=>{S=fresh();S.pending=null;S.toast='';for(const k in F)delete F[k];go('home')},
+kind:id=>{S.nt={kind:id,files:[],side:'',client:'',ins:{}}},
+addf:id=>{const s=SAMP[S.nt.kind][+id];if(!S.nt.files.some(f=>f.name===s[0]))S.nt.files.push({name:s[0],type:s[1],untyped:s[2]})},
+rmf:(id,x)=>{S.nt.files.splice(+x,1)},
+side:id=>{S.nt.side=id},
+run:id=>startRun(id),
+dec:(c,x)=>{const [id,v]=x.split(':');S[c].dec[id]={v,by:P[S.as]}},
+undo:(c,id)=>{delete S[c].dec[id]},
+editopen:(c,id)=>{S[c].edit[id]=1;F['ed_'+c+id]=curText(c,id)},
+editcancel:(c,id)=>{delete S[c].edit[id]},
+editsave:(c,id)=>{S[c].dec[id]={v:'edit',text:(F['ed_'+c+id]||'').trim()||curText(c,id),by:P[S.as]};delete S[c].edit[id]},
+askopen:(c,id)=>{S.rv.askOpen[id]=!S.rv.askOpen[id]},
+askgo:(c,id)=>{const i=RV.find(r=>r.id===id);S.rv.sugg[id]={text:i.alt[0],why:i.alt[1]};S.rv.askOpen[id]=false},
+usesugg:(c,id)=>{S.rv.put[id]=S.rv.sugg[id].text;delete S.rv.sugg[id];toast('Position updated. It still needs your decision.')},
+keep:(c,id)=>{delete S.rv.sugg[id]},
+sec:(c,g)=>{S.sec=S.sec===c+g?null:c+g},seccancel:()=>{S.sec=null},
+secok:(c,g)=>{const L=LIST[c]().filter(i=>i.int===g&&!S[c].dec[i.id]&&!isHeld(c,i));const v={rv:'rec',os:'approve',ks:'accept',dr:'accept',tp:'accept'}[c],b=Date.now();L.forEach(i=>S[c].dec[i.id]={v,by:P[S.as],batch:b});S.sec=null;toast(`${L.length} decision${L.length>1?'s':''} recorded, one for each point.`)},
+doc:c=>{S.drawer={k:'doc',ctx:c,aud:'internal',clean:false}},iss:c=>{S.drawer={k:'iss',ctx:c,f:'all'}},
+close:()=>{S.drawer=null;S.modal=null},clean:id=>{S.drawer.clean=id==='1'},ifil:id=>{S.drawer.f=id},
+dl:()=>toast('In the app this downloads a Word file. Downloads are switched off in this preview.'),
+mailq:()=>toast('In the app this opens an email to the client with the approved question.'),
+srcgo:id=>toast(`In the app this opens ${id} in the Clause Library.`),
+share:()=>{S.modal={k:'share'}},
+shareto:id=>{if(S.route==='draft'){S.modal=null;toast(`Shared with ${id}. This works the same way as on the review.`);return}S.rv.shared=id;S.modal=null;toast(`Shared with ${id}. ${id==='Ruth Okafor'?'Switch Acting as to Ruth to see it.':''}`)},
+move:()=>{S.modal={k:'move',sel:null}},movesel:id=>{S.modal.sel=id},
+movego:()=>{S.rv.moved=true;S.os={dec:{},edit:{},view:null};go('osprey')},
+movedr:()=>toast('No matter for Lumen Bio yet. Set up the matter, then move this in.'),
+conf:(c,x)=>{S.dr.conflict=x},
+view:(c,x)=>{S[c].view=x||null},
+qok:(c,x)=>{S.rv.qs[x]='approved';S.rv.qBy[x]=P[S.as];if(x==='q2'){S.rv.shared='Ruth Okafor';toast('Sent to Ruth Okafor. The task is now shared with her.')}},
+qdis:(c,x)=>{S.rv.qs[x]='dismissed'},
+ansave:(c,x)=>{const v=(F['ans_'+x]||'').trim();S.rv.ans[x]=v||(x==='q1'?'The founders are fine with 24 months but will not accept 36. They would also like good leaver treatment if they resign after a year.':'Hold at 1x overall. Offer 1.5x for title and capacity only if they push.');S.rv.qs[x]='answered'},
+useans:()=>{S.rv.used=true;S.rv.sugg.r2={text:'within 24 months of Completion, with good leaver treatment for resignation after 12 months',why:"Based on Nimbus Health's answer: 24 months is acceptable, 36 is not."};toast('The agent has a new suggestion on 9.1.')},
+savepos:()=>{S.rv.pos=true},
+escd:(c,x)=>{S.ks.esc=x;S.ks.escBy=P[S.as];toast('Decided. The agent retried 4.1 with the new limit.')},
+issok:()=>{S.ks.issues=P[S.as]},undoiss:()=>{S.ks.issues=null},
+emedit:()=>{S.ks.email='editing';F.em=S.ks.emailText;S.ks.emErr=''},emcancel:()=>{S.ks.email='proposed';S.ks.emErr=''},
+emsave:()=>{const t=F.em??S.ks.emailText,hit=LIM.find(l=>t.includes(l));if(hit){S.ks.emErr=`This mentions ${hit}, which is one of Ruth Okafor's limits. Take it out, then save.`;return}S.ks.emailText=t;S.ks.email='proposed';S.ks.emErr=''},
+emok:()=>{S.ks.email='approved';S.ks.emBy=P[S.as]},
+copy:()=>{const t=S.ks.emailText;try{navigator.clipboard.writeText(t).then(()=>{toast('Copied.');render()},()=>{toast('Copy was blocked here. Select the text and copy it.');render()})}catch(e){toast('Copy was blocked here. Select the text and copy it.')}},
+openmail:()=>toast('In the app this opens a new email to counsel@lexandco.example. Scriptum does not send it.'),
+smedit:()=>{S.ks.sum='editing';F.sm=S.ks.sumText;S.ks.sumErr=''},smcancel:()=>{S.ks.sum='proposed';S.ks.sumErr=''},
+smsave:()=>{const t=F.sm??S.ks.sumText,hit=LIM.find(l=>t.includes(l));if(hit){S.ks.sumErr=`Notes for the client cannot mention a partner limit (${hit}). Take it out, then save.`;return}S.ks.sumText=t;S.ks.sum='proposed';S.ks.sumErr=''},
+smok:()=>{S.ks.sum='sent'},smdis:()=>{S.ks.sum='dismissed'},q3ok:()=>{S.ks.q3='sent'},q3dis:()=>{S.ks.q3='dismissed'},
+sendk:()=>{S.ks.sent=true;S.ks.view=null;toast('v5 recorded as sent. Waiting on Lex & Co.')},
+tpsave:()=>{S.tp.saved=true},
+askfu:()=>{const q=(F.fu||'').trim();if(!q)return;S.ak.fu.push({q,a:fuAnswer(q)});F.fu=''}
+};
+
+function render(){const r=S.route;const V={new:vNew,run:vRun,review:vReview,draft:vDraft,ask:vAsk,template:vTpl,kestrel:vKestrel,osprey:vOsprey};const [sd,tn]=side();
+document.getElementById('root').innerHTML=demoBar()+`<div class="app">${sd}<div>${tn}<main id="main">${(V[r]||vHome)()}</main></div></div>${drawer()}${modal()}${S.toast?`<div class="toast" role="status">${esc(S.toast)}</div>`:''}`;
+try{const {pending,modal:_m,drawer:_d,toast:_t,run:_r,...keep}=S;localStorage.setItem('scr-agents-v1',JSON.stringify(keep))}catch(e){}}
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const a=b.dataset.a,id=b.dataset.id||'',x=b.dataset.x||'';
+if(b.dataset.c){const key=a+'|'+id+'|'+x;if(S.pending!==key){S.pending=key;render();clearTimeout(window._pt);window._pt=setTimeout(()=>{if(S.pending===key){S.pending=null;render()}},4000);return}S.pending=null}
+if(A[a]){A[a](id,x);if(a!=='go'&&a!=='run')render()}});
+document.addEventListener('input',e=>{const m=e.target.dataset&&e.target.dataset.m;if(m)F[m]=e.target.value});
+document.addEventListener('change',e=>{const t=e.target;
+if(t.id==='as'){S.as=t.value;S.sec=null;render()}
+else if(t.id==='plan'){S.plan=t.value;render()}
+else if(t.id==='client'){S.nt.client=t.value;render()}
+else if(t.id==='tagc'){S.rv.client=t.value;render()}
+else if(t.id==='aud'){S.drawer.aud=t.value;render()}
+else if(t.dataset.ins){S.nt.ins[t.dataset.ins]=t.checked;render()}
+else if(t.id==='fileup'&&t.files[0]){S.nt.files.push({name:t.files[0].name,type:'Unknown document type',untyped:S.nt.kind==='review'});render()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(S.drawer||S.modal)){S.drawer=null;S.modal=null;render()}});
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1)||'home';if(h!==S.route){S.route=h;S.drawer=null;S.modal=null;render()}});
+const h0=location.hash.slice(1);if(h0)S.route=h0;if(S.route==='run')S.route='home';
+render();
+}
+</script>
+</body>
+</html>
